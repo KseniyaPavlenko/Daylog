@@ -36,7 +36,7 @@ class _TabBarMaterialWidgetState extends State<TabBarMaterialWidget> {
           placeholder,
           buildTabItem(
             index: 2,
-            icon: const Icon(Icons.description_outlined),
+            icon: const Icon(Icons.info_outline),
           ),
           buildTabItem(
             index: 3,

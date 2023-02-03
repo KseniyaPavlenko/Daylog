@@ -1,4 +1,4 @@
-import 'package:daylog/common/net/dio_ierceptor.dart';
+import 'package:daylog/common/net/dio_interceptor.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_cubit.dart';
 import 'package:daylog/cubits/draft_list/draft_list_cubit.dart';
@@ -13,6 +13,7 @@ import 'package:daylog/services/draft/draft_service_mock.dart';
 import 'package:daylog/services/event/event_service.dart';
 import 'package:daylog/services/event/event_service_mock.dart';
 import 'package:daylog/services/local_storage/local_storage.dart';
+import 'package:daylog/services/local_storage/local_storage_impl.dart';
 import 'package:daylog/services/user/user_service.dart';
 import 'package:daylog/services/user/user_service_mock.dart';
 import 'package:dio/dio.dart';
@@ -48,7 +49,7 @@ void _setupDio() {
   final dio = Dio();
   dio.options.baseUrl = envConfig.baseUrl;
 
-  getIt.registerLazySingleton<LocalStorage>(() => LocalStorage());
+  getIt.registerLazySingleton<LocalStorage>(() => LocalStorageImlp());
   dio.interceptors.add(DioInterceptor(getIt()));
   getIt.registerLazySingleton<Dio>(() => dio);
 }

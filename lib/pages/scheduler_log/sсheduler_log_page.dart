@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison, unused_local_variable, avoid_print, avoid_function_literals_in_foreach_calls, file_names
 
-import 'package:daylog/pages/home_/home_page.dart';
+import 'package:daylog/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

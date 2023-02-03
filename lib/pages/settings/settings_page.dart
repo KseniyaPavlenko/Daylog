@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors, unused_local_variable
 
-import 'package:daylog/pages/settings_/widgets/logout_button.dart';
+import 'package:daylog/pages/settings/widgets/logout_button.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -32,8 +32,9 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         body: Center(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            // mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Text(
                 'Version: $version',

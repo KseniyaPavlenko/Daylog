@@ -18,6 +18,18 @@ class DraftListCubit extends Cubit<DraftListState> {
     }
   }
 
+  // Future<void> loadDataByDate(DateTime dateTime) async {
+  //   emit(state.copyWith(isLoading: true));
+  //   try {
+  //      final drafts = await draftService.listByDate(dateTime);
+  //      emit(state.copyWith(drafts: drafts));
+  //   } catch (e) {
+  //     // handle error
+  //   } finally {
+  //     emit(state.copyWith(isLoading: false));
+  //   }
+  // }
+
   Future<void> deleteDraft(String draftId) async {
     emit(state.copyWith(isLoading: true));
     try {

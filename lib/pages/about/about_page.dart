@@ -14,7 +14,7 @@ class _AboutPageState extends State<AboutPage> {
           title: const Text('About the App'),
         ),
         body: const Padding(
-          padding: EdgeInsets.only(left: 30, right: 30, bottom: 20, top: 150),
+          padding: EdgeInsets.only(left: 30, right: 30, bottom: 20, top: 250),
           child: Text(
             '       Welcome to "Daily Planner"! This app is designed to make your life easier. You can no longer fill your head with your affairs. You just need to open the application and perform a couple of actions. Now all your affairs will be stored in this application.            ',
             style: TextStyle(

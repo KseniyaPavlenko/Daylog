@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/setup/di.dart';
+import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_cubit.dart';
 import 'package:daylog/cubits/draft_list/draft_list_cubit.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   setupDi();
+  setupLog();
   runApp(App());
 }
 

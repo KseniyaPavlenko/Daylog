@@ -21,7 +21,7 @@ class EventListCubit extends Cubit<EventListState> {
   Future<void> updateDate(DateTime date) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final events = await eventService.list(state.selectedDate);
+      final events = await eventService.list(date);
       emit(state.copyWith(events: events, selectedDate: date));
     } catch (e) {
       // handle error

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:daylog/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
 
@@ -7,11 +9,13 @@ class DioInterceptor extends Interceptor {
   DioInterceptor(this.localStorage);
 
   @override
-  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+  void onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     print('REQUEST[${options.method}] => PATH: ${options.path}');
     if (isTokenRequired(options)) {
       Map<String, dynamic> headers = Map.from(options.headers);
-      headers['token'] = localStorage.token;
+      final token = await localStorage.getToken();
+      headers['Authorization'] = 'Bearer $token';
       handler.next(options.copyWith(headers: headers));
       return;
     }

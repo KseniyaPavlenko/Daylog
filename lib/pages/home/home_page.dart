@@ -4,7 +4,7 @@ import 'package:daylog/pages/about/about_page.dart';
 import 'package:daylog/pages/dashboard/dashboard_page.dart';
 import 'package:daylog/pages/scheduler/sheduler_page.dart';
 import 'package:daylog/pages/scheduler_log/s%D1%81heduler_log_page.dart';
-import 'package:daylog/pages/settings_/settings_page.dart';
+import 'package:daylog/pages/settings/settings_page.dart';
 import 'package:daylog/widgets/tabbar_widget.dart';
 import 'package:flutter/material.dart';
 

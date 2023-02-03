@@ -45,6 +45,9 @@ dependencies:
   bloc_test: ^9.1.0
   get_it: ^7.2.0
   dio: ^4.0.6
+  shared_preferences: ^2.0.16
+  # logger: ^1.1.0
+  logging: ^1.1.0
 
 dev_dependencies:
   flutter_test:

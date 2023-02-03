@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:daylog/common/utils/date_utils.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/services/event/event_service.dart';
 import 'package:uuid/uuid.dart';
@@ -12,7 +13,9 @@ class EventServiceMock implements EventService {
 
   @override
   Future<List<Event>> list(DateTime date) async {
-    return _events;
+    return _events
+        .where((e) => e.startDate?.compareDate(date) ?? false)
+        .toList();
   }
 
   @override
@@ -76,8 +79,10 @@ class EventServiceMock implements EventService {
   }]''';
 
   static List<Event> mockedEventList() {
-    final list = jsonDecode(_rawEvents) as List;
-    return list.map((e) => Event.fromJson(e)).toList();
+    final mapList = jsonDecode(_rawEvents) as List;
+    final eventList = mapList.map((e) => Event.fromJson(e)).toList();
+    eventList.first = eventList.first.copyWith(startDate: DateTime.now());
+    return eventList;
   }
 
   static const eventId1 = '6c250a66-ad54-4c9d-a089-0df5cd0aa188';

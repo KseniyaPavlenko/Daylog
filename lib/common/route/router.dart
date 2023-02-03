@@ -1,7 +1,8 @@
 import 'package:daylog/pages/daylog/daylog_page.dart';
-import 'package:daylog/pages/home_/home_page.dart';
+import 'package:daylog/pages/home/home_page.dart';
 import 'package:daylog/pages/login/login_page.dart';
 import 'package:daylog/pages/scheduler/sheduler_page.dart';
+import 'package:daylog/pages/signup/signup_page.dart';
 import 'package:daylog/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -20,6 +21,12 @@ class AppRouter {
       path: login,
       builder: (BuildContext context, GoRouterState state) {
         return const LoginPage();
+      },
+    ),
+    GoRoute(
+      path: signUp,
+      builder: (BuildContext context, GoRouterState state) {
+        return const SignUpPage();
       },
     ),
     GoRoute(
@@ -50,6 +57,7 @@ class AppRouter {
 
   static const String splash = '/';
   static const String login = '/login';
+  static const String signUp = '/sugnUp';
   static const String home = '/home';
   static const String daylog = '/daylog';
   static const String scheduler = '/scheduler';

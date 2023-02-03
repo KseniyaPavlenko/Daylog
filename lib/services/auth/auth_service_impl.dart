@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 
 import 'package:daylog/models/token.dart';
@@ -18,26 +20,32 @@ class AuthServiceImpl implements AuthService {
 
   @override
   Future<Token> login(String login, String password) async {
-    final response = await dio.post('/auth/login');
+    final response = await dio.post('/auth/login', data: {
+      'login': login,
+      'password': password,
+    });
     final token = Token.fromJson(jsonDecode(response.data));
-    localStorage.token = token.token;
+    await localStorage.setToken(token.token);
     return token;
   }
 
   @override
   Future<User> signup(String login, String password) async {
-    final response = await dio.post('/auth/signup');
+    final response = await dio.post('/auth/signup', data: {
+      'login': login,
+      'password': password,
+    });
     return User.fromJson(jsonDecode(response.data));
   }
 
   @override
   Future<bool> isAuthorized() async {
-    return localStorage.token != null;
+    final token = await localStorage.getToken();
+    return token != null;
   }
 
   @override
   Future<void> logout() async {
-    await dio.post('/auth/logout');
-    localStorage.token = null;
+    await localStorage.setToken(null);
   }
 }

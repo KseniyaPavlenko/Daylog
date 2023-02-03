@@ -1,7 +1,6 @@
 import 'package:daylog/cubits/draft_list/draft_list_cubit.dart';
 import 'package:daylog/cubits/draft_list/draft_list_state.dart';
 import 'package:daylog/models/draft.dart';
-import 'package:daylog/widgets/date_selector/date_selector_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +33,7 @@ class _SchedulerPageState extends State<SchedulerPage> {
             }
             return Column(
               children: [
-                const DateSelectorWidget(),
+                // const DateSelectorWidget(),
                 Expanded(
                   child: Container(
                     color: Colors.grey[600],

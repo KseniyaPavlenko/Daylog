@@ -5,14 +5,14 @@ import 'package:daylog/pages/login/widgets/bottom_wave.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   // ignore: unused_field
@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: 100,
           ),
-          _form('LOGIN', _loginUser),
+          _form('SIGN UP', _signUpUser),
           BottomWave(),
         ],
       ),
@@ -92,11 +92,11 @@ class _LoginPageState extends State<LoginPage> {
         style: TextStyle(
             fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
       ),
-      onPressed: _onLogin,
+      onPressed: () {},
     );
   }
 
-  Widget _createAccButton(String text, void Function() func) {
+  Widget _backButton(String text, void Function() func) {
     return TextButton(
       style: TextButton.styleFrom(
         primary: Theme.of(context).primaryColor,
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
         // color: Colors.white,
       ),
       child: Text(
-        text = "Create account",
+        text = "Already have an account? Login",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.white,
@@ -114,16 +114,16 @@ class _LoginPageState extends State<LoginPage> {
           decoration: TextDecoration.underline,
         ),
       ),
-      onPressed: _onCreateAcc,
+      onPressed: _onBack,
     );
   }
 
-  void _onLogin() {
-    GoRouter.of(context).go(AppRouter.home);
-  }
+  //void _onLogin() {
+  //   GoRouter.of(context).go(AppRouter.home);
+//  }
 
-  void _onCreateAcc() {
-    GoRouter.of(context).go(AppRouter.signUp);
+  void _onBack() {
+    GoRouter.of(context).go(AppRouter.login);
   }
 
   Widget _form(String label, void Function() func) {
@@ -138,11 +138,11 @@ class _LoginPageState extends State<LoginPage> {
             child: _input(
                 Icon(Icons.lock), "Password", _passwordController, true)),
         Padding(
-          padding: EdgeInsets.only(left: 260),
+          padding: EdgeInsets.only(left: 150),
           child: SizedBox(
               height: 40,
               width: MediaQuery.of(context).size.width,
-              child: _createAccButton(label, func)),
+              child: _backButton(label, func)),
         ),
         SizedBox(
           height: 20,
@@ -158,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _loginUser() {
+  void _signUpUser() {
     _username = _usernameController.text;
     _password = _passwordController.text;
 

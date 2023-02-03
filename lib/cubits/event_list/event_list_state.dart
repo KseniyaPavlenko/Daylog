@@ -12,6 +12,8 @@ class EventListState with EquatableMixin {
     required this.selectedDate,
   });
 
+  List<Event> get list => events ?? [];
+
   EventListState copyWith({
     bool? isLoading,
     List<Event>? events,

@@ -1,4 +1,9 @@
-class LocalStorage {
-  String? get token => '';
-  set token(String? value) {}
+abstract class LocalStorage {
+  Future<String?> getToken();
+  Future<void> setToken(String? value);
+}
+
+class LocalStorageMock implements LocalStorage {
+  @override
+  void noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
