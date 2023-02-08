@@ -28,7 +28,7 @@ class Wireframe extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bgColor = backgroundColor ?? Theme.of(context).backgroundColor;
+    final bgColor = backgroundColor ?? Theme.of(context).colorScheme.background;
     if (title == null && drawer == null) {
       return _buildBody(context);
     } else {
@@ -38,7 +38,7 @@ class Wireframe extends StatelessWidget {
             AppBar(
               title: Text(
                 title ?? '',
-                style: Theme.of(context).textTheme.headline6!.copyWith(),
+                style: Theme.of(context).textTheme.titleLarge!.copyWith(),
               ),
               // actions: actions ??
               //     <Widget>[

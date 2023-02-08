@@ -1,5 +1,4 @@
 import 'package:daylog/models/event.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EventListItem extends StatelessWidget {

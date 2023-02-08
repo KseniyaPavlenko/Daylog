@@ -5,6 +5,7 @@ import 'package:daylog/pages/dashboard/widgets/event_list_item.dart';
 import 'package:daylog/widgets/date_selector/date_selector_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -40,7 +41,7 @@ class _DashboardPageState extends State<DashboardPage> {
     setDate();
   }
 
-  void onTapEvent(Event event) {}
+  void onTapEvent(Event event) => context.push('/daylog/${event.id}');
 
   @override
   Widget build(BuildContext context) => Scaffold(

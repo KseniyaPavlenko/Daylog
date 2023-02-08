@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 final _timeFormat = DateFormat('HH:mm:ss');
@@ -41,6 +42,12 @@ extension DateTimeX on DateTime {
 
   String toMonth() {
     return months[month - 1].substring(0, 3).toUpperCase();
+  }
+
+  TimeOfDay get toTimeOfDay => TimeOfDay(hour: hour, minute: minute);
+
+  String toFormatTime(BuildContext context) {
+    return TimeOfDay.fromDateTime(DateTime.now()).format(context);
   }
 
   bool isBetween(DateTime? startDate, DateTime? endDate) {

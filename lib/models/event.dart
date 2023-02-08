@@ -101,6 +101,17 @@ enum EventStatus {
     return values.firstWhere((e) => e.name == value,
         orElse: () => EventStatus.todo);
   }
+
+  String get label {
+    switch (this) {
+      case EventStatus.todo:
+        return 'TODO';
+      case EventStatus.progress:
+        return 'In Progress';
+      case EventStatus.done:
+        return 'Done';
+    }
+  }
 }
 
 extension EventStatusX on EventStatus {}
