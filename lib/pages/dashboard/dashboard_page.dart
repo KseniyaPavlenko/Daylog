@@ -45,7 +45,9 @@ class _DashboardPageState extends State<DashboardPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
+          backgroundColor: Colors.brown[900],
           title: const Text('Dashboard'),
         ),
         body: BlocBuilder<EventListCubit, EventListState>(
@@ -62,17 +64,21 @@ class _DashboardPageState extends State<DashboardPage> {
                 ),
                 Expanded(
                   child: Container(
-                    color: Colors.grey[600],
+                    // color: Colors.grey[600],
                     padding: const EdgeInsets.all(10),
-                    child: ListView.builder(
-                        itemCount: state.list.length,
-                        itemBuilder: (_, index) {
-                          final event = state.list[index];
-                          return EventListItem(
-                            event: event,
-                            onTap: () => onTapEvent(event),
-                          );
-                        }),
+                    child: ListView.separated(
+                      itemCount: state.list.length,
+                      itemBuilder: (_, index) {
+                        final event = state.list[index];
+                        return EventListItem(
+                          event: event,
+                          onTap: () => onTapEvent(event),
+                        );
+                      },
+                      separatorBuilder: (context, index) => const SizedBox(
+                        height: 10,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -81,6 +87,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ),
       );
 }
+
 //TODO: 
 //  return Center(
 //               child: Container(

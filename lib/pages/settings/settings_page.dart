@@ -27,7 +27,9 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           title: const Text('Settings'),
         ),
         body: Center(
@@ -39,16 +41,18 @@ class _SettingsPageState extends State<SettingsPage> {
               Text(
                 'Version: $version',
                 style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  //color: Colors.white
+                ),
               ),
               Text(
                 'Build : $buildNumber',
                 style: const TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  // color: Colors.white
+                ),
               ),
               LogoutButton(text)
             ],

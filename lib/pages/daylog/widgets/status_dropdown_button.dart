@@ -19,13 +19,14 @@ class StatusDropdownButton extends StatelessWidget {
         value: dropdownValue,
         icon: const Icon(Icons.arrow_downward),
         elevation: 16,
-        style: const TextStyle(color: Colors.white),
+        //style: const TextStyle(color: Colors.white),
         underline: Container(
           height: 2,
-          color: Colors.black12,
+          // color: Colors.black12,
         ),
         onChanged: onChanged,
-        items: EventStatus.values.map<DropdownMenuItem<EventStatus>>((EventStatus value) {
+        items: EventStatus.values
+            .map<DropdownMenuItem<EventStatus>>((EventStatus value) {
           return DropdownMenuItem<EventStatus>(
             value: value,
             child: Text(value.label),

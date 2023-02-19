@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'package:daylog/common/errors/auth_error.dart';
+import 'package:daylog/common/errors/request_error.dart';
 import 'package:daylog/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
 
@@ -30,6 +32,16 @@ class DioInterceptor extends Interceptor {
 
     if (code >= 200 && code < 300) {
       handler.next(response);
+      return;
+    }
+
+    if (code == 400) {
+      handler.reject(RequestError(requestOptions: response.requestOptions));
+      return;
+    }
+
+    if (code == 401) {
+      handler.reject(AuthError(requestOptions: response.requestOptions));
       return;
     }
 

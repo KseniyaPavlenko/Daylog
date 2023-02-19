@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_cast
+
 import 'package:daylog/pages/daylog/daylog_page.dart';
 import 'package:daylog/pages/home/home_page.dart';
 import 'package:daylog/pages/login/login_page.dart';
@@ -50,7 +52,7 @@ class AppRouter {
     GoRoute(
       path: schedulerLog,
       builder: (BuildContext context, GoRouterState state) {
-        return const SchedulerLogPage();
+        return SchedulerLogPage(id: state.extra as String?);
       },
     ),
   ]);

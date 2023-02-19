@@ -1,7 +1,9 @@
 // ignore_for_file: deprecated_member_use, unused_local_variable
 
+import 'package:daylog/common/errors/request_error.dart';
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/utils/date_utils.dart';
+import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
@@ -58,19 +60,28 @@ class _DaylogPageState extends State<DaylogPage> {
   }
 
   void _onTapSave() async {
-    await eventDetailCubit.updateEvent(
-      Event(
-        id: widget.id,
-        userId: userId,
-        title: _titleController.text,
-        detail: _detailsController.text,
-        comment: _commentController.text,
-        startAt: date.copyWith(minute: time.minute, hour: time.hour),
-        startDate: date,
-        status: dropdownValue,
-      ),
-    );
-    context.pop();
+    try {
+      await eventDetailCubit.updateEvent(
+        Event(
+          id: widget.id,
+          userId: userId,
+          title: _titleController.text,
+          detail: _detailsController.text,
+          comment: _commentController.text,
+          startAt: date.copyWith(minute: time.minute, hour: time.hour),
+          startDate: date,
+          status: dropdownValue,
+        ),
+      );
+      context.pop();
+    } on RequestError catch (e) {
+      final message = e.toString();
+      // TODO: Show toast 
+      
+      log.e(e);
+    } catch (e) {
+      log.e(e);
+    }
   }
 
   void _onTapTimeField() async {
@@ -84,9 +95,34 @@ class _DaylogPageState extends State<DaylogPage> {
     });
   }
 
+  // _backButton() {
+  //   ElevatedButton.icon(
+  //     onPressed: () => context.go(AppRouter.home),
+  //     icon: const Icon(Icons.arrow_left_sharp),
+  //     label: const Text('Back'),
+  //     style: ElevatedButton.styleFrom(
+  //       elevation: 3,
+  //       primary: Colors.brown[900],
+  //     ),
+  //   );
+  // }
+
+  // _saveButton() {
+  //   ElevatedButton.icon(
+  //       onPressed:_onTapSave,
+  //       icon: const Icon(Icons.save_outlined),
+  //       label: const Text('Save'),
+  //       style: ElevatedButton.styleFrom(
+  //       elevation: 3,
+  //       primary: Colors.brown[900],
+  //     ),
+  //   ),
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leadingWidth: 100,
@@ -95,19 +131,22 @@ class _DaylogPageState extends State<DaylogPage> {
           icon: const Icon(Icons.arrow_left_sharp),
           label: const Text('Back'),
           style: ElevatedButton.styleFrom(
-              elevation: 0, primary: Colors.transparent),
+              elevation: 3,
+              primary: Colors.brown[900],
+              minimumSize: const Size(1000, 1000)),
         ),
         title: const Text('Day Log'),
+        backgroundColor: Theme.of(context).primaryColor,
         centerTitle: true,
         actions: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              primary: Colors.white,
-              shape: const CircleBorder(
-                  side: BorderSide(color: Colors.transparent)),
-            ),
-            child: const Text("Save"),
+          ElevatedButton.icon(
             onPressed: _onTapSave,
+            icon: const Icon(Icons.save_outlined),
+            label: const Text('Save'),
+            style: ElevatedButton.styleFrom(
+              elevation: 3,
+              primary: Colors.brown[900],
+            ),
           ),
         ],
       ),
@@ -142,11 +181,11 @@ class _DaylogPageState extends State<DaylogPage> {
                         children: [
                           Text(
                             'Date: ${date.year}.${date.month}.${date.day}',
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                            // style: const TextStyle(
+                            //   fontSize: 18,
+                            //   fontWeight: FontWeight.bold,
+                            //   color: Colors.white,
+                            // ),
                           ),
                           StatusDropdownButton(
                             dropdownValue: dropdownValue,

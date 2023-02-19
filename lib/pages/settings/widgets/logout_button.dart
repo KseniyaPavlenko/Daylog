@@ -10,7 +10,8 @@ class LogoutButton extends StatelessWidget {
     String text = "LOGOUT";
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: Theme.of(context).primaryColor,
+        primary: Colors.brown,
+        backgroundColor: Colors.brown[900],
       ),
       child: Text(
         text,

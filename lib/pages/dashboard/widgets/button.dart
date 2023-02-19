@@ -12,7 +12,7 @@ class Button extends StatelessWidget {
       String text = "Daylog";
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: Colors.brown[100],
         ),
         child: Text(
           text,

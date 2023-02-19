@@ -20,6 +20,7 @@ class _TabBarMaterialWidgetState extends State<TabBarMaterialWidget> {
         child: IconButton(onPressed: null, icon: Icon(Icons.no_cell)));
 
     return BottomAppBar(
+      color: Colors.red,
       notchMargin: 8,
       shape: const CircularNotchedRectangle(),
       child: Row(
@@ -49,14 +50,9 @@ class _TabBarMaterialWidgetState extends State<TabBarMaterialWidget> {
 
   Widget buildTabItem({required int index, required Icon icon}) {
     final isSelected = index == widget.index;
-    return IconTheme(
-      data: IconThemeData(
-        color: isSelected ? Colors.white : Colors.black,
-      ),
-      child: IconButton(
-        icon: icon,
-        onPressed: () => widget.onChangedTab(index),
-      ),
+    return IconButton(
+      icon: icon,
+      onPressed: () => widget.onChangedTab(index),
     );
   }
 }

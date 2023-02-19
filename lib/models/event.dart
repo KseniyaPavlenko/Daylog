@@ -5,6 +5,7 @@ import '../common/utils/date_utils.dart';
 class Event with EquatableMixin {
   final String? id;
   final String? userId;
+  final String? draftId;
   // final DateTime? updateAt;
   final DateTime? startAt;
   final DateTime? startDate;
@@ -17,6 +18,7 @@ class Event with EquatableMixin {
   Event({
     this.id,
     this.userId,
+    this.draftId,
     // this.updateAt,
     this.startAt,
     this.startDate,
@@ -30,6 +32,7 @@ class Event with EquatableMixin {
   Event.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         userId = json['userId'],
+        draftId = json['draftId'],
         // updateAt = DateTime.parse(json['updateAt']),
         startAt = DateTime.parse(json['startAt']),
         startDate = DateTime.parse(json['startDate']),
@@ -42,6 +45,7 @@ class Event with EquatableMixin {
   Map<String, dynamic> toJson() => {
         'id': id,
         'userId': userId,
+        'draftId': draftId,
         // 'updateAt': updateAt?.formatDateTime(),
         'startAt': startAt?.formatDateTime(),
         'startDate': startDate?.formatDate(),
@@ -55,6 +59,7 @@ class Event with EquatableMixin {
   Event copyWith({
     String? id,
     String? userId,
+    String? draftId,
     DateTime? startAt,
     DateTime? startDate,
     int? duration,
@@ -66,6 +71,7 @@ class Event with EquatableMixin {
     return Event(
       id: id ?? this.id,
       userId: userId ?? this.userId,
+      draftId: draftId ?? this.draftId,
       startAt: startAt ?? this.startAt,
       startDate: startDate ?? this.startDate,
       duration: duration ?? this.duration,
@@ -81,6 +87,7 @@ class Event with EquatableMixin {
     return [
       id,
       userId,
+      draftId,
       startAt,
       startDate,
       duration,

@@ -1,13 +1,14 @@
-import 'package:daylog/models/event.dart';
+import 'package:daylog/models/draft.dart';
 import 'package:flutter/material.dart';
 
-class EventListItem extends StatelessWidget {
-  const EventListItem({
+class DraftListItem extends StatelessWidget {
+  const DraftListItem({
     Key? key,
-    required this.event,
+    required this.draft,
     this.onTap,
   }) : super(key: key);
-  final Event event;
+
+  final Draft draft;
   final VoidCallback? onTap;
 
   @override
@@ -17,22 +18,24 @@ class EventListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
+          
           color: Colors.brown[900],
+          //color: Colors.grey[800],
         ),
         child: ListTile(
           leading: const Icon(
             Icons.add_alert,
             size: 30,
           ),
-          title: Text(event.title ?? ''),
+          title: Text(draft.title ?? ''),
           subtitle: const Text('test subtitle'),
           trailing: onTap == null ? null : const Icon(Icons.arrow_forward_ios),
           contentPadding: const EdgeInsets.all(10),
+          
           enabled: true,
-
           // iconColor: Colors.white,
-          // textColor: Colors.white,
-          // tileColor: Colors.grey[600],
+          //textColor: Colors.white,
+          //tileColor: Colors.grey[600],
           //// shape:
           //    RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         ),

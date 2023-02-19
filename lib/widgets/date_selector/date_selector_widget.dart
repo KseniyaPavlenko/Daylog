@@ -18,7 +18,7 @@ class DateSelectorWidget extends StatelessWidget {
     return Container(
       height: 100,
       width: double.infinity,
-      color: Colors.grey[600],
+      // color: Colors.grey[600],
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -28,7 +28,7 @@ class DateSelectorWidget extends StatelessWidget {
             child: const Icon(
               Icons.arrow_left,
               size: 50,
-              color: Colors.white,
+              // color: Colors.white,
             ),
           ),
           Column(
@@ -57,7 +57,7 @@ class DateSelectorWidget extends StatelessWidget {
             child: const Icon(
               Icons.arrow_right,
               size: 50,
-              color: Colors.white,
+              //color: Colors.white,
             ),
           ),
         ],

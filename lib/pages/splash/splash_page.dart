@@ -43,6 +43,7 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       body: const Center(
         child: Text(
           'Daily Planner',
@@ -50,7 +51,7 @@ class _SplashPageState extends State<SplashPage> {
           style: TextStyle(
             fontSize: 45,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+           // color: Colors.white,
           ),
         ),
       ),

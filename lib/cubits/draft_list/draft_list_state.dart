@@ -10,6 +10,8 @@ class DraftListState with EquatableMixin {
     this.drafts,
   });
 
+  List<Draft> get list => drafts ?? []; 
+
   DraftListState copyWith({
     bool? isLoading,
     List<Draft>? drafts,

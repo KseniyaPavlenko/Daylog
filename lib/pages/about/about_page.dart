@@ -10,7 +10,9 @@ class AboutPage extends StatefulWidget {
 class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
           title: const Text('About the App'),
         ),
         body: const Padding(
@@ -20,7 +22,7 @@ class _AboutPageState extends State<AboutPage> {
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              //color: Colors.white,
             ),
           ),
         ),
