@@ -27,7 +27,8 @@ class DioInterceptor extends Interceptor {
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     print(
-        'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}');
+      'RESPONSE[${response.statusCode}] => PATH: ${response.requestOptions.path}',
+    );
     final code = response.statusCode ?? 500;
 
     if (code >= 200 && code < 300) {

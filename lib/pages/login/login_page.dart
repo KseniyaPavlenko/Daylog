@@ -1,8 +1,13 @@
 // ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:daylog/common/route/router.dart';
+import 'package:daylog/common/utils/context_utils.dart';
+import 'package:daylog/cubits/auth/auth_cubit.dart';
+import 'package:daylog/cubits/auth/auth_state.dart';
 import 'package:daylog/pages/login/widgets/bottom_wave.dart';
+import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,31 +18,48 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  // ignore: unused_field
-  late String _username;
-  // ignore: unused_field
-  late String _password;
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  bool buttonIsEnabled = false;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: Column(
-        children: <Widget>[
-          _logo(),
-          SizedBox(
-            height: 100,
-          ),
-          _form('LOGIN', _loginUser),
-          BottomWave(),
-        ],
-      ),
-    );
+  void initState() {
+    super.initState();
+    _usernameController.addListener(_textControllerListener);
+    _passwordController.addListener(_textControllerListener);
   }
 
-  Widget _logo() {
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _textControllerListener() {
+    setState(() {
+      buttonIsEnabled = _usernameController.text.isNotEmpty &&
+          _passwordController.text.isNotEmpty;
+    });
+  }
+
+  void _loginUser() {
+    context.read<AuthCubit>().login(
+          _usernameController.text,
+          _passwordController.text,
+        );
+  }
+
+  void _onLogin() {
+    GoRouter.of(context).go(AppRouter.home);
+  }
+
+  void _onCreateAcc() {
+    GoRouter.of(context).go(AppRouter.signUp);
+  }
+
+  Widget _buildLogo() {
     return Padding(
         padding: EdgeInsets.only(top: 100),
         child: Align(
@@ -78,35 +100,24 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _button(String text, void Function() func) {
+  Widget _buildButtonLogin(String text, void Function() func) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        primary: Theme.of(context).primaryColor,
-
-        //   splashColor: Theme.of(context).primaryColor,
-        // highlightColor: Theme.of(context).primaryColor,
-        // color: Colors.white,
-      ),
+      onPressed: buttonIsEnabled ? _loginUser : null,
       child: Text(
         text,
         style: TextStyle(
-            fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 20,
+        ),
       ),
-      onPressed: _onLogin,
     );
   }
 
   Widget _createAccButton(String text, void Function() func) {
     return TextButton(
-      style: TextButton.styleFrom(
-        primary: Theme.of(context).primaryColor,
-
-        //   splashColor: Theme.of(context).primaryColor,
-        // highlightColor: Theme.of(context).primaryColor,
-        // color: Colors.white,
-      ),
       child: Text(
-        text = "Create account",
+        "Create account",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.white,
@@ -118,25 +129,27 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _onLogin() {
-    GoRouter.of(context).go(AppRouter.home);
-  }
-
-  void _onCreateAcc() {
-    GoRouter.of(context).go(AppRouter.signUp);
-  }
-
   Widget _form(String label, void Function() func) {
     return Column(
       children: <Widget>[
         Padding(
-            padding: EdgeInsets.only(bottom: 20, top: 10),
-            child: _input(
-                Icon(Icons.email), "Username", _usernameController, false)),
+          padding: EdgeInsets.only(bottom: 20, top: 10),
+          child: _input(
+            Icon(Icons.email),
+            "Username",
+            _usernameController,
+            false,
+          ),
+        ),
         Padding(
-            padding: EdgeInsets.only(bottom: 5),
-            child: _input(
-                Icon(Icons.lock), "Password", _passwordController, true)),
+          padding: EdgeInsets.only(bottom: 5),
+          child: _input(
+            Icon(Icons.lock),
+            "Password",
+            _passwordController,
+            true,
+          ),
+        ),
         Padding(
           padding: EdgeInsets.only(left: 260),
           child: SizedBox(
@@ -152,18 +165,40 @@ class _LoginPageState extends State<LoginPage> {
           child: SizedBox(
               height: 50,
               width: MediaQuery.of(context).size.width,
-              child: _button(label, func)),
+              child: _buildButtonLogin(label, func)),
         )
       ],
     );
   }
 
-  void _loginUser() {
-    _username = _usernameController.text;
-    _password = _passwordController.text;
-
-    _usernameController.clear();
-    _passwordController.clear();
+  @override
+  Widget build(BuildContext context) {
+    return BlocConsumer<AuthCubit, AuthState>(
+      listener: (context, state) {
+        if (state.isAuthorized ?? false) _onLogin();
+        if (state.error?.isNotEmpty ?? false) {
+          context.showError('AUTH ERROR');
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: Theme.of(context).primaryColor,
+          body: CommonLoadingIndicator(
+            isLoading: state.isLoading,
+            child: Column(
+              children: <Widget>[
+                _buildLogo(),
+                SizedBox(
+                  height: 100,
+                ),
+                _form('LOGIN', _loginUser),
+                BottomWave(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

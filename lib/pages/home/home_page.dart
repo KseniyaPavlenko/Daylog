@@ -1,11 +1,11 @@
-// ignore_for_file: camel_case_types, unused_element
+
 
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/pages/about/about_page.dart';
 import 'package:daylog/pages/dashboard/dashboard_page.dart';
+import 'package:daylog/pages/home/widgets/home_bottom_bar.dart';
 import 'package:daylog/pages/scheduler/sheduler_page.dart';
 import 'package:daylog/pages/settings/settings_page.dart';
-import 'package:daylog/widgets/tabbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -43,16 +43,18 @@ class _HomePageState extends State<HomePage> {
       //     BottomNavigationBarItem(icon: Icon(Icons.abc), label: '2'),
       //   ],
       // ),
-      bottomNavigationBar: TabBarMaterialWidget(
-        index: index,
-        onChangedTab: onChangedTab,
+      bottomNavigationBar: HomeBottomBar(
+        currentPage: 0,
+        onCahngePage: (int) {
+          pages[index];
+        },
       ),
-      // floatingActionButton: FloatingActionButton(
-      //   // backgroundColor: Colors.brown[600],
-      //   child: const Icon(Icons.add),
-      //   onPressed: () => context.push(AppRouter.schedulerLog),
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        // backgroundColor: Colors.brown[600],
+        child: const Icon(Icons.add),
+        onPressed: () => context.push(AppRouter.schedulerLog),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 

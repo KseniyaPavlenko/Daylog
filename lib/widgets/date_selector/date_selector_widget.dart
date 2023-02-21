@@ -15,7 +15,7 @@ class DateSelectorWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 100,
       width: double.infinity,
       // color: Colors.grey[600],

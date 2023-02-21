@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+const _bottomBarIcons = [
+  Icons.dashboard_outlined,
+  Icons.date_range_outlined,
+  Icons.add,
+  Icons.info_outline,
+  Icons.settings_applications_outlined,
+];
+
 class TabBarMaterialWidget extends StatefulWidget {
   const TabBarMaterialWidget({
     Key? key,
@@ -19,40 +27,30 @@ class _TabBarMaterialWidgetState extends State<TabBarMaterialWidget> {
         opacity: 0,
         child: IconButton(onPressed: null, icon: Icon(Icons.no_cell)));
 
-    return BottomAppBar(
-      color: Colors.red,
-      notchMargin: 8,
-      shape: const CircularNotchedRectangle(),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          buildTabItem(
-            index: 0,
-            icon: const Icon(Icons.dashboard_outlined),
-          ),
-          buildTabItem(
-            index: 1,
-            icon: const Icon(Icons.date_range_outlined),
-          ),
-          placeholder,
-          buildTabItem(
-            index: 2,
-            icon: const Icon(Icons.info_outline),
-          ),
-          buildTabItem(
-            index: 3,
-            icon: const Icon(Icons.settings_applications_outlined),
-          ),
-        ],
+    return BottomNavigationBar(
+      items: List.generate(
+        _bottomBarIcons.length,
+        (index) {
+          final icon = _bottomBarIcons[index];
+          return BottomNavigationBarItem(
+            icon: Icon(icon),
+            label: icon.toString(),
+          );
+        },
       ),
     );
   }
 
   Widget buildTabItem({required int index, required Icon icon}) {
     final isSelected = index == widget.index;
-    return IconButton(
-      icon: icon,
-      onPressed: () => widget.onChangedTab(index),
+    return IconTheme(
+      data: IconThemeData(
+        color: isSelected ? Colors.white : Colors.black,
+      ),
+      child: IconButton(
+        icon: icon,
+        onPressed: () => widget.onChangedTab(index),
+      ),
     );
   }
 }

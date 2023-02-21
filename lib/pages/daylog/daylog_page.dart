@@ -76,8 +76,7 @@ class _DaylogPageState extends State<DaylogPage> {
       context.pop();
     } on RequestError catch (e) {
       final message = e.toString();
-      // TODO: Show toast 
-      
+      // TODO: Show toast
       log.e(e);
     } catch (e) {
       log.e(e);

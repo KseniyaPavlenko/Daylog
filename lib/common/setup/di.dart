@@ -7,6 +7,7 @@ import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/cubits/me/me_cubit.dart';
 import 'package:daylog/env_config.dart';
 import 'package:daylog/services/auth/auth_service.dart';
+import 'package:daylog/services/auth/auth_service_impl.dart';
 import 'package:daylog/services/auth/auth_service_mock.dart';
 import 'package:daylog/services/draft/draft_service.dart';
 import 'package:daylog/services/draft/draft_service_mock.dart';
@@ -35,7 +36,11 @@ void setupDi() {
   getIt.registerFactory<DraftDetailCubit>(
       () => DraftDetailCubit(draftService: getIt()));
 //Auth
-  getIt.registerLazySingleton<AuthService>(() => AuthServiceMock());
+  // getIt.registerLazySingleton<AuthService>(() => AuthServiceMock());
+  getIt.registerLazySingleton<AuthService>(() => AuthServiceImpl(
+        dio: getIt(),
+        localStorage: getIt(),
+      ));
   getIt.registerFactory<AuthCubit>(() => AuthCubit(authService: getIt()));
 //User
   getIt.registerLazySingleton<UserService>(() => UserServiceMock());
@@ -45,7 +50,8 @@ void setupDi() {
 }
 
 void _setupDio() {
-  final envConfig = EnvConfig.local();
+  // final envConfig = EnvConfig.local();
+  final envConfig = EnvConfig.heroku();
   final dio = Dio();
   dio.options.baseUrl = envConfig.baseUrl;
 
