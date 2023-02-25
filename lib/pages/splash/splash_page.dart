@@ -43,7 +43,6 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _checkAuth() async {
-    context.go(AppRouter.home);
     final authCubit = context.read<AuthCubit>();
     await authCubit.loadData();
     if (authCubit.state.isAuthorized ?? false) {

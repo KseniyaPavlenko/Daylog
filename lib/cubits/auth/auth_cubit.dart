@@ -1,5 +1,7 @@
+import 'package:daylog/common/errors/auth_error.dart';
 import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
+import 'package:daylog/models/daylog_error.dart';
 import 'package:daylog/services/auth/auth_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';
@@ -9,7 +11,7 @@ class AuthCubit extends Cubit<AuthState> {
   final Logger _logger;
 
   AuthCubit({required this.authService})
-      : _logger = createLog(name: 'createLog'),
+      : _logger = createLog(name: 'AuthCubit'),
         super(AuthState.init());
 
   Future<void> loadData() async {
@@ -29,10 +31,13 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await authService.login(login, password);
       emit(state.copyWith(isAuthorized: true));
-    } catch (e) {
-      final error = e.toString();
-      _logger.e(error);
-      emit(state.updateError(error: error));
+    } catch (error) {
+      if (error is AuthError) {
+        emit(state.updateError(DaylogError.authError));
+      } else {
+        _logger.e(error.toString());
+        emit(state.updateError(DaylogError.deafultError));
+      }
     } finally {
       emit(state.copyWith(isLoading: false).updateError());
     }

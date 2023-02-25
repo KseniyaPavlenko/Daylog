@@ -1,16 +1,19 @@
+import 'package:daylog/models/daylog_error.dart';
 import 'package:daylog/models/user.dart';
 import 'package:equatable/equatable.dart';
 
 class AuthState with EquatableMixin {
   final bool isLoading;
   final bool? isAuthorized;
-  final String? error;
+  final DaylogError? error;
 
   const AuthState({
     this.isLoading = false,
     this.isAuthorized,
     this.error,
   });
+
+  bool get hasError => error != null;
 
   AuthState copyWith({
     bool? isLoading,
@@ -23,9 +26,7 @@ class AuthState with EquatableMixin {
     );
   }
 
-  AuthState updateError({
-    String? error,
-  }) {
+  AuthState updateError([DaylogError? error]) {
     return AuthState(
       isLoading: isLoading,
       isAuthorized: isAuthorized,
