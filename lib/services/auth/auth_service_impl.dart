@@ -1,13 +1,10 @@
-// ignore_for_file: unused_local_variable
-
 import 'dart:convert';
 
 import 'package:daylog/models/token.dart';
 import 'package:daylog/models/user.dart';
 import 'package:daylog/services/auth/auth_service.dart';
+import 'package:daylog/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
-
-import '../local_storage/local_storage.dart';
 
 class AuthServiceImpl implements AuthService {
   final Dio dio;

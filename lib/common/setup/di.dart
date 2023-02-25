@@ -8,7 +8,6 @@ import 'package:daylog/cubits/me/me_cubit.dart';
 import 'package:daylog/env_config.dart';
 import 'package:daylog/services/auth/auth_service.dart';
 import 'package:daylog/services/auth/auth_service_impl.dart';
-import 'package:daylog/services/auth/auth_service_mock.dart';
 import 'package:daylog/services/draft/draft_service.dart';
 import 'package:daylog/services/draft/draft_service_mock.dart';
 import 'package:daylog/services/event/event_service.dart';
@@ -26,23 +25,30 @@ void setupDi() {
   // Event
   getIt.registerLazySingleton<EventService>(() => EventServiceMock());
   getIt.registerFactory<EventListCubit>(
-      () => EventListCubit(eventService: getIt()));
+    () => EventListCubit(eventService: getIt()),
+  );
   getIt.registerFactory<EventDetailCubit>(
-      () => EventDetailCubit(eventService: getIt()));
+    () => EventDetailCubit(eventService: getIt()),
+  );
+
   // Draft
   getIt.registerLazySingleton<DraftService>(() => DraftServiceMock());
   getIt.registerFactory<DraftListCubit>(
-      () => DraftListCubit(draftService: getIt()));
+    () => DraftListCubit(draftService: getIt()),
+  );
   getIt.registerFactory<DraftDetailCubit>(
-      () => DraftDetailCubit(draftService: getIt()));
-//Auth
+    () => DraftDetailCubit(draftService: getIt()),
+  );
+
+  // Auth
   // getIt.registerLazySingleton<AuthService>(() => AuthServiceMock());
   getIt.registerLazySingleton<AuthService>(() => AuthServiceImpl(
         dio: getIt(),
         localStorage: getIt(),
       ));
   getIt.registerFactory<AuthCubit>(() => AuthCubit(authService: getIt()));
-//User
+
+  // User
   getIt.registerLazySingleton<UserService>(() => UserServiceMock());
   getIt.registerFactory<MeCubit>(() => MeCubit(userService: getIt()));
 
@@ -50,8 +56,7 @@ void setupDi() {
 }
 
 void _setupDio() {
-  // final envConfig = EnvConfig.local();
-  final envConfig = EnvConfig.heroku();
+  final envConfig = EnvConfig.prod();
   final dio = Dio();
   dio.options.baseUrl = envConfig.baseUrl;
 

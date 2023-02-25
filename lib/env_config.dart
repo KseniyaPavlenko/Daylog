@@ -1,6 +1,6 @@
 class EnvConfig {
   static const localBaseUrl = 'http://localost:8087/api/v1';
-  static const prodBaseUrl = 'http://localost:8087/api/v1';
+  static const prodBaseUrl = 'https://app.onedaylog.org/api/v1';
   static const herokuBaseUrl = 'https://daylog-dev.abexam.org/api/v1';
 
   final String baseUrl;
