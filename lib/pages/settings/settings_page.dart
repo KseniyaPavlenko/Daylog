@@ -1,7 +1,11 @@
 // ignore_for_file: deprecated_member_use, prefer_const_constructors, unused_local_variable
 
+import 'package:daylog/common/route/router.dart';
+import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/pages/settings/widgets/logout_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -23,6 +27,11 @@ class _SettingsPageState extends State<SettingsPage> {
     packageInfo = await PackageInfo.fromPlatform();
     String version = packageInfo!.version;
     String buildNumber = packageInfo!.buildNumber;
+  }
+
+  void _onLogout() async {
+    await context.read<AuthCubit>().logout();
+    context.go(AppRouter.login);
   }
 
   @override
@@ -54,7 +63,10 @@ class _SettingsPageState extends State<SettingsPage> {
                   // color: Colors.white
                 ),
               ),
-              LogoutButton(text)
+              LogoutButton(
+                text,
+                onPressed: _onLogout,
+              )
             ],
           ),
         ),

@@ -34,7 +34,6 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        
         BlocProvider<EventListCubit>(
           create: (BuildContext context) => getIt(),
         ),

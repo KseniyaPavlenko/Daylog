@@ -14,9 +14,8 @@ extension BuildContextX on BuildContext {
       messageColor: const Color.fromARGB(255, 114, 37, 31),
       backgroundColor: const Color(0x00faebd7),
       flushbarPosition: FlushbarPosition.BOTTOM,
-      
       boxShadows: const [
-         BoxShadow(
+        BoxShadow(
           color: Color.fromARGB(255, 208, 173, 170),
           offset: Offset(2, 2),
           blurRadius: 8,
@@ -30,4 +29,6 @@ extension BuildContextX on BuildContext {
       shouldIconPulse: true,
     ).show(this);
   }
+
+  double get bottomPadding => MediaQuery.of(this).padding.bottom;
 }
