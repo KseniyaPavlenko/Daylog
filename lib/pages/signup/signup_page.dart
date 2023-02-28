@@ -1,8 +1,13 @@
 // ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:daylog/common/route/router.dart';
+import 'package:daylog/common/utils/context_utils.dart';
+import 'package:daylog/cubits/auth/auth_cubit.dart';
+import 'package:daylog/cubits/auth/auth_state.dart';
 import 'package:daylog/pages/login/widgets/bottom_wave.dart';
+import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -20,21 +25,62 @@ class _SignUpPageState extends State<SignUpPage> {
   // ignore: unused_field
   late String _password;
 
+  bool buttonIsEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _usernameController.addListener(_textControllerListener);
+    _passwordController.addListener(_textControllerListener);
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+  void _textControllerListener() {
+    setState(() {
+      buttonIsEnabled = _usernameController.text.isNotEmpty &&
+          _passwordController.text.isNotEmpty;
+    });
+  }
+
+  void _signUpUser() {
+    context.read<AuthCubit>().signup(
+          _usernameController.text,
+          _passwordController.text,
+        );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      body: Column(
-        children: <Widget>[
-          _logo(),
-          SizedBox(
-            height: 100,
+    return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
+      if (state.isAuthorized ?? false) {
+        context.go(AppRouter.home);
+      } else if (state.hasError) {
+        context.showError(state.error!.message);
+      }
+    }, builder: (context, state) {
+      return Scaffold(
+        backgroundColor: Theme.of(context).primaryColor,
+        body: CommonLoadingIndicator(
+          isLoading: state.isLoading,
+          child: Column(
+            children: <Widget>[
+              _logo(),
+              SizedBox(
+                height: 100,
+              ),
+              _form('SIGN UP', _signUpUser),
+              BottomWave(),
+            ],
           ),
-          _form('SIGN UP', _signUpUser),
-          BottomWave(),
-        ],
-      ),
-    );
+        ),
+      );
+    });
   }
 
   Widget _logo() {
@@ -92,7 +138,9 @@ class _SignUpPageState extends State<SignUpPage> {
         style: TextStyle(
             fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
       ),
-      onPressed: () {},
+      onPressed: () {
+        _signUpUser();
+      },
     );
   }
 
@@ -156,14 +204,6 @@ class _SignUpPageState extends State<SignUpPage> {
         )
       ],
     );
-  }
-
-  void _signUpUser() {
-    _username = _usernameController.text;
-    _password = _passwordController.text;
-
-    _usernameController.clear();
-    _passwordController.clear();
   }
 }
 

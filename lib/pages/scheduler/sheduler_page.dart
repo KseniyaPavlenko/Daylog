@@ -34,7 +34,7 @@ class _SchedulerPageState extends State<SchedulerPage> {
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           title: const Text('Scheduler'),
-          backgroundColor: Theme.of(context).primaryColor,
+          backgroundColor: const Color(0xFF3E2723),
         ),
         body: BlocBuilder<DraftListCubit, DraftListState>(
           builder: (context, state) {

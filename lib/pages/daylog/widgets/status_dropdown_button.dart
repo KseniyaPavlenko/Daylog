@@ -16,6 +16,10 @@ class StatusDropdownButton extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: DropdownButton<EventStatus>(
+        iconDisabledColor: Colors.red,
+        iconEnabledColor: Colors.brown[800],
+        dropdownColor: Colors.brown[800],
+
         value: dropdownValue,
         icon: const Icon(Icons.arrow_downward),
         elevation: 16,
