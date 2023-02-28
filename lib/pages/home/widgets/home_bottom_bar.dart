@@ -29,7 +29,7 @@ class HomeBottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: const BoxDecoration(color: Colors.red),
+      decoration: const BoxDecoration(color: Color(0xFF3E2723)),
       child: Padding(
         padding: EdgeInsets.only(bottom: context.bottomPadding),
         child: SizedBox(
@@ -119,7 +119,7 @@ class _IconButton extends StatelessWidget {
           children: [
             Icon(
               icon,
-              color: isSelected ? Colors.green : Colors.yellow,
+              color: isSelected ? Colors.brown[50] : Colors.brown[500],
             ),
             Text(label),
           ],

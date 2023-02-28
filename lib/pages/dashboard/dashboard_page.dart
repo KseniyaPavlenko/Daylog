@@ -47,7 +47,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
-          backgroundColor: Colors.brown[900],
+          backgroundColor: const Color(0xFF3E2723),
           title: const Text('Dashboard'),
         ),
         body: BlocBuilder<EventListCubit, EventListState>(

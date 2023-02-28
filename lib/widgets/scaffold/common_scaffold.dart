@@ -33,7 +33,8 @@ class _CommonScaffoldState extends State<CommonScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Colors.brown[700],
+      // backgroundColor: Theme.of(context).colorScheme.background,
       floatingActionButton: widget.floatButton,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Stack(
