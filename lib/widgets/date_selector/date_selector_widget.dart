@@ -24,6 +24,7 @@ class DateSelectorWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           InkWell(
+            key: const Key('dateSelector_prev'),
             onTap: onLeftTap,
             child: const Icon(
               Icons.arrow_left,
@@ -53,6 +54,7 @@ class DateSelectorWidget extends StatelessWidget {
             ],
           ),
           InkWell(
+            key: const Key('dateSelector_next'),
             onTap: onRightTap,
             child: const Icon(
               Icons.arrow_right,
