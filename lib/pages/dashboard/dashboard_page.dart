@@ -3,10 +3,11 @@ import 'package:daylog/cubits/event_list/event_list_state.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/dashboard/widgets/event_list_item.dart';
 import 'package:daylog/widgets/date_selector/date_selector_widget.dart';
+import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-
+//TODO: AppBar?????????
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
@@ -44,51 +45,66 @@ class _DashboardPageState extends State<DashboardPage> {
   void onTapEvent(Event event) => context.push('/daylog/${event.id}');
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-        backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF3E2723),
-          title: const Text('Dashboard'),
-        ),
-        body: BlocBuilder<EventListCubit, EventListState>(
-          builder: (context, state) {
-            if (state.isLoading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return Column(
-              children: [
-                DateSelectorWidget(
-                  date: selectedDate,
-                  onLeftTap: onLeftTap,
-                  onRightTap: onRightTap,
-                ),
-                Expanded(
-                  child: Container(
-                    // color: Colors.grey[600],
-                    padding: const EdgeInsets.all(10),
-                    child: ListView.separated(
-                      itemCount: state.list.length,
-                      itemBuilder: (_, index) {
-                        final event = state.list[index];
-                        return EventListItem(
-                          event: event,
-                          onTap: () => onTapEvent(event),
-                        );
-                      },
-                      separatorBuilder: (context, index) => const SizedBox(
-                        height: 10,
-                      ),
+  Widget build(BuildContext context) {
+    return BlocBuilder<EventListCubit, EventListState>(
+      
+      builder: (context, state) {
+        
+        if (state.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+        return CommonScaffold(
+          
+          isLoading: state.isLoading,
+          // error: state.error?message,
+          body:
+          
+              // backgroundColor: Theme.of(context).primaryColor,
+              // appBar: AppBar(
+              //   backgroundColor: const Color(0xFF3E2723),
+              //   title: const Text('Dashboard'),
+              // ),
+              // body: BlocBuilder<EventListCubit, EventListState>(
+              //   builder: (context, state) {
+              //     if (state.isLoading) {
+              //       return const Center(child: CircularProgressIndicator());
+              //     }
+              //return
+              Column(
+            children: [
+              DateSelectorWidget(
+                date: selectedDate,
+                onLeftTap: onLeftTap,
+                onRightTap: onRightTap,
+              ),
+              Expanded(
+                child: Container(
+                  // color: Colors.grey[600],
+                  padding: const EdgeInsets.all(10),
+                  child: ListView.separated(
+                    itemCount: state.list.length,
+                    itemBuilder: (_, index) {
+                      final event = state.list[index];
+                      return EventListItem(
+                        event: event,
+                        onTap: () => onTapEvent(event),
+                      );
+                    },
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 10,
                     ),
                   ),
                 ),
-              ],
-            );
-          },
-        ),
-      );
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
 
-//TODO: 
+//TODO:
 //  return Center(
 //               child: Container(
 //                 padding: const EdgeInsets.only(top: 30),
