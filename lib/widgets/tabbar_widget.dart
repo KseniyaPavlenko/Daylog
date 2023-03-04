@@ -23,9 +23,9 @@ class TabBarMaterialWidget extends StatefulWidget {
 class _TabBarMaterialWidgetState extends State<TabBarMaterialWidget> {
   @override
   Widget build(BuildContext context) {
-    const placeholder = Opacity(
-        opacity: 0,
-        child: IconButton(onPressed: null, icon: Icon(Icons.no_cell)));
+    // const placeholder = Opacity(
+    //     opacity: 0,
+    //     child: IconButton(onPressed: null, icon: Icon(Icons.no_cell)));
 
     return BottomNavigationBar(
       items: List.generate(
