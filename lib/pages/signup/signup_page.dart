@@ -60,9 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
       if (state.isAuthorized ?? false) {
         context.go(AppRouter.home);
-      } else if (state.hasError) {
-        context.showError(state.error!.message);
-      }
+      } 
     }, builder: (context, state) {
       return Scaffold(
         backgroundColor: Theme.of(context).primaryColor,

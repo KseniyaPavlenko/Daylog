@@ -38,6 +38,7 @@ class DateSelectorWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
+                key: const Key('day'),
                 date.day.toString(),
                 style: const TextStyle(
                   fontSize: 40,
@@ -45,6 +46,7 @@ class DateSelectorWidget extends StatelessWidget {
                 ),
               ),
               Text(
+                key: const Key('month'),
                 date.toMonth(),
                 style: const TextStyle(
                   fontSize: 14,

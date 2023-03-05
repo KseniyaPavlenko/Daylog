@@ -1,5 +1,6 @@
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
+import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/services/auth/auth_service_mock.dart';
 import 'package:test/test.dart';
 
@@ -8,7 +9,7 @@ void main() {
     late AuthCubit authCubit;
 
     setUp((() {
-      authCubit = AuthCubit(authService: AuthServiceMock());
+      authCubit = AuthCubit(authService: AuthServiceMock(), errorCubit: ErrorCubit());
     }));
 
     test('Get me', () async {

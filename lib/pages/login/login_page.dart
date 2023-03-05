@@ -176,15 +176,13 @@ class _LoginPageState extends State<LoginPage> {
       listener: (_, state) {
         if (state.isAuthorized ?? false) {
           _onLogin();
-        } else if (state.hasError) {
-          //  context.showError(state.error!.message);
-        }
+        } 
       },
       builder: (_, state) {
         return CommonScaffold(
           //  backgroundColor: Theme.of(context).primaryColor,
           isLoading: state.isLoading,
-          error: state.error?.message,
+          
           body: Column(
             children: <Widget>[
               _buildLogo(),
