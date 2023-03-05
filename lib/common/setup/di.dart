@@ -26,8 +26,9 @@ void setupDi() {
   // Event
   getIt.registerLazySingleton<EventService>(() => EventServiceMock());
   getIt.registerFactory<EventListCubit>(
-    () => EventListCubit(eventService: getIt()),
+    () => EventListCubit(eventService: getIt(), draftService: getIt()),
   );
+
   getIt.registerFactory<EventDetailCubit>(
     () => EventDetailCubit(eventService: getIt()),
   );

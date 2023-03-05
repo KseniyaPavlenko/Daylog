@@ -7,6 +7,7 @@ import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+
 //TODO: AppBar?????????
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -47,18 +48,15 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EventListCubit, EventListState>(
-      
       builder: (context, state) {
-        
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
         return CommonScaffold(
-          
           isLoading: state.isLoading,
           // error: state.error?message,
           body:
-          
+
               // backgroundColor: Theme.of(context).primaryColor,
               // appBar: AppBar(
               //   backgroundColor: const Color(0xFF3E2723),
@@ -86,6 +84,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     itemBuilder: (_, index) {
                       final event = state.list[index];
                       return EventListItem(
+                        isDraft: event.id == Event.draftKey,
                         event: event,
                         onTap: () => onTapEvent(event),
                       );

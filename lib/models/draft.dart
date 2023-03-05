@@ -1,4 +1,5 @@
 import 'package:daylog/common/utils/date_utils.dart';
+import 'package:daylog/models/event.dart';
 import 'package:equatable/equatable.dart';
 
 class Draft with EquatableMixin {
@@ -46,6 +47,18 @@ class Draft with EquatableMixin {
         'title': title,
         'detail': detail,
       };
+
+  Event get toEvent {
+    return Event(
+      id: Event.draftKey,
+      userId: userId,
+      startAt: startAt,
+      startDate: startDate,
+      duration: duration,
+      title: title,
+      detail: detail,
+    );
+  }
 
   Draft copyWith({
     String? id,
