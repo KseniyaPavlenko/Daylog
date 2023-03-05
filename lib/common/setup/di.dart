@@ -2,6 +2,7 @@ import 'package:daylog/common/net/dio_interceptor.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_cubit.dart';
 import 'package:daylog/cubits/draft_list/draft_list_cubit.dart';
+import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/cubits/me/me_cubit.dart';
@@ -46,11 +47,17 @@ void setupDi() {
         dio: getIt(),
         localStorage: getIt(),
       ));
-  getIt.registerFactory<AuthCubit>(() => AuthCubit(authService: getIt()));
+  getIt.registerFactory<AuthCubit>(() => AuthCubit(
+        authService: getIt(),
+        errorCubit: getIt(),
+      ));
 
   // User
   getIt.registerLazySingleton<UserService>(() => UserServiceMock());
   getIt.registerFactory<MeCubit>(() => MeCubit(userService: getIt()));
+
+  //Error
+  getIt.registerLazySingleton<ErrorCubit>(() => ErrorCubit());
 
   _setupDio();
 }

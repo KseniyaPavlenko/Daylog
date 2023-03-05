@@ -9,6 +9,7 @@ import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_cubit.dart';
 import 'package:daylog/cubits/draft_list/draft_list_cubit.dart';
+import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/cubits/me/me_cubit.dart';
@@ -51,6 +52,9 @@ class _AppState extends State<App> {
           create: (BuildContext context) => getIt(),
         ),
         BlocProvider<MeCubit>(
+          create: (BuildContext context) => getIt(),
+        ),
+        BlocProvider<ErrorCubit>(
           create: (BuildContext context) => getIt(),
         ),
       ],
