@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors, deprecated_member_use
 
 import 'package:daylog/common/route/router.dart';
-import 'package:daylog/common/utils/context_utils.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
 import 'package:daylog/pages/login/widgets/bottom_wave.dart';
