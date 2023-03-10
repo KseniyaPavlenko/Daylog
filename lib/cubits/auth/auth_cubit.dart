@@ -36,10 +36,10 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(isAuthorized: true));
     } catch (error) {
       if (error is AuthError) {
-        errorCubit.showError(ErrorState.auth);
+        errorCubit.showError(ErrorState.deafult);
       } else {
         _logger.e(error.toString());
-        errorCubit.showError(ErrorState.deafult);
+        errorCubit.showError(ErrorState.auth);
       }
     } finally {
       emit(state.copyWith(isLoading: false));

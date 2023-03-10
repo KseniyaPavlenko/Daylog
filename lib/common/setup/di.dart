@@ -26,20 +26,20 @@ void setupDi() {
   // Event
   getIt.registerLazySingleton<EventService>(() => EventServiceMock());
   getIt.registerFactory<EventListCubit>(
-    () => EventListCubit(eventService: getIt(), draftService: getIt()),
+    () => EventListCubit(eventService: getIt(), draftService: getIt(), errorCubit: getIt()),
   );
 
   getIt.registerFactory<EventDetailCubit>(
-    () => EventDetailCubit(eventService: getIt()),
+    () => EventDetailCubit(eventService: getIt(), errorCubit: getIt()),
   );
 
   // Draft
   getIt.registerLazySingleton<DraftService>(() => DraftServiceMock());
   getIt.registerFactory<DraftListCubit>(
-    () => DraftListCubit(draftService: getIt()),
+    () => DraftListCubit(draftService: getIt(), errorCubit: getIt()),
   );
   getIt.registerFactory<DraftDetailCubit>(
-    () => DraftDetailCubit(draftService: getIt()),
+    () => DraftDetailCubit(draftService: getIt(), errorCubit: getIt()),
   );
 
   // Auth
@@ -55,7 +55,7 @@ void setupDi() {
 
   // User
   getIt.registerLazySingleton<UserService>(() => UserServiceMock());
-  getIt.registerFactory<MeCubit>(() => MeCubit(userService: getIt()));
+  getIt.registerFactory<MeCubit>(() => MeCubit(userService: getIt(), errorCubit: getIt()));
 
   //Error
   getIt.registerLazySingleton<ErrorCubit>(() => ErrorCubit());
