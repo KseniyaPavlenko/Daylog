@@ -1,4 +1,5 @@
 import 'package:bloc_test/bloc_test.dart';
+import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/cubits/event_list/event_list_state.dart';
 import 'package:daylog/services/draft/draft_service_mock.dart';
@@ -15,7 +16,11 @@ void main() {
 
     blocTest(
       'Get list of events',
-      build: () => EventListCubit(eventService: EventServiceMock(), draftService: DraftServiceMock()),
+      build: () => EventListCubit(
+        eventService: EventServiceMock(),
+        draftService: DraftServiceMock(),
+        errorCubit: ErrorCubit(),
+      ),
       seed: () => EventListState(selectedDate: today),
       act: (bloc) => bloc.loadData(),
       expect: () => [
@@ -28,7 +33,11 @@ void main() {
     );
     blocTest(
       'Delete event from list',
-      build: () => EventListCubit(eventService: EventServiceMock(), draftService: DraftServiceMock()),
+      build: () => EventListCubit(
+        eventService: EventServiceMock(),
+        draftService: DraftServiceMock(),
+        errorCubit: ErrorCubit(),
+      ),
       seed: () => EventListState(selectedDate: today, events: resultEventList),
       act: (bloc) => bloc.deleteEvent(eventId),
       expect: () => [

@@ -1,3 +1,4 @@
+import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
@@ -8,7 +9,10 @@ void main() {
   group('Event Detail Cubit', () {
     late EventDetailCubit eventDetailCubit;
     setUp((() {
-      eventDetailCubit = EventDetailCubit(eventService: EventServiceMock());
+      eventDetailCubit = EventDetailCubit(
+        eventService: EventServiceMock(),
+        errorCubit: ErrorCubit(),
+      );
     }));
 
     test(

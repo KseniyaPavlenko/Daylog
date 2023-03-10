@@ -1,5 +1,6 @@
 import 'package:daylog/cubits/draft_detail/draft_detail_cubit.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_state.dart';
+import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:daylog/services/draft/draft_service_mock.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,7 +9,10 @@ void main() {
   group('Draft Detail Cubit', () {
     late DraftDetailCubit draftDetailCubit;
     setUp((() {
-      draftDetailCubit = DraftDetailCubit(draftService: DraftServiceMock());
+      draftDetailCubit = DraftDetailCubit(
+        draftService: DraftServiceMock(),
+        errorCubit: ErrorCubit(),
+      );
     }));
 
     test(
