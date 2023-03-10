@@ -4,25 +4,24 @@ import 'package:daylog/cubits/error_cubit/error_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CommonScaffold extends StatefulWidget {
+class CommonScaffold extends StatelessWidget {
   const CommonScaffold({
     Key? key,
     required this.body,
     this.isLoading = false,
     this.bottomBar,
     this.floatButton,
+    this.appBar,
+    this.backgroundColor,
   }) : super(key: key);
 
   final Widget body;
   final bool isLoading;
   final Widget? bottomBar;
   final Widget? floatButton;
+  final PreferredSizeWidget? appBar;
+  final Color? backgroundColor;
 
-  @override
-  State<CommonScaffold> createState() => _CommonScaffoldState();
-}
-
-class _CommonScaffoldState extends State<CommonScaffold> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<ErrorCubit, ErrorState>(
@@ -33,14 +32,15 @@ class _CommonScaffoldState extends State<CommonScaffold> {
         }
       },
       child: Scaffold(
-        backgroundColor: Colors.brown[700],
+        appBar: appBar,
+        backgroundColor: backgroundColor,
         // backgroundColor: Theme.of(context).colorScheme.background,
-        floatingActionButton: widget.floatButton,
+        floatingActionButton: floatButton,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Stack(
           children: [
-            widget.body,
-            if (widget.isLoading)
+            body,
+            if (isLoading)
               Container(
                 alignment: Alignment.center,
                 color: Colors.grey[400],
@@ -50,7 +50,7 @@ class _CommonScaffoldState extends State<CommonScaffold> {
               ),
           ],
         ),
-        bottomNavigationBar: widget.bottomBar,
+        bottomNavigationBar: bottomBar,
       ),
     );
   }

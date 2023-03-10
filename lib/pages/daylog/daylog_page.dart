@@ -9,6 +9,7 @@ import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/daylog/widgets/status_dropdown_button.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
+import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:daylog/widgets/text_fields/common_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -120,7 +121,7 @@ class _DaylogPageState extends State<DaylogPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,

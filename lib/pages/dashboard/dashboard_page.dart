@@ -53,7 +53,12 @@ class _DashboardPageState extends State<DashboardPage> {
           return const Center(child: CircularProgressIndicator());
         }
         return CommonScaffold(
+          backgroundColor: Theme.of(context).primaryColor,
           isLoading: state.isLoading,
+          appBar: AppBar(
+            backgroundColor: const Color(0xFF3E2723),
+            title: const Text('Dashboard'),
+          ),
           // error: state.error?message,
           body:
 

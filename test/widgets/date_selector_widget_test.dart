@@ -6,7 +6,7 @@ void main() {
   DateTime selectedDate = DateTime.now();
   String previousDay =
       selectedDate.subtract(const Duration(days: 1)).toString();
-  DateTime nextDay = selectedDate.add(const Duration(days: 1));
+  String nextDay = selectedDate.add(const Duration(days: 1)).toString();
   const keyPreviosDay = Key('dateSelector_prev');
   const keyNextDay = Key('dateSelector_next');
   const dayText = Key('day');

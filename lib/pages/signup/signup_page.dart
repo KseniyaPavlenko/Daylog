@@ -6,6 +6,7 @@ import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
 import 'package:daylog/pages/login/widgets/bottom_wave.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
+import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -62,7 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
         context.go(AppRouter.home);
       } 
     }, builder: (context, state) {
-      return Scaffold(
+      return CommonScaffold(
         backgroundColor: Theme.of(context).primaryColor,
         body: CommonLoadingIndicator(
           isLoading: state.isLoading,

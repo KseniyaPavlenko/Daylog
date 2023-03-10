@@ -3,6 +3,7 @@ import 'package:daylog/cubits/draft_list/draft_list_cubit.dart';
 import 'package:daylog/cubits/draft_list/draft_list_state.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:daylog/pages/scheduler/widgets/draft_list_item.dart';
+import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +31,7 @@ class _SchedulerPageState extends State<SchedulerPage> {
       );
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => CommonScaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           title: const Text('Scheduler'),

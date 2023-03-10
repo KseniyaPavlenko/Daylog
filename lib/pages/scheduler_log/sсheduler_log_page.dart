@@ -7,6 +7,7 @@ import 'package:daylog/models/day_of_week.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:daylog/pages/scheduler_log/widgets/day_of_week_selector.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
+import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:daylog/widgets/text_fields/common_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -144,9 +145,9 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      resizeToAvoidBottomInset: true,
+      // resizeToAvoidBottomInset: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leadingWidth: 100,
