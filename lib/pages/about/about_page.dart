@@ -1,3 +1,4 @@
+import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class _AboutPageState extends State<AboutPage> {
     return CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF3E2723), // TODO(Kseniya): AppColors
+        backgroundColor: AppColors.darkRed2,
         title: const Text('About the App'),
       ),
       body: const Padding(
@@ -24,7 +25,6 @@ class _AboutPageState extends State<AboutPage> {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            //color: Colors.white, // TODO(Kseniya): удалить
           ),
         ),
       ),

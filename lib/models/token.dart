@@ -7,9 +7,10 @@ class Token with EquatableMixin {
     required this.token,
   });
 
-  Token.fromJson(Map<String, dynamic> json) : token = json['token'];
+ // Token.fromJson(Map<String, dynamic> json) : token = json['token'];
+  Token.fromJson(Map<String, dynamic> json) : token = json['token'] as String;
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'token': token,
       };
 

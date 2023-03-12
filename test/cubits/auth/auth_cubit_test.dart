@@ -9,7 +9,8 @@ void main() {
     late AuthCubit authCubit;
 
     setUp((() {
-      authCubit = AuthCubit(authService: AuthServiceMock(), errorCubit: ErrorCubit());
+      authCubit =
+          AuthCubit(authService: AuthServiceMock(), errorCubit: ErrorCubit());
     }));
 
     test('Get me', () async {
@@ -84,7 +85,7 @@ void main() {
       );
 
       // When
-      await authCubit.signup(login, password);
+      await authCubit.signUp(login, password);
 
       /* expectLater(authCubit.state,
           const AuthState(isLoading: false, isAuthorized: true)); */
@@ -113,7 +114,7 @@ void main() {
       );
 
       // When
-      await authCubit.signup(login, password);
+      await authCubit.signUp(login, password);
       await authCubit.logout();
 
       /* expectLater(authCubit.state,

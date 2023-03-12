@@ -15,19 +15,20 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  PackageInfo? packageInfo; // TODO(Kseniya): private
+  PackageInfo? _packageInfo; 
 
-  get version => null; // TODO(Kseniya): private
+  dynamic get _version => null; 
+  // get _version => null; 
 
-  get buildNumber => null; // TODO(Kseniya): private
+  dynamic get _buildNumber => null; 
+  // get _buildNumber => null; 
 
-  String text = "LOGOUT"; // TODO(Kseniya): private + зачем это ?)
+  String _text = "LOGOUT"; 
 
-  // TODO(Kseniya): private
-  void getPackage() async {
-    packageInfo = await PackageInfo.fromPlatform();
-    String version = packageInfo!.version;
-    String buildNumber = packageInfo!.buildNumber;
+  void _getPackage() async {
+    _packageInfo = await PackageInfo.fromPlatform();
+    String version = _packageInfo!.version;
+    String buildNumber = _packageInfo!.buildNumber;
   }
 
   void _onLogout() async {
@@ -47,10 +48,9 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
-          // mainAxisSize: MainAxisSize.min, // TODO(Kseniya): удалить
           children: <Widget>[
             Text(
-              'Version: $version',
+              'Version: $_version',
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
             Text(
-              'Build : $buildNumber',
+              'Build : $_buildNumber',
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
             LogoutButton(
-              text,
+              _text,
               onPressed: _onLogout,
             )
           ],

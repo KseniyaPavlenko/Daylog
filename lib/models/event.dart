@@ -31,20 +31,32 @@ class Event with EquatableMixin {
     this.comment,
   });
 
-  Event.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        userId = json['userId'],
-        draftId = json['draftId'],
+  // Event.fromJson(Map<String, dynamic> json) 
+  //     : id = json['id'] ,
+  //       userId = json['userId'],
+  //       draftId = json['draftId'],
+  //       // updateAt = DateTime.parse(json['updateAt']),
+  //       startAt = DateTime.parse(json['startAt']),
+  //       startDate = DateTime.parse(json['startDate']),
+  //       duration = json['duration'],
+  //       status = EventStatus.parse(json['status']),
+  //       title = json['title'],
+  //       detail = json['detail'],
+  //       comment = json['comment'];
+  Event.fromJson(Map<String, dynamic> json) 
+      : id = json['id'] as String,
+        userId = json['userId'] as String,
+        draftId = json['draftId'] as String,
         // updateAt = DateTime.parse(json['updateAt']),
-        startAt = DateTime.parse(json['startAt']),
-        startDate = DateTime.parse(json['startDate']),
+        startAt = DateTime.parse(json['startAt']) ,
+        startDate = DateTime.parse(json['startDate']) ,
         duration = json['duration'],
-        status = EventStatus.parse(json['status']),
-        title = json['title'],
-        detail = json['detail'],
-        comment = json['comment'];
+        status = EventStatus.parse(json['status']) ,
+        title = json['title'] as String,
+        detail = json['detail'] as String,
+        comment = json['comment'] as String;
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
         'userId': userId,
         'draftId': draftId,

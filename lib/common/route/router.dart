@@ -2,12 +2,11 @@ import 'package:daylog/pages/daylog/daylog_page.dart';
 import 'package:daylog/pages/home/home_page.dart';
 import 'package:daylog/pages/login/login_page.dart';
 import 'package:daylog/pages/scheduler/sheduler_page.dart';
+import 'package:daylog/pages/scheduler_log/s%D1%81heduler_log_page.dart';
 import 'package:daylog/pages/signup/signup_page.dart';
 import 'package:daylog/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../pages/scheduler_log/sсheduler_log_page.dart'; // TODO(Kseniya): Использовать на импорты полого пути, как выше
 
 class AppRouter {
   static final GoRouter router = GoRouter(routes: <GoRoute>[
@@ -53,15 +52,20 @@ class AppRouter {
         return SchedulerLogPage(id: state.extra as String?);
       },
     ),
+    GoRoute(
+      path: daylog2,
+      builder: (BuildContext context, GoRouterState state) {
+        return DaylogPage(id: state.extra as String?);
+      },
+    ),
   ]);
 
   static const String splash = '/';
   static const String login = '/login';
-  // TODO(Kseniya): Использовать опечатку (для подсветки опечаток можно установить
-  // расширение Code Spell Checker / Code Spell Checker Russian / ...
-  static const String signUp = '/sugnUp';
+  static const String signUp = '/signUp';
   static const String home = '/home';
   static const String daylog = '/daylog/:id';
   static const String scheduler = '/scheduler';
   static const String schedulerLog = '/schedulerLog';
+  static const String daylog2 = '/daylog2';
 }

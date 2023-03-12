@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:daylog/common/style/app_colors.dart';
 import 'package:flutter/material.dart';
 
 extension BuildContextX on BuildContext {
@@ -6,18 +7,18 @@ extension BuildContextX on BuildContext {
     String message, {
     String? title,
   }) {
-    Flushbar(
+    //Flushbar(
+    Flushbar<dynamic>(
       title: title,
       message: message,
       duration: const Duration(seconds: 3),
       titleColor: Colors.red,
-      messageColor: const Color.fromARGB(255, 114, 37, 31),
-      // TODO(Kseniya): вынести все цвета в AppColors и дергать их оттуда
-      backgroundColor: const Color(0x00faebd7), // AppColors.lightGreen
+      messageColor: AppColors.darkRed,
+      backgroundColor: AppColors.lightYellow, // AppColors.lightGreen
       flushbarPosition: FlushbarPosition.BOTTOM,
       boxShadows: const [
         BoxShadow(
-          color: Color.fromARGB(255, 208, 173, 170),
+          color: AppColors.lightRed,
           offset: Offset(2, 2),
           blurRadius: 8,
         )
@@ -25,7 +26,7 @@ extension BuildContextX on BuildContext {
       icon: const Icon(
         Icons.error_outline,
         size: 32,
-        color: Color.fromARGB(255, 114, 37, 31),
+        color: AppColors.darkRed,
       ),
       shouldIconPulse: true,
     ).show(this);

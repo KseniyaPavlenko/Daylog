@@ -35,9 +35,9 @@ class AuthServiceImpl implements AuthService {
   }
 
   // TODO(Kseniya): отформатировать как AuthServiceImpl.login
-  // TODO(Kseniya):  signUp
+
   @override
-  Future<User> signup(String login, String password) async {
+  Future<User> signUp(String login, String password) async {
     final response = await dio.post('/auth/signup', data: {
       'login': login,
       'password': password,

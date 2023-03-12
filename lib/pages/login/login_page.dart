@@ -18,7 +18,7 @@ class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  bool buttonIsEnabled = false; // TODO(Kseniya): private
+  bool _buttonIsEnabled = false; 
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
 
   void _textControllerListener() {
     setState(() {
-      buttonIsEnabled = _usernameController.text.isNotEmpty &&
+      _buttonIsEnabled = _usernameController.text.isNotEmpty &&
           _passwordController.text.isNotEmpty;
     });
   }
@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
   // TODO(Kseniya): вынеси в отдельный файл в state less widget
   Widget _buildButtonLogin(String text, void Function() func) {
     return ElevatedButton(
-      onPressed: buttonIsEnabled ? _loginUser : null,
+      onPressed: _buttonIsEnabled ? _loginUser : null,
       child: Text(
         text,
         style: TextStyle(
@@ -164,6 +164,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(left: 260),
           child: SizedBox(
             height: 40,
+            
             // TODO(Kseniya): context.width
             // + можно вынести в переменную выше так как использует больше раза
             width: MediaQuery.of(context).size.width,

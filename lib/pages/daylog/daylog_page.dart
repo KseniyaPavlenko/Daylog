@@ -21,38 +21,40 @@ class DaylogPage extends StatefulWidget {
   State<DaylogPage> createState() => _DaylogPageState();
 }
 
-class _DaylogPageState extends State<DaylogPage> {
+
+ class _DaylogPageState extends State<DaylogPage> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _detailsController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
-  var time = const TimeOfDay(hour: 00, minute: 00); // TODO(Kseniya): private
-  EventStatus dropdownValue = EventStatus.todo; // TODO(Kseniya): var + private
+  var _time = const TimeOfDay(hour: 00, minute: 00); 
+   EventStatus _dropdownValue = EventStatus.todo; // TODO(Kseniya): var + private
 
-  // TODO(Kseniya): перменные должны быть private
-  var uuid = const Uuid();
-  String? userId;
-  DateTime date = DateTime.now();
-  List logItems = [];
 
-  // TODO(Kseniya): private
-  EventDetailCubit get eventDetailCubit => context.read<EventDetailCubit>();
+  var _uuid = const Uuid();
+  String? _userId;
+  DateTime _date = DateTime.now();
+  List _logItems = <dynamic>[];
+  //List _logItems = [];
+
+  EventDetailCubit get _eventDetailCubit => context.read<EventDetailCubit>();
 
   @override
   void initState() {
     super.initState();
-
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      if (_checkId()) {
+      _eventDetailCubit.loadData(widget.id);
+    }
+    });
+    
     /*
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       // executes after build
     })
-    TODO(Kseniya): Обернуть в addPostFrameCallback как выше, 
-    кубит может не успеть построиться и будет ошибка
     */
 
-    if (_checkId()) {
-      eventDetailCubit.loadData(widget.id);
-    }
+   
   }
 
   bool _checkId() {
@@ -63,36 +65,27 @@ class _DaylogPageState extends State<DaylogPage> {
     return true;
   }
 
-  createUuid() {
-    const uuid = Uuid();
-    //Create UUID version-4
-    return uuid.v4();
-  }
+  // createUuid() {
+  //   const uuid = Uuid();
+  //   //Create UUID version-4
+  //   return uuid.v4();
+  // }
 
   void _onTapSave() async {
-    try {
-      // TODO(Kseniya): удали try cath, все ошибки отлавливаются в кубите теперь
-      await eventDetailCubit.updateEvent(
+      await _eventDetailCubit.updateEvent(
         Event(
           id: widget.id,
-          userId: userId,
+          userId: _userId,
           title: _titleController.text,
           detail: _detailsController.text,
           comment: _commentController.text,
-          startAt: date.copyWith(minute: time.minute, hour: time.hour),
-          startDate: date,
-          status: dropdownValue,
+          startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
+          startDate: _date,
+          status: _dropdownValue,
         ),
       );
-      context.pop();
-    } on RequestError catch (e) {
-      final message = e.toString();
-      // Show toast
-      log.e(e);
-    } catch (e) {
-      log.e(e);
-    }
-  }
+    } 
+  
 
   void _onTapTimeField() async {
     const initialTime = TimeOfDay(hour: 00, minute: 00);
@@ -104,30 +97,6 @@ class _DaylogPageState extends State<DaylogPage> {
       _timeController.text = newTime.format(context);
     });
   }
-
-  // _backButton() { // TODO(Kseniya): удалить
-  //   ElevatedButton.icon(
-  //     onPressed: () => context.go(AppRouter.home),
-  //     icon: const Icon(Icons.arrow_left_sharp),
-  //     label: const Text('Back'),
-  //     style: ElevatedButton.styleFrom(
-  //       elevation: 3,
-  //       primary: Colors.brown[900],
-  //     ),
-  //   );
-  // }
-
-  // _saveButton() {
-  //   ElevatedButton.icon(
-  //       onPressed:_onTapSave,
-  //       icon: const Icon(Icons.save_outlined),
-  //       label: const Text('Save'),
-  //       style: ElevatedButton.styleFrom(
-  //       elevation: 3,
-  //       primary: Colors.brown[900],
-  //     ),
-  //   ),
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -193,11 +162,7 @@ class _DaylogPageState extends State<DaylogPage> {
                         children: [
                           Text(
                             'Date: ${date.year}.${date.month}.${date.day}',
-                            // style: const TextStyle( // TODO(Kseniya): удалить
-                            //   fontSize: 18,
-                            //   fontWeight: FontWeight.bold,
-                            //   color: Colors.white,
-                            // ),
+                          
                           ),
                           StatusDropdownButton(
                             dropdownValue: dropdownValue,

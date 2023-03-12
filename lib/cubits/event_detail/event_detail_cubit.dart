@@ -1,18 +1,15 @@
-import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/error_cubit/error_state.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/services/event/event_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logging/logging.dart';
 
 class EventDetailCubit extends Cubit<EventDetailState> {
   final EventService eventService;
-  final Logger _logger; // TODO(Kseniya): не используется или добавь вывод ошибок в консоль или удали
   final ErrorCubit errorCubit;
   EventDetailCubit({required this.errorCubit, required this.eventService})
-      : _logger = createLog(name: 'EventDetailCubit'),
+      : 
         super(EventDetailState.init());
 
   Future<void> loadData(String? eventId) async {
@@ -26,7 +23,7 @@ class EventDetailCubit extends Cubit<EventDetailState> {
       emit(state.copyWith(selectedEvent: event));
     } catch (error) {
       // handle error
-      errorCubit.showError(ErrorState.deafult);
+      errorCubit.showError(ErrorState.common);
     } finally {
       emit(state.copyWith(isLoading: false));
     }
@@ -44,7 +41,7 @@ class EventDetailCubit extends Cubit<EventDetailState> {
       }
     } catch (error) {
       // handle error
-      errorCubit.showError(ErrorState.deafult);
+      errorCubit.showError(ErrorState.common);
     } finally {
       emit(state.copyWith(isLoading: false));
     }

@@ -26,69 +26,63 @@ class SchedulerLogPage extends StatefulWidget {
 class _SchedulerLogPageState extends State<SchedulerLogPage> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _detailsController = TextEditingController();
-  // TODO(Kseniya): опечатка
-  final TextEditingController _endDateCintroller = TextEditingController();
+  final TextEditingController _endDateController = TextEditingController();
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
 
-  // TODO(Kseniya): private
-  TimeOfDay time = const TimeOfDay(hour: 00, minute: 00);
+  TimeOfDay _time = const TimeOfDay(hour: 00, minute: 00);
 
-  // TODO(Kseniya): private
-  List<DayOfWeek> selectedDayList = [];
+  List<DayOfWeek> _selectedDayList = [];
 
-  // TODO(Kseniya): private
-  String? userId;
-  int? duration;
-  int? days;
-  DateTime date = DateTime.now();
-  DateTime? endDate;
+  String? _userId;
+  int? _duration;
+  int? _days;
+  DateTime _date = DateTime.now();
+  DateTime? _endDate;
 
   String getText() {
     // TODO(Kseniya): переделай в getter
-    if (time == null) {
+    if (_time == null) {
       return 'Select Time';
     } else {
-      return '${time.hour}:${time.minute}';
+      return '${_time.hour}:${_time.minute}';
     }
   }
 
-  // TODO(Kseniya): private
-  DraftDetailCubit get draftDetailCubit => context.read<DraftDetailCubit>();
+  DraftDetailCubit get _draftDetailCubit => context.read<DraftDetailCubit>();
 
   @override
   void initState() {
     super.initState();
 
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (widget.id?.isNotEmpty ?? false) draftDetailCubit.loadData(widget.id);
+      if (widget.id?.isNotEmpty ?? false) _draftDetailCubit.loadData(widget.id);
     });
   }
 
   void _onTapSave() async {
-    await draftDetailCubit.updateDraft(
+    await _draftDetailCubit.updateDraft(
       Draft(
         id: widget.id,
-        userId: userId,
+        userId: _userId,
         title: _titleController.text,
         detail: _detailsController.text,
-        startAt: date.copyWith(minute: time.minute, hour: time.hour),
-        startDate: date,
-        endDate: endDate,
-        duration: duration,
-        days: days,
+        startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
+        startDate: _date,
+        endDate: _endDate,
+        duration: _duration,
+        days: _days,
       ),
     );
     context.pop();
   }
 
-  // TODO(Kseniya): private
-  void onTapDay(DayOfWeek day) {
+  void _onTapDay(DayOfWeek day) {
     setState(() {
-      if (selectedDayList.contains(day)) {
-        selectedDayList.removeWhere((e) => e == day);
+      if (_selectedDayList.contains(day)) {
+        _selectedDayList.removeWhere((e) => e == day);
       } else {
-        selectedDayList.add(day);
+        _selectedDayList.add(day);
       }
     });
   }
@@ -126,7 +120,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
       print(formattedDate);
 
       setState(() {
-        _endDateCintroller.text = formattedDate;
+        _endDateController.text = formattedDate;
       });
     } else {
       print("Date is not selected");
@@ -135,18 +129,18 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
 
   void onTapEveryDay() {
     setState(() {
-      selectedDayList.clear();
-      selectedDayList.addAll(DayOfWeek.values);
+      _selectedDayList.clear();
+      _selectedDayList.addAll(DayOfWeek.values);
     });
   }
 
   void _onTapTimeField() async {
     const initialTime = TimeOfDay(hour: 00, minute: 00);
-    final newTime = await showTimePicker(context: context, initialTime: time);
+    final newTime = await showTimePicker(context: context, initialTime: _time);
     if (newTime == null) return;
 
     setState(() {
-      time = newTime;
+      _time = newTime;
       _timeController.text = newTime.format(context);
     });
   }
@@ -154,7 +148,6 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   @override
   Widget build(BuildContext context) => CommonScaffold(
         backgroundColor: Theme.of(context).primaryColor,
-        // resizeToAvoidBottomInset: true,   // TODO(Kseniya): удалить
         appBar: AppBar(
           // TODO(Kseniya): вынеси в отдельный файл
           automaticallyImplyLeading: false,
@@ -165,7 +158,6 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
             label: const Text('Back'),
             style: ElevatedButton.styleFrom(
               elevation: 3,
-              //backgroundColor: Colors.brown[900], // TODO(Kseniya): удалить
             ),
           ),
           title: const Text("Scheduler Log"),
@@ -189,7 +181,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
               final draft = state.selectedDraft;
               _titleController.text = draft?.title ?? '';
               _detailsController.text = draft?.detail ?? '';
-              date = draft?.startDate ?? DateTime.now();
+              _date = draft?.startDate ?? DateTime.now();
               _timeController.text =
                   draft?.startAt?.toFormatTime(context) ?? '';
             }
@@ -201,7 +193,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
                 height: MediaQuery.of(context).size.height,
                 child: RefreshIndicator(
                   edgeOffset: 20,
-                  onRefresh: () => draftDetailCubit.loadData(widget.id),
+                  onRefresh: () => _draftDetailCubit.loadData(widget.id),
                   child: ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: <Widget>[
@@ -236,16 +228,15 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
                         icon: const Icon(Icons.more_time_outlined),
                       ),
                       CommonTextField(
-                        // TODO(Kseniya): опечатка
-                        controller: _endDateCintroller,
+                        controller: _endDateController,
                         hintText: "Choose End Date",
                         icon: const Icon(Icons.edit_calendar_outlined),
                         onTap: _onTapEndDate,
                       ),
                       const SizedBox(height: 16),
                       DayOfWeekSelector(
-                        selected: selectedDayList,
-                        onTapDay: onTapDay,
+                        selected: _selectedDayList,
+                        onTapDay: _onTapDay,
                         onTapEveryDay: onTapEveryDay,
                       ),
                     ],

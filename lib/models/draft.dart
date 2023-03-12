@@ -25,18 +25,29 @@ class Draft with EquatableMixin {
     this.detail,
   });
 
-  Draft.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        userId = json['userId'],
+  //Draft.fromJson(Map<String, dynamic> json)  
+  Draft.fromJson(Map<String, dynamic> json)  
+      : id = json['id'] as String,
+        userId = json['userId'] as String,
         startDate = DateTime.parse(json['startDate']),
         endDate = DateTime.parse(json['endDate']),
         startAt = DateTime.parse(json['startAt']),
         duration = json['duration'],
-        days = json['days'],
-        title = json['title'],
-        detail = json['detail'];
+        days = json['days'] ,
+        title = json['title'] as String,
+        detail = json['detail'] as String;
+  // Draft.fromJson(Map<String, dynamic> json)  
+  //     : id = json['id'] ,
+  //       userId = json['userId'],
+  //       startDate = DateTime.parse(json['startDate']),
+  //       endDate = DateTime.parse(json['endDate']),
+  //       startAt = DateTime.parse(json['startAt']),
+  //       duration = json['duration'],
+  //       days = json['days'],
+  //       title = json['title'],
+  //       detail = json['detail'];
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
         'userId': userId,
         'startDate': startDate?.formatDate(),

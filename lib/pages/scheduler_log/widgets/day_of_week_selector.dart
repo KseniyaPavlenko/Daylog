@@ -84,20 +84,5 @@ class _DayOfWeekItem extends StatelessWidget {
         ),
       ),
     );
-    // TODO(Kseniya): Удали
-    // return InkWell(
-    //   onTap: onTap,
-    //   borderRadius: BorderRadius.circular(30),
-    //   child: Chip(
-    //     padding: EdgeInsets.zero,
-    //     label: Text(title),
-    //     avatar: isSelected
-    //         ? const Icon(
-    //             Icons.check,
-    //             size: 15,
-    //           )
-    //         : null,
-    //   ),
-    // );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/cubits/event_list/event_list_state.dart';
 import 'package:daylog/models/event.dart';
@@ -16,26 +17,23 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  DateTime selectedDate =
-      DateTime.now(); // TODO(Kseniya): должно быть private _selectedDate
-  String text =
-      "Daylog"; // TODO(Kseniya): должно быть private, зачем это вообще :)
-  EventListCubit get eventListCubit => // TODO(Kseniya): должно быть private
-      context.read<
-          EventListCubit>(); // TODO(Kseniya): разделяй геттеры и переменные пустой строкой
+  DateTime _selectedDate = DateTime.now();
+
+  EventListCubit get _eventListCubit => context.read<EventListCubit>();
 
   @override
   void initState() {
     super.initState();
-    // TODO(Kseniya): оберни в post frame callback
-    eventListCubit.loadData();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      _eventListCubit.loadData();
+    });
   }
 
   void onDateUpdated(DateTime date) {
-    setState(() {
-      selectedDate = date; // TODO(Kseniya): переделай в стрелочную функцию
-    });
-    eventListCubit.updateDate(date);
+    setState(
+      () => _selectedDate = date,
+    );
+    _eventListCubit.updateDate(date);
   }
 
   /* TODO(Kseniya): Используей GoRouter 
@@ -53,48 +51,29 @@ class _DashboardPageState extends State<DashboardPage> {
           backgroundColor: Theme.of(context).primaryColor,
           isLoading: state.isLoading,
           appBar: AppBar(
-            backgroundColor:
-                const Color(0xFF3E2723), // TODO(Kseniya): вынеси в AppColors
+            backgroundColor: AppColors.darkRed2,
             title: const Text('Dashboard'),
           ),
-          // error: state.error?message, // TODO(Kseniya): удали
-          body:
-              // TODO(Kseniya): удали
-              // backgroundColor: Theme.of(context).primaryColor,
-              // appBar: AppBar(
-              //   backgroundColor: const Color(0xFF3E2723),
-              //   title: const Text('Dashboard'),
-              // ),
-              // body: BlocBuilder<EventListCubit, EventListState>(
-              //   builder: (context, state) {
-              //     if (state.isLoading) {
-              //       return const Center(child: CircularProgressIndicator());
-              //     }
-              //return
-              Column(
+          body: Column(
             children: [
               DateSelectorWidget(
-                date: selectedDate,
+                date: _selectedDate,
                 onChange: onDateUpdated,
               ),
               Expanded(
-                child: Container(
-                  // color: Colors.grey[600],  // TODO(Kseniya): удали
-                  // TODO(Kseniya): у ListView тоже есть padding, container не нужен
+                child: ListView.separated(
                   padding: const EdgeInsets.all(10),
-                  child: ListView.separated(
-                    itemCount: state.list.length,
-                    itemBuilder: (_, index) {
-                      final event = state.list[index];
-                      return EventListItem(
-                        isDraft: event.id == Event.draftKey,
-                        event: event,
-                        onTap: () => onTapEvent(event),
-                      );
-                    },
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(height: 10),
-                  ),
+                  itemCount: state.list.length,
+                  itemBuilder: (_, index) {
+                    final event = state.list[index];
+                    return EventListItem(
+                      isDraft: event.id == Event.draftKey,
+                      event: event,
+                      onTap: () => onTapEvent(event),
+                    );
+                  },
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10),
                 ),
               ),
             ],
@@ -104,38 +83,3 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 }
-
- // TODO(Kseniya): удали 
-//  return Center(
-//               child: Container(
-//                 padding: const EdgeInsets.only(top: 30),
-//                 child: Column(
-//                   mainAxisAlignment: MainAxisAlignment.start,
-//                   children: [
-//                     Text(
-//                       '${initialDate.year}.${initialDate.month}.${initialDate.day}',
-//                       style: const TextStyle(fontSize: 26),
-//                     ),
-//                     const SizedBox(height: 13),
-//                     ElevatedButton(
-//                       child: const Text(
-//                         'Select date',
-//                         style: TextStyle(color: Colors.white),
-//                       ),
-//                       onPressed: () async {
-//                         DateTime? newDate = await showDatePicker(
-//                             context: context,
-//                             initialDate: initialDate,
-//                             firstDate: DateTime(2015),
-//                             lastDate: DateTime(2025));
-
-//                         if (newDate == null) return;
-//                         setState(() => initialDate = newDate);
-//                       },
-//                     ),
-//                     Button(text)
-//                     //_button(text, () {})
-//                   ],
-//                 ),
-//               ),
-//             );

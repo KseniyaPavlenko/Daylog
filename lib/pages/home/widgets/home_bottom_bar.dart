@@ -1,3 +1,4 @@
+import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/common/utils/context_utils.dart';
 import 'package:daylog/pages/about/about_page.dart';
 import 'package:daylog/pages/dashboard/dashboard_page.dart';
@@ -5,27 +6,30 @@ import 'package:daylog/pages/scheduler/sheduler_page.dart';
 import 'package:daylog/pages/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 
-List<dynamic> screens = [
+List<dynamic> screens = <dynamic>[
   const DashboardPage(),
   const SchedulerPage(),
   const AboutPage(),
   const SettingsPage(),
 ];
+// List<dynamic> screens = <dynamic>[
+//   const DashboardPage(),
+//   const SchedulerPage(),
+//   const AboutPage(),
+//   const SettingsPage(),
+// ];
 
 class HomeBottomBar extends StatelessWidget {
   const HomeBottomBar({
     super.key,
     required this.currentPage,
-    required this.onCahngePage, // TODO(Kseniya): опечатка
+    required this.onChangePage, 
   });
 
   final int currentPage;
-  final void Function(int) onCahngePage;
+  final void Function(int) onChangePage;
 
-  // void _onItemTapped(int index) { // TODO(Kseniya): удалить
-  //   _selectedIndex = index;
-  // }
-
+ 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -40,26 +44,26 @@ class HomeBottomBar extends StatelessWidget {
                 icon: Icons.dashboard_outlined,
                 label: 'Dashboard',
                 isSelected: currentPage == 0,
-                onTap: () => onCahngePage(0),
+                onTap: () => onChangePage(0),
               ),
               _IconButton(
                 icon: Icons.date_range_outlined,
                 label: 'Scheduler',
                 isSelected: currentPage == 1,
-                onTap: () => onCahngePage(1),
+                onTap: () => onChangePage(1),
               ),
               const Spacer(),
               _IconButton(
                 icon: Icons.info_outline,
                 label: 'About',
                 isSelected: currentPage == 2,
-                onTap: () => onCahngePage(2),
+                onTap: () => onChangePage(2),
               ),
               _IconButton(
                 icon: Icons.settings_applications_outlined,
                 label: 'Settings',
                 isSelected: currentPage == 3,
-                onTap: () => onCahngePage(3),
+                onTap: () => onChangePage(3),
               ),
             ],
           ),
@@ -67,31 +71,6 @@ class HomeBottomBar extends StatelessWidget {
       ),
     );
 
-    // return Container( // TODO(Kseniya): удалить
-
-    //   child: BottomNavigationBar(
-    //     // fixedColor: Colors.red,
-    //     backgroundColor: Colors.red,
-    //     onTap: onCahngePage,
-    //     currentIndex: currentPage,
-    //     selectedItemColor: Colors.brown[700],
-    //     unselectedItemColor: Colors.brown[300],
-
-    //     elevation: 0,
-
-    //     items: List.generate(
-    //       _bottomBarIcons.length,
-    //       (index) {
-    //         final icon = _bottomBarIcons[index];
-    //         final label = _bottomBarLabels[index];
-    //         return BottomNavigationBarItem(
-    //           icon: Icon(icon),
-    //           label: label,
-    //         );
-    //       },
-    //     ),
-    //   ),
-    //);
   }
 }
 
@@ -119,8 +98,7 @@ class _IconButton extends StatelessWidget {
           children: [
             Icon(
               icon,
-              // TODO(Kseniya): Цвета вынести AppColors
-              color: isSelected ? Colors.brown[50] : Colors.brown[500],
+              color: isSelected ? AppColors.lightBrown : AppColors.middleBrown,
             ),
             Text(label),
           ],
@@ -129,57 +107,3 @@ class _IconButton extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter/material.dart'; // TODO(Kseniya): удалить
-
-// const _bottomBarIcons = [
-//   Icons.dashboard_outlined,
-//   Icons.date_range_outlined,
-//   Icons.info_outline,
-//   Icons.settings_applications_outlined,
-// ];
-
-//  const List<Widget> _widgetOptions = <Widget>[
-//     Text(
-//       'Index 0: Dashboard',
-//     ),
-//     Text(
-//       'Index 1: Scheduler',
-//     ),
-//     Text(
-//       'Index 2: Add',
-//     ),
-//     Text(
-//       'Index 3: About',
-//     ),
-//     Text(
-//       'Index 4: Settings',
-//     ),
-//   ];
-
-// class HomeBottomBar extends StatelessWidget {
-//    HomeBottomBar({
-//     super.key,
-//     required this.currentPage,
-//     required this.onCahngePage,
-//   });
-
-//    final int currentPage = 0;
-//  final void Function(int) onCahngePage;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BottomNavigationBar(
-//       onTap: onCahngePage,
-//       items: List.generate(
-//         _bottomBarIcons.length,
-//         (index) {
-//           final icon = _bottomBarIcons[index];
-//           return BottomNavigationBarItem(
-//             icon: Icon(icon),
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }

@@ -17,7 +17,8 @@ class DioInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     _logger.info('REQUEST[${options.method}] => PATH: ${options.path}');
     if (isTokenRequired(options)) {
-      Map<String, dynamic> headers = Map.from(options.headers);
+     // Map<String, dynamic> headers = Map.from(options.headers);
+      Map<String, dynamic> headers = Map<String, dynamic>.from(options.headers);
       final token = await localStorage.getToken();
       headers['Authorization'] = 'Bearer $token';
       handler.next(options.copyWith(headers: headers));

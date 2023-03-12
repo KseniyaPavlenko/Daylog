@@ -45,7 +45,7 @@ void main() {
     test('SignUp check', () async {
       const login = 'ksenia_test_user_01';
       const password = '1234';
-      final token = await authService.signup(login, password);
+      final token = await authService.signUp(login, password);
       expect(token.login, isNotNull);
       expect(token.password, isNull);
       expect(token.id, isNotNull);

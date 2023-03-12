@@ -49,10 +49,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // TODO(Kseniya): в стрелочную функциюы
-  void _onPageChanged(int index) {
+  void _onPageChanged(int index) =>
     setState(() => _currentPage = index);
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +64,9 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomBar: HomeBottomBar(
         currentPage: _currentPage,
-        onCahngePage: _onTap, // TODO(Kseniya): опечатка
+        onChangePage: _onTap, 
       ),
       floatButton: FloatingActionButton(
-        // backgroundColor: Colors.brown[600], // TODO(Kseniya): удалить
         child: const Icon(Icons.add),
         onPressed: () => context.push(AppRouter.schedulerLog),
       ),

@@ -16,7 +16,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  Timer? timer; // TODO(Kseniya): private
+  Timer? _timer; 
 
   @override
   void initState() {
@@ -26,8 +26,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void initStateX() {
-    super.initState(); // TODO(Kseniya): private он вызван уже на 23 строке
-    timer = Timer(
+    _timer = Timer(
       const Duration(seconds: 3),
       () => context.go(AppRouter.login),
     );
@@ -35,7 +34,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   void dispose() {
-    timer?.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 

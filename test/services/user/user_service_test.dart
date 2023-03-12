@@ -51,7 +51,7 @@ void main() {
     test('Create user', () async {
       const login = 'ksenia_test_user_002';
       const password = '1234';
-      await authService.signup(login, password);
+      await authService.signUp(login, password);
       localStorage.setToken('login=$login');
       await userService.delete();
     });

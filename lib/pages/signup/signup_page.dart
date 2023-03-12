@@ -18,8 +18,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  late String _username; // TODO(Kseniya): неиспользуется
-  late String _password; // TODO(Kseniya): неиспользуется
+
 
   bool buttonIsEnabled = false;
 
@@ -45,8 +44,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _signUpUser() {
-    context.read<AuthCubit>().signup(
-          // TODO(Kseniya): signUp
+    context.read<AuthCubit>().signUp(
           _usernameController.text,
           _passwordController.text,
         );
@@ -123,21 +121,13 @@ class _SignUpPageState extends State<SignUpPage> {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         primary: Theme.of(context).primaryColor,
-
-        // TODO(Kseniya): удалить
-        //   splashColor: Theme.of(context).primaryColor,
-        // highlightColor: Theme.of(context).primaryColor,
-        // color: Colors.white,
       ),
       child: Text(
         text,
         style: TextStyle(
             fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
       ),
-      onPressed: () {
-        // TODO(Kseniya): в стерлочную функцию
-        _signUpUser();
-      },
+      onPressed: () => _signUpUser(),
     );
   }
 
@@ -145,12 +135,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _backButton(String text, void Function() func) {
     return TextButton(
       style: TextButton.styleFrom(
-        primary: Theme.of(context).primaryColor,
-
-        // TODO(Kseniya): удалить
-        //   splashColor: Theme.of(context).primaryColor,
-        // highlightColor: Theme.of(context).primaryColor,
-        // color: Colors.white,
+        foregroundColor: Theme.of(context).primaryColor,
       ),
       child: Text(
         text = "Already have an account? Login",
@@ -165,43 +150,29 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-// TODO(Kseniya): удалить
-  //void _onLogin() {
-  //   GoRouter.of(context).go(AppRouter.home);
-//  }
-
-  // TODO(Kseniya): в стерлочную функцию
-  void _onBack() {
-    GoRouter.of(context).go(AppRouter.login);
-  }
+  void _onBack() => GoRouter.of(context).go(AppRouter.login);
 
 // TODO(Kseniya): вынести в отдельный state less widget + именованные параметры
   Widget _form(String label, void Function() func) {
     return Column(
       children: <Widget>[
         Padding(
-            padding: EdgeInsets.only(bottom: 20, top: 10),
-            child: _input(
-                // TODO(Kseniya): отформатировать запятые
-                Icon(Icons.email),
-                "Username",
-                _usernameController,
-                false)),
+          padding: EdgeInsets.only(bottom: 20, top: 10),
+          child:
+              _input(Icon(Icons.email), "Username", _usernameController, false),
+        ),
         Padding(
-            padding: EdgeInsets.only(bottom: 5),
-            child: _input(
-                // TODO(Kseniya): отформатировать запятыеы
-                Icon(Icons.lock),
-                "Password",
-                _passwordController,
-                true)),
+          padding: EdgeInsets.only(bottom: 5),
+          child:
+              _input(Icon(Icons.lock), "Password", _passwordController, true),
+        ),
         Padding(
           padding: EdgeInsets.only(left: 150),
           child: SizedBox(
-              height: 40,
-              width: MediaQuery.of(context).size.width,
-              // TODO(Kseniya): отформатировать запятые
-              child: _backButton(label, func)),
+            height: 40,
+            width: MediaQuery.of(context).size.width,
+            child: _backButton(label, func),
+          ),
         ),
         SizedBox(
           height: 20,
@@ -209,10 +180,10 @@ class _SignUpPageState extends State<SignUpPage> {
         Padding(
           padding: EdgeInsets.only(left: 20, right: 20),
           child: SizedBox(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              // TODO(Kseniya): отформатировать запятые
-              child: _button(label, func)),
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            child: _button(label, func),
+          ),
         )
       ],
     );
