@@ -56,7 +56,7 @@ class _DayOfWeekItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.only(bottom: 6),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -64,8 +64,8 @@ class _DayOfWeekItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: isSelected
-            ? theme.colorScheme.primaryContainer
-            : theme.colorScheme.secondaryContainer,
+            ? colorScheme.primaryContainer
+            : colorScheme.secondaryContainer,
       ),
       child: InkWell(
         onTap: onTap,
@@ -78,14 +78,13 @@ class _DayOfWeekItem extends StatelessWidget {
             ],
             Text(
               title.capitalize,
-              style: const TextStyle(
-                fontSize: 16,
-              ),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),
       ),
     );
+    // TODO(Kseniya): Удали
     // return InkWell(
     //   onTap: onTap,
     //   borderRadius: BorderRadius.circular(30),

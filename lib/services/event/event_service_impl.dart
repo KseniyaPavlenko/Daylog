@@ -10,6 +10,7 @@ class EventServiceImpl implements EventService {
 
   EventServiceImpl({required this.dio});
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<List<Event>> list(DateTime date) async {
     final response = await dio
@@ -19,6 +20,7 @@ class EventServiceImpl implements EventService {
     return list;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<Event> byId(String id) async {
     final response = await dio.get('/events/$id');
@@ -26,6 +28,7 @@ class EventServiceImpl implements EventService {
     return event;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<Event> create(Event event) async {
     final response =
@@ -34,6 +37,7 @@ class EventServiceImpl implements EventService {
     return newEvent;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<Event> update(Event event) async {
     final response =
@@ -42,6 +46,7 @@ class EventServiceImpl implements EventService {
     return updatedEvent;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<void> delete(String id) async {
     await dio.delete('/events/$id');

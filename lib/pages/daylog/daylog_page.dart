@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use, unused_local_variable
-
 import 'package:daylog/common/errors/request_error.dart';
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/utils/date_utils.dart';
@@ -28,19 +26,30 @@ class _DaylogPageState extends State<DaylogPage> {
   final TextEditingController _detailsController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
-  TimeOfDay time = const TimeOfDay(hour: 00, minute: 00);
-  EventStatus dropdownValue = EventStatus.todo;
+  var time = const TimeOfDay(hour: 00, minute: 00); // TODO(Kseniya): private
+  EventStatus dropdownValue = EventStatus.todo; // TODO(Kseniya): var + private
 
+  // TODO(Kseniya): перменные должны быть private
   var uuid = const Uuid();
   String? userId;
   DateTime date = DateTime.now();
   List logItems = [];
 
+  // TODO(Kseniya): private
   EventDetailCubit get eventDetailCubit => context.read<EventDetailCubit>();
 
   @override
   void initState() {
     super.initState();
+
+    /*
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      // executes after build
+    })
+    TODO(Kseniya): Обернуть в addPostFrameCallback как выше, 
+    кубит может не успеть построиться и будет ошибка
+    */
+
     if (_checkId()) {
       eventDetailCubit.loadData(widget.id);
     }
@@ -62,6 +71,7 @@ class _DaylogPageState extends State<DaylogPage> {
 
   void _onTapSave() async {
     try {
+      // TODO(Kseniya): удали try cath, все ошибки отлавливаются в кубите теперь
       await eventDetailCubit.updateEvent(
         Event(
           id: widget.id,
@@ -95,7 +105,7 @@ class _DaylogPageState extends State<DaylogPage> {
     });
   }
 
-  // _backButton() {
+  // _backButton() { // TODO(Kseniya): удалить
   //   ElevatedButton.icon(
   //     onPressed: () => context.go(AppRouter.home),
   //     icon: const Icon(Icons.arrow_left_sharp),
@@ -124,6 +134,7 @@ class _DaylogPageState extends State<DaylogPage> {
     return CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
+        // TODO(Kseniya): вынеси в отдельный файл
         automaticallyImplyLeading: false,
         leadingWidth: 100,
         leading: ElevatedButton.icon(
@@ -174,6 +185,7 @@ class _DaylogPageState extends State<DaylogPage> {
                   physics: const AlwaysScrollableScrollPhysics(),
                   children: <Widget>[
                     Padding(
+                      // TODO(Kseniya): вынеси в отдельный файл
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 8),
                       child: Row(
@@ -181,7 +193,7 @@ class _DaylogPageState extends State<DaylogPage> {
                         children: [
                           Text(
                             'Date: ${date.year}.${date.month}.${date.day}',
-                            // style: const TextStyle(
+                            // style: const TextStyle( // TODO(Kseniya): удалить
                             //   fontSize: 18,
                             //   fontWeight: FontWeight.bold,
                             //   color: Colors.white,

@@ -18,21 +18,18 @@ class DraftListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          
-          color: Colors.brown[900],
-          //color: Colors.grey[800],
+          color: Colors.brown[900], // TODO(Kseniya): AppColors.
+          //color: Colors.grey[800],   // TODO(Kseniya): удали
         ),
         child: ListTile(
-          leading: const Icon(
-            Icons.add_alert,
-            size: 30,
-          ),
+          leading: const Icon(Icons.add_alert, size: 30),
           title: Text(draft.title ?? ''),
           subtitle: const Text('test subtitle'),
+          // TODO(Kseniya): вынеси в private getter выше build
           trailing: onTap == null ? null : const Icon(Icons.arrow_forward_ios),
           contentPadding: const EdgeInsets.all(10),
-          
           enabled: true,
+          // TODO(Kseniya): удали
           // iconColor: Colors.white,
           //textColor: Colors.white,
           //tileColor: Colors.grey[600],

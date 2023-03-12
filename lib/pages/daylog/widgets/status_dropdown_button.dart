@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../models/event.dart';
+import '../../../models/event.dart';  // TODO(Kseniya): полный путь import 'package:daylog/models/event.dart';
 
 class StatusDropdownButton extends StatelessWidget {
   const StatusDropdownButton({
@@ -10,7 +10,7 @@ class StatusDropdownButton extends StatelessWidget {
   }) : super(key: key);
 
   final EventStatus dropdownValue;
-  final void Function(EventStatus?) onChanged;
+  final void Function(EventStatus?) onChanged;  // TODO(Kseniya): пустую строку после добавь
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,10 +23,10 @@ class StatusDropdownButton extends StatelessWidget {
         value: dropdownValue,
         icon: const Icon(Icons.arrow_downward),
         elevation: 16,
-        //style: const TextStyle(color: Colors.white),
+        //style: const TextStyle(color: Colors.white), // TODO(Kseniya): удали
         underline: Container(
           height: 2,
-          // color: Colors.black12,
+          // color: Colors.black12, // TODO(Kseniya): удали
         ),
         onChanged: onChanged,
         items: EventStatus.values

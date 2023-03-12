@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // TODO(Kseniya): в стрелочную функциюы
   void _onPageChanged(int index) {
     setState(() => _currentPage = index);
   }
@@ -64,10 +65,10 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomBar: HomeBottomBar(
         currentPage: _currentPage,
-        onCahngePage: _onTap,
+        onCahngePage: _onTap, // TODO(Kseniya): опечатка
       ),
       floatButton: FloatingActionButton(
-        // backgroundColor: Colors.brown[600],
+        // backgroundColor: Colors.brown[600], // TODO(Kseniya): удалить
         child: const Icon(Icons.add),
         onPressed: () => context.push(AppRouter.schedulerLog),
       ),

@@ -9,12 +9,11 @@ import 'package:logging/logging.dart';
 
 class MeCubit extends Cubit<MeState> {
   final UserService userService;
-  final Logger _logger;
+  final Logger _logger; // TODO(Kseniya): не используется добавь вывод ошибок в консоль или удали
   final ErrorCubit errorCubit;
-  MeCubit({required this.errorCubit, required this.userService}) 
-  : _logger = createLog(name: 'MeCubit'),
-  
-  super(MeState.init());
+  MeCubit({required this.errorCubit, required this.userService})
+      : _logger = createLog(name: 'MeCubit'),
+        super(MeState.init());
 
   Future<void> loadData() async {
     emit(state.copyWith(isLoading: true));
@@ -56,6 +55,7 @@ class MeCubit extends Cubit<MeState> {
   }
 
   void init() {
-    emit(MeState.init());
+    emit(MeState.init()); // TODO(Kseniya): сделай функции стрелочной, для одного действия
+    //нет смысла писать тело функции {}
   }
 }

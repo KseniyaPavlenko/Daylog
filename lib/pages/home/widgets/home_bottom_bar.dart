@@ -16,13 +16,13 @@ class HomeBottomBar extends StatelessWidget {
   const HomeBottomBar({
     super.key,
     required this.currentPage,
-    required this.onCahngePage,
+    required this.onCahngePage, // TODO(Kseniya): опечатка
   });
 
   final int currentPage;
   final void Function(int) onCahngePage;
 
-  // void _onItemTapped(int index) {
+  // void _onItemTapped(int index) { // TODO(Kseniya): удалить
   //   _selectedIndex = index;
   // }
 
@@ -67,7 +67,7 @@ class HomeBottomBar extends StatelessWidget {
       ),
     );
 
-    // return Container(
+    // return Container( // TODO(Kseniya): удалить
 
     //   child: BottomNavigationBar(
     //     // fixedColor: Colors.red,
@@ -119,6 +119,7 @@ class _IconButton extends StatelessWidget {
           children: [
             Icon(
               icon,
+              // TODO(Kseniya): Цвета вынести AppColors
               color: isSelected ? Colors.brown[50] : Colors.brown[500],
             ),
             Text(label),
@@ -129,10 +130,7 @@ class _IconButton extends StatelessWidget {
   }
 }
 
-
-
-
-// import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart'; // TODO(Kseniya): удалить
 
 // const _bottomBarIcons = [
 //   Icons.dashboard_outlined,
@@ -140,8 +138,6 @@ class _IconButton extends StatelessWidget {
 //   Icons.info_outline,
 //   Icons.settings_applications_outlined,
 // ];
-
-
 
 //  const List<Widget> _widgetOptions = <Widget>[
 //     Text(
@@ -170,7 +166,6 @@ class _IconButton extends StatelessWidget {
 
 //    final int currentPage = 0;
 //  final void Function(int) onCahngePage;
-
 
 //   @override
 //   Widget build(BuildContext context) {

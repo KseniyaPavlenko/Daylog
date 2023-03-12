@@ -16,12 +16,15 @@ class SchedulerPage extends StatefulWidget {
 }
 
 class _SchedulerPageState extends State<SchedulerPage> {
+  // TODO(Kseniya): private
   DraftListCubit get draftListCubit => context.read<DraftListCubit>();
+  // TODO(Kseniya): private
   List<Draft>? get currentDraftList => draftListCubit.state.drafts;
 
   @override
   void initState() {
     super.initState();
+    // TODO(Kseniya): оберни в post frame callback
     draftListCubit.loadData();
   }
 
@@ -35,7 +38,7 @@ class _SchedulerPageState extends State<SchedulerPage> {
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           title: const Text('Scheduler'),
-          backgroundColor: const Color(0xFF3E2723),
+          backgroundColor: const Color(0xFF3E2723), // TODO(Kseniya): AppColors
         ),
         body: BlocBuilder<DraftListCubit, DraftListState>(
           builder: (context, state) {
@@ -44,12 +47,11 @@ class _SchedulerPageState extends State<SchedulerPage> {
             }
             return Column(
               children: [
-                // const DateSelectorWidget(),
+                // const DateSelectorWidget(), // TODO(Kseniya): удали
                 Expanded(
                   child: Container(
-                    //color: Colors.grey[600],
+                    //color: Colors.grey[600], // TODO(Kseniya): удали
                     padding: const EdgeInsets.all(10),
-
                     child: ListView.separated(
                       itemCount: state.list.length,
                       itemBuilder: (_, index) {
@@ -70,6 +72,7 @@ class _SchedulerPageState extends State<SchedulerPage> {
           },
         ),
       );
+  // TODO(Kseniya): удали
   // Widget _buildListItem(BuildContext context, int index) {
   //   final event = currentDraftList![index];
   //   return Container(

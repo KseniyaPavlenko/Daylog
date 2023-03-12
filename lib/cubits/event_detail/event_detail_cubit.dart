@@ -9,11 +9,11 @@ import 'package:logging/logging.dart';
 
 class EventDetailCubit extends Cubit<EventDetailState> {
   final EventService eventService;
-  final Logger _logger;
+  final Logger _logger; // TODO(Kseniya): не используется или добавь вывод ошибок в консоль или удали
   final ErrorCubit errorCubit;
   EventDetailCubit({required this.errorCubit, required this.eventService})
       : _logger = createLog(name: 'EventDetailCubit'),
-      super(EventDetailState.init());
+        super(EventDetailState.init());
 
   Future<void> loadData(String? eventId) async {
     if (eventId == null) {

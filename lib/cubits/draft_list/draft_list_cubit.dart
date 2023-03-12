@@ -8,11 +8,11 @@ import 'package:logging/logging.dart';
 
 class DraftListCubit extends Cubit<DraftListState> {
   final DraftService draftService;
-  final Logger _logger;
+  final Logger _logger; // TODO(Kseniya): не используется или добавь вывод ошибок в консоль или удали
   final ErrorCubit errorCubit;
   DraftListCubit({required this.errorCubit, required this.draftService})
-  :_logger = createLog(name: 'DraftListCubit'),
-   super(DraftListState.init());
+      : _logger = createLog(name: 'DraftListCubit'),
+        super(DraftListState.init());
 
   Future<void> loadData() async {
     emit(state.copyWith(isLoading: true));
@@ -27,6 +27,7 @@ class DraftListCubit extends Cubit<DraftListState> {
     }
   }
 
+  // TODO(Kseniya): Удали если уже не будешь использовать
   // Future<void> loadDataByDate(DateTime dateTime) async {
   //   emit(state.copyWith(isLoading: true));
   //   try {

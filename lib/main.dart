@@ -1,7 +1,3 @@
-// ignore_for_file: prefer_const_constructors, unused_import
-
-import 'dart:async';
-
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/setup/di.dart';
 import 'package:daylog/common/style/app_style.dart';
@@ -13,12 +9,26 @@ import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/cubits/me/me_cubit.dart';
-import 'package:daylog/pages/dashboard/dashboard_page.dart';
 import 'package:daylog/widgets/date_selector/date_selector_widget.dart';
 import 'package:daylog/widgets/widget_test/widget_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+/* 
+  - TODO(Kseniya): Исправить все ошибки от анализатора 
+    Ошибки можно увидеть в вкладке PROBLEMS в VSCode 
+    или запустить команду flutter analyze в терминале в директории проекта 
+
+  - TODO(Kseniya): Вынеси все кастомные цвета в AppColors и дергай оттуда, 
+    так у тебя цвета буду в одном месте и если какой-то цвет нужно будет подправить 
+    ты исправишь его в одном файле, а не в 100 файлах
+
+  - TODO(Kseniya): Не строй виджеты в функциях выноси их отдельный файл в 
+    state less widget, это оптимизирует работу твоего проекта. Виджеты в функции
+    будут перестраиваться каждый раз после изменения состояния родительского виджета 
+    StateFullWidget. В то время как StateLessWidget перестраивается когда изменяются
+    параметры передаваемые в него
+*/
 void main() {
   setupDi();
   setupLog();
@@ -61,7 +71,6 @@ class _AppState extends State<App> {
         BlocProvider<DraftListCubit>(
           create: (BuildContext context) => getIt(),
         ),
-        /////
         BlocProvider<EventDetailCubit>(
           create: (BuildContext context) => getIt(),
         ),

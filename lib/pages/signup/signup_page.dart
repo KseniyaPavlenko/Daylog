@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, deprecated_member_use
-
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
@@ -20,10 +18,8 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // ignore: unused_field
-  late String _username;
-  // ignore: unused_field
-  late String _password;
+  late String _username; // TODO(Kseniya): неиспользуется
+  late String _password; // TODO(Kseniya): неиспользуется
 
   bool buttonIsEnabled = false;
 
@@ -50,6 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _signUpUser() {
     context.read<AuthCubit>().signup(
+          // TODO(Kseniya): signUp
           _usernameController.text,
           _passwordController.text,
         );
@@ -60,7 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
       if (state.isAuthorized ?? false) {
         context.go(AppRouter.home);
-      } 
+      }
     }, builder: (context, state) {
       return CommonScaffold(
         backgroundColor: Theme.of(context).primaryColor,
@@ -69,9 +66,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Column(
             children: <Widget>[
               _logo(),
-              SizedBox(
-                height: 100,
-              ),
+              SizedBox(height: 100),
               _form('SIGN UP', _signUpUser),
               BottomWave(),
             ],
@@ -82,6 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget _logo() {
+    // TODO(Kseniya): вынести в отдельный state less widget
     return Padding(
         padding: EdgeInsets.only(top: 100),
         child: Align(
@@ -93,6 +89,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ));
   }
 
+// TODO(Kseniya): вынести в отдельный state less widget  + именованные параметры
   Widget _input(
       Icon icon, String hint, TextEditingController controller, bool obscure) {
     return Container(
@@ -102,31 +99,32 @@ class _SignUpPageState extends State<SignUpPage> {
         obscureText: obscure,
         style: TextStyle(fontSize: 20, color: Colors.white),
         decoration: InputDecoration(
-            hintStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white30),
-            hintText: hint,
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 3)),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white54, width: 1)),
-            prefixIcon: Padding(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: IconTheme(
-                data: IconThemeData(color: Colors.white),
-                child: icon,
-              ),
-            )),
+          hintStyle: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white30),
+          hintText: hint,
+          focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white, width: 3)),
+          enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white54, width: 1)),
+          prefixIcon: Padding(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: IconTheme(
+              data: IconThemeData(color: Colors.white),
+              child: icon,
+            ),
+          ),
+        ),
       ),
     );
   }
 
+// TODO(Kseniya): вынести в отдельный state less widget + именованные параметры
   Widget _button(String text, void Function() func) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         primary: Theme.of(context).primaryColor,
 
+        // TODO(Kseniya): удалить
         //   splashColor: Theme.of(context).primaryColor,
         // highlightColor: Theme.of(context).primaryColor,
         // color: Colors.white,
@@ -137,16 +135,19 @@ class _SignUpPageState extends State<SignUpPage> {
             fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
       ),
       onPressed: () {
+        // TODO(Kseniya): в стерлочную функцию
         _signUpUser();
       },
     );
   }
 
+// TODO(Kseniya): вынести в отдельный state less widget + именованные параметры
   Widget _backButton(String text, void Function() func) {
     return TextButton(
       style: TextButton.styleFrom(
         primary: Theme.of(context).primaryColor,
 
+        // TODO(Kseniya): удалить
         //   splashColor: Theme.of(context).primaryColor,
         // highlightColor: Theme.of(context).primaryColor,
         // color: Colors.white,
@@ -164,30 +165,42 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+// TODO(Kseniya): удалить
   //void _onLogin() {
   //   GoRouter.of(context).go(AppRouter.home);
 //  }
 
+  // TODO(Kseniya): в стерлочную функцию
   void _onBack() {
     GoRouter.of(context).go(AppRouter.login);
   }
 
+// TODO(Kseniya): вынести в отдельный state less widget + именованные параметры
   Widget _form(String label, void Function() func) {
     return Column(
       children: <Widget>[
         Padding(
             padding: EdgeInsets.only(bottom: 20, top: 10),
             child: _input(
-                Icon(Icons.email), "Username", _usernameController, false)),
+                // TODO(Kseniya): отформатировать запятые
+                Icon(Icons.email),
+                "Username",
+                _usernameController,
+                false)),
         Padding(
             padding: EdgeInsets.only(bottom: 5),
             child: _input(
-                Icon(Icons.lock), "Password", _passwordController, true)),
+                // TODO(Kseniya): отформатировать запятыеы
+                Icon(Icons.lock),
+                "Password",
+                _passwordController,
+                true)),
         Padding(
           padding: EdgeInsets.only(left: 150),
           child: SizedBox(
               height: 40,
               width: MediaQuery.of(context).size.width,
+              // TODO(Kseniya): отформатировать запятые
               child: _backButton(label, func)),
         ),
         SizedBox(
@@ -198,6 +211,7 @@ class _SignUpPageState extends State<SignUpPage> {
           child: SizedBox(
               height: 50,
               width: MediaQuery.of(context).size.width,
+              // TODO(Kseniya): отформатировать запятые
               child: _button(label, func)),
         )
       ],
@@ -205,6 +219,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 }
 
+// TODO(Kseniya): где-то уже видел такой клипер можно вынести и использовать дважды тот же
 class BottomWaveClipper extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {

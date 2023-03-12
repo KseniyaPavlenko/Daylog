@@ -12,7 +12,8 @@ extension BuildContextX on BuildContext {
       duration: const Duration(seconds: 3),
       titleColor: Colors.red,
       messageColor: const Color.fromARGB(255, 114, 37, 31),
-      backgroundColor: const Color(0x00faebd7),
+      // TODO(Kseniya): вынести все цвета в AppColors и дергать их оттуда
+      backgroundColor: const Color(0x00faebd7), // AppColors.lightGreen
       flushbarPosition: FlushbarPosition.BOTTOM,
       boxShadows: const [
         BoxShadow(
@@ -31,4 +32,8 @@ extension BuildContextX on BuildContext {
   }
 
   double get bottomPadding => MediaQuery.of(this).padding.bottom;
+
+  double get screenWidth => MediaQuery.of(this).size.width;
+
+  double get screenHeight => MediaQuery.of(this).size.height;
 }

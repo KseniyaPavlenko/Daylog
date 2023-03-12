@@ -16,23 +16,30 @@ class DashboardPage extends StatefulWidget {
 }
 
 class _DashboardPageState extends State<DashboardPage> {
-  DateTime selectedDate = DateTime.now();
-  String text = "Daylog";
-  EventListCubit get eventListCubit => context.read<EventListCubit>();
+  DateTime selectedDate =
+      DateTime.now(); // TODO(Kseniya): должно быть private _selectedDate
+  String text =
+      "Daylog"; // TODO(Kseniya): должно быть private, зачем это вообще :)
+  EventListCubit get eventListCubit => // TODO(Kseniya): должно быть private
+      context.read<
+          EventListCubit>(); // TODO(Kseniya): разделяй геттеры и переменные пустой строкой
 
   @override
   void initState() {
     super.initState();
+    // TODO(Kseniya): оберни в post frame callback
     eventListCubit.loadData();
   }
 
   void onDateUpdated(DateTime date) {
     setState(() {
-      selectedDate = date;
+      selectedDate = date; // TODO(Kseniya): переделай в стрелочную функцию
     });
     eventListCubit.updateDate(date);
   }
 
+  /* TODO(Kseniya): Используей GoRouter 
+  + путь используй из константы, возможно нужно передачу id переделать под extra как в SchedulerLogPage */
   void onTapEvent(Event event) => context.push('/daylog/${event.id}');
 
   @override
@@ -46,12 +53,13 @@ class _DashboardPageState extends State<DashboardPage> {
           backgroundColor: Theme.of(context).primaryColor,
           isLoading: state.isLoading,
           appBar: AppBar(
-            backgroundColor: const Color(0xFF3E2723),
+            backgroundColor:
+                const Color(0xFF3E2723), // TODO(Kseniya): вынеси в AppColors
             title: const Text('Dashboard'),
           ),
-          // error: state.error?message,
+          // error: state.error?message, // TODO(Kseniya): удали
           body:
-
+              // TODO(Kseniya): удали
               // backgroundColor: Theme.of(context).primaryColor,
               // appBar: AppBar(
               //   backgroundColor: const Color(0xFF3E2723),
@@ -71,7 +79,8 @@ class _DashboardPageState extends State<DashboardPage> {
               ),
               Expanded(
                 child: Container(
-                  // color: Colors.grey[600],
+                  // color: Colors.grey[600],  // TODO(Kseniya): удали
+                  // TODO(Kseniya): у ListView тоже есть padding, container не нужен
                   padding: const EdgeInsets.all(10),
                   child: ListView.separated(
                     itemCount: state.list.length,
@@ -83,9 +92,8 @@ class _DashboardPageState extends State<DashboardPage> {
                         onTap: () => onTapEvent(event),
                       );
                     },
-                    separatorBuilder: (context, index) => const SizedBox(
-                      height: 10,
-                    ),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 10),
                   ),
                 ),
               ),
@@ -97,7 +105,7 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 }
 
-//TODO:
+ // TODO(Kseniya): удали 
 //  return Center(
 //               child: Container(
 //                 padding: const EdgeInsets.only(top: 30),

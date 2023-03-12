@@ -14,7 +14,7 @@ class _AboutPageState extends State<AboutPage> {
     return CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF3E2723),
+        backgroundColor: const Color(0xFF3E2723), // TODO(Kseniya): AppColors
         title: const Text('About the App'),
       ),
       body: const Padding(
@@ -24,7 +24,7 @@ class _AboutPageState extends State<AboutPage> {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            //color: Colors.white,
+            //color: Colors.white, // TODO(Kseniya): удалить
           ),
         ),
       ),

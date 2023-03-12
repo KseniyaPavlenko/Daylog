@@ -19,19 +19,17 @@ class EventListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: isDraft ? Colors.grey[800] : Colors.brown[900],
+          color: isDraft ? Colors.grey[800] : Colors.brown[900], // TODO(Kseniya): как и везде вынеси в AppColors
         ),
         child: ListTile(
-          leading: const Icon(
-            Icons.add_alert,
-            size: 30,
-          ),
+          leading: const Icon(Icons.add_alert, size: 30),
           title: Text(event.title ?? ''),
           subtitle: const Text('test subtitle'),
           trailing: onTap == null ? null : const Icon(Icons.arrow_forward_ios),
           contentPadding: const EdgeInsets.all(10),
           enabled: true,
 
+          // TODO(Kseniya): удали
           // iconColor: Colors.white,
           // textColor: Colors.white,
           // tileColor: Colors.grey[600],

@@ -36,7 +36,7 @@ class _DateSelectorWidgetState extends State<DateSelectorWidget> {
         children: [
           InkWell(
             key: const Key('dateSelector_prev'),
-            onTap: () {
+            onTap: () { // TODO(Kseniya): вынеси в функцию onTap...
               setState(() {
                 _selectedDate = _selectedDate.subtract(const Duration(days: 1));
               });
@@ -74,16 +74,14 @@ class _DateSelectorWidgetState extends State<DateSelectorWidget> {
           InkWell(
             key: const Key('dateSelector_next'),
             onTap: () {
+              // TODO(Kseniya): вынеси в функцию _onTap...
               setState(() {
                 _selectedDate = _selectedDate.add(const Duration(days: 1));
               });
               widget.onChange?.call(_selectedDate);
               // widget.onRightTap;
             },
-            child: const Icon(
-              Icons.arrow_right,
-              size: 50,
-            ),
+            child: const Icon(Icons.arrow_right, size: 50),
           ),
         ],
       ),

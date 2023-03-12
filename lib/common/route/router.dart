@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_cast
-
 import 'package:daylog/pages/daylog/daylog_page.dart';
 import 'package:daylog/pages/home/home_page.dart';
 import 'package:daylog/pages/login/login_page.dart';
@@ -9,7 +7,7 @@ import 'package:daylog/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../pages/scheduler_log/sсheduler_log_page.dart';
+import '../../pages/scheduler_log/sсheduler_log_page.dart'; // TODO(Kseniya): Использовать на импорты полого пути, как выше
 
 class AppRouter {
   static final GoRouter router = GoRouter(routes: <GoRoute>[
@@ -59,6 +57,8 @@ class AppRouter {
 
   static const String splash = '/';
   static const String login = '/login';
+  // TODO(Kseniya): Использовать опечатку (для подсветки опечаток можно установить
+  // расширение Code Spell Checker / Code Spell Checker Russian / ...
   static const String signUp = '/sugnUp';
   static const String home = '/home';
   static const String daylog = '/daylog/:id';

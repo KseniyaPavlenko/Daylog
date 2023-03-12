@@ -9,6 +9,7 @@ class DraftServiceImpl implements DraftService {
 
   DraftServiceImpl({required this.dio});
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<List<Draft>> list() async {
     final response = await dio.get('/drafts'); //
@@ -17,6 +18,7 @@ class DraftServiceImpl implements DraftService {
     return list;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<Draft> byId(String id) async {
     final response = await dio.get('/drafts/$id');
@@ -24,6 +26,7 @@ class DraftServiceImpl implements DraftService {
     return draft;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<Draft> create(Draft draft) async {
     final response =
@@ -32,6 +35,7 @@ class DraftServiceImpl implements DraftService {
     return newDraft;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.logins
   @override
   Future<Draft> update(Draft draft) async {
     final response =
@@ -40,6 +44,7 @@ class DraftServiceImpl implements DraftService {
     return updatedDraft;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.logins
   @override
   Future<void> delete(String id) async {
     await dio.delete('/drafts/$id');

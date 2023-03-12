@@ -15,17 +15,27 @@ class AuthServiceImpl implements AuthService {
     required this.localStorage,
   });
 
+  // Paths
+  static const _authPath = '/auth';
+  static const _loginPath = '$_authPath/login';
+
+  // Keys
+  static const _loginKey = 'login';
+  static const _passwordKey = 'password';
+
   @override
   Future<Token> login(String login, String password) async {
-    final response = await dio.post('/auth/login', data: {
-      'login': login,
-      'password': password,
-    });
-    final token = Token.fromJson(jsonDecode(response.data));
+    final response = await dio.post(
+      _loginPath,
+      data: {_loginKey: login, _passwordKey: password},
+    );
+    final token = Token.fromJson(json.decode(response.data));
     await localStorage.setToken(token.token);
     return token;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
+  // TODO(Kseniya):  signUp
   @override
   Future<User> signup(String login, String password) async {
     final response = await dio.post('/auth/signup', data: {

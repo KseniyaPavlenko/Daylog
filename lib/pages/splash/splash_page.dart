@@ -16,24 +16,20 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  Timer? timer;
+  Timer? timer; // TODO(Kseniya): private
 
   @override
   void initState() {
     super.initState();
 
-    SchedulerBinding.instance.addPostFrameCallback(
-      (_) => _checkAuth(),
-    );
+    SchedulerBinding.instance.addPostFrameCallback((_) => _checkAuth());
   }
 
   void initStateX() {
-    super.initState();
+    super.initState(); // TODO(Kseniya): private он вызван уже на 23 строке
     timer = Timer(
       const Duration(seconds: 3),
-      () {
-        context.go(AppRouter.login);
-      },
+      () => context.go(AppRouter.login),
     );
   }
 
@@ -44,7 +40,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _checkAuth() async {
-    // context.go(AppRouter.home);
+    // context.go(AppRouter.home); // TODO(Kseniya): удалить
     final authCubit = context.read<AuthCubit>();
     await authCubit.loadData();
     if (authCubit.state.isAuthorized ?? false) {

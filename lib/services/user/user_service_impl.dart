@@ -11,6 +11,7 @@ class UserServiceImpl implements UserService {
     required this.dio,
   });
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<User> me() async {
     final response = await dio.get('/me');
@@ -18,6 +19,7 @@ class UserServiceImpl implements UserService {
     return user;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<User> update(User user) async {
     final response = await dio.put('/me', data: jsonEncode(user.toJson()));
@@ -25,6 +27,7 @@ class UserServiceImpl implements UserService {
     return updatedUser;
   }
 
+  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<void> delete() async {
     await dio.delete('/me');

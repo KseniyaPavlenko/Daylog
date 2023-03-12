@@ -13,16 +13,15 @@ import 'package:logging/logging.dart';
 class EventListCubit extends Cubit<EventListState> {
   final EventService eventService;
   final DraftService draftService;
-  final Logger _logger;
+  final Logger _logger; // TODO(Kseniya): не используется или добавь выввод ошибок в консоль или удали
   final ErrorCubit errorCubit;
 
-  EventListCubit({required this.errorCubit, 
+  EventListCubit({
+    required this.errorCubit,
     required this.draftService,
     required this.eventService,
-  }) : _logger = createLog(name: 'EventListCubit'),
-   super(
-          EventListState.init(),
-        );
+  })  : _logger = createLog(name: 'EventListCubit'),
+        super(EventListState.init());
 
   Future<void> loadData([bool withDraft = false]) async {
     emit(state.copyWith(isLoading: true));
@@ -35,8 +34,7 @@ class EventListCubit extends Cubit<EventListState> {
       ]);
 
       drafts
-        ..where((draft) =>
-            state.selectedDate.isBetween(draft.startAt, draft.endDate))
+        ..where((draft) => state.selectedDate.isBetween(draft.startAt, draft.endDate))
         ..forEach((draft) => events.add(draft.toEvent));
 
       emit(state.copyWith(events: events));

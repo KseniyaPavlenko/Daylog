@@ -8,14 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:logging/logging.dart';
 
 class DraftDetailCubit extends Cubit<DraftDetailState> {
-  final Logger _logger;
+  final Logger _logger; // TODO(Kseniya): не используется или добавь вывод ошибок в консоль или удали
   final ErrorCubit errorCubit;
   final DraftService draftService;
-  DraftDetailCubit({
-    required this.errorCubit, 
-    required this.draftService
-  }) :  _logger = createLog(name: 'DraftDetailCubit'),
-  super(DraftDetailState.init());
+  DraftDetailCubit({required this.errorCubit, required this.draftService})
+      : _logger = createLog(name: 'DraftDetailCubit'),
+        super(DraftDetailState.init());
 
   Future<void> loadData(String? draftId) async {
     if (draftId == null) {

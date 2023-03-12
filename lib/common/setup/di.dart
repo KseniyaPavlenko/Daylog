@@ -67,7 +67,7 @@ void _setupDio() {
   final envConfig = EnvConfig.prod();
   final dio = Dio();
   dio.options.baseUrl = envConfig.baseUrl;
-
+  // TODO(Kseniya): Исправить опечатку LocalStorageImlp
   getIt.registerLazySingleton<LocalStorage>(() => LocalStorageImlp());
   dio.interceptors.add(DioInterceptor(getIt()));
   getIt.registerLazySingleton<Dio>(() => dio);

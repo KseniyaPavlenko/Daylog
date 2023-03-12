@@ -40,6 +40,7 @@ class Wireframe extends StatelessWidget {
                 title ?? '',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(),
               ),
+              // TODO(Kseniya): удали
               // actions: actions ??
               //     <Widget>[
               //       Padding(

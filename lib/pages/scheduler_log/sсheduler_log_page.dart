@@ -1,5 +1,3 @@
-// ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison, unused_local_variable, avoid_print, avoid_function_literals_in_foreach_calls, file_names
-
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_cubit.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_state.dart';
@@ -18,7 +16,9 @@ import 'package:daylog/common/utils/date_utils.dart';
 
 class SchedulerLogPage extends StatefulWidget {
   const SchedulerLogPage({Key? key, this.id}) : super(key: key);
+
   final String? id;
+
   @override
   State<SchedulerLogPage> createState() => _SchedulerLogPageState();
 }
@@ -26,14 +26,18 @@ class SchedulerLogPage extends StatefulWidget {
 class _SchedulerLogPageState extends State<SchedulerLogPage> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _detailsController = TextEditingController();
+  // TODO(Kseniya): опечатка
   final TextEditingController _endDateCintroller = TextEditingController();
   final TextEditingController _startDateController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
 
+  // TODO(Kseniya): private
   TimeOfDay time = const TimeOfDay(hour: 00, minute: 00);
 
+  // TODO(Kseniya): private
   List<DayOfWeek> selectedDayList = [];
 
+  // TODO(Kseniya): private
   String? userId;
   int? duration;
   int? days;
@@ -41,6 +45,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   DateTime? endDate;
 
   String getText() {
+    // TODO(Kseniya): переделай в getter
     if (time == null) {
       return 'Select Time';
     } else {
@@ -48,6 +53,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
     }
   }
 
+  // TODO(Kseniya): private
   DraftDetailCubit get draftDetailCubit => context.read<DraftDetailCubit>();
 
   @override
@@ -76,6 +82,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
     context.pop();
   }
 
+  // TODO(Kseniya): private
   void onTapDay(DayOfWeek day) {
     setState(() {
       if (selectedDayList.contains(day)) {
@@ -146,101 +153,107 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
 
   @override
   Widget build(BuildContext context) => CommonScaffold(
-      backgroundColor: Theme.of(context).primaryColor,
-      // resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leadingWidth: 100,
-        leading: ElevatedButton.icon(
-          onPressed: () => context.go(AppRouter.home),
-          icon: const Icon(Icons.arrow_left_sharp),
-          label: const Text('Back'),
-          style: ElevatedButton.styleFrom(
-            elevation: 3,
-            //backgroundColor: Colors.brown[900],
-          ),
-        ),
-        title: const Text("Scheduler Log"),
         backgroundColor: Theme.of(context).primaryColor,
-        centerTitle: true,
-        actions: <Widget>[
-          ElevatedButton.icon(
-            onPressed: _onTapSave,
-            icon: const Icon(Icons.save_outlined),
-            label: const Text('Save'),
+        // resizeToAvoidBottomInset: true,   // TODO(Kseniya): удалить
+        appBar: AppBar(
+          // TODO(Kseniya): вынеси в отдельный файл
+          automaticallyImplyLeading: false,
+          leadingWidth: 100,
+          leading: ElevatedButton.icon(
+            onPressed: () => context.go(AppRouter.home),
+            icon: const Icon(Icons.arrow_left_sharp),
+            label: const Text('Back'),
             style: ElevatedButton.styleFrom(
               elevation: 3,
-              backgroundColor: Colors.brown[900],
+              //backgroundColor: Colors.brown[900], // TODO(Kseniya): удалить
             ),
           ),
-        ],
-      ),
-      body: BlocConsumer<DraftDetailCubit, DraftDetailState>(
-        listener: (context, state) {
-          if (state.selectedDraft != null) {
-            final draft = state.selectedDraft;
-            _titleController.text = draft?.title ?? '';
-            _detailsController.text = draft?.detail ?? '';
-            date = draft?.startDate ?? DateTime.now();
-            _timeController.text = draft?.startAt?.toFormatTime(context) ?? '';
-          }
-        },
-        builder: (context, state) {
-          return CommonLoadingIndicator(
-            isLoading: state.isLoading,
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              child: RefreshIndicator(
-                edgeOffset: 20,
-                onRefresh: () => draftDetailCubit.loadData(widget.id),
-                child: ListView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      ),
-                    ),
-                    CommonTextField(
-                      controller: _titleController,
-                      hintText: 'Enter Title',
-                    ),
-                    CommonTextField(
-                      controller: _detailsController,
-                      hintText: 'Enter Details',
-                    ),
-                    CommonTextField(
-                      controller: _startDateController,
-                      hintText: "Choose Start Date",
-                      icon: const Icon(Icons.calendar_today_outlined),
-                      onTap: _onTapStartDate,
-                    ),
-                    CommonTextField(
-                      controller: _timeController,
-                      hintText: 'Choose Start Time',
-                      onTap: () async => _onTapTimeField(),
-                      icon: const Icon(Icons.more_time_outlined),
-                    ),
-                    //////////
-                    CommonTextField(
-                      controller: _endDateCintroller,
-                      hintText: "Choose End Date",
-                      icon: const Icon(Icons.edit_calendar_outlined),
-                      onTap: _onTapEndDate,
-                    ),
-                    const SizedBox(height: 16),
-                    DayOfWeekSelector(
-                      selected: selectedDayList,
-                      onTapDay: onTapDay,
-                      onTapEveryDay: onTapEveryDay,
-                    ),
-                  ],
-                ),
+          title: const Text("Scheduler Log"),
+          backgroundColor: Theme.of(context).primaryColor,
+          centerTitle: true,
+          actions: <Widget>[
+            ElevatedButton.icon(
+              onPressed: _onTapSave,
+              icon: const Icon(Icons.save_outlined),
+              label: const Text('Save'),
+              style: ElevatedButton.styleFrom(
+                elevation: 3,
+                backgroundColor: Colors.brown[900],
               ),
             ),
-          );
-        },
-      ));
+          ],
+        ),
+        body: BlocConsumer<DraftDetailCubit, DraftDetailState>(
+          listener: (context, state) {
+            if (state.selectedDraft != null) {
+              final draft = state.selectedDraft;
+              _titleController.text = draft?.title ?? '';
+              _detailsController.text = draft?.detail ?? '';
+              date = draft?.startDate ?? DateTime.now();
+              _timeController.text =
+                  draft?.startAt?.toFormatTime(context) ?? '';
+            }
+          },
+          builder: (context, state) {
+            return CommonLoadingIndicator(
+              isLoading: state.isLoading,
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: RefreshIndicator(
+                  edgeOffset: 20,
+                  onRefresh: () => draftDetailCubit.loadData(widget.id),
+                  child: ListView(
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: <Widget>[
+                      // TODO(Kseniya): Нужен ли этот пустой виджет ?ы
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        ),
+                      ),
+                      CommonTextField(
+                        controller: _titleController,
+                        hintText: 'Enter Title',
+                      ),
+                      CommonTextField(
+                        controller: _detailsController,
+                        hintText: 'Enter Details',
+                      ),
+                      CommonTextField(
+                        controller: _startDateController,
+                        hintText: "Choose Start Date",
+                        icon: const Icon(Icons.calendar_today_outlined),
+                        onTap: _onTapStartDate,
+                      ),
+                      CommonTextField(
+                        controller: _timeController,
+                        hintText: 'Choose Start Time',
+                        onTap: () async => _onTapTimeField(),
+                        icon: const Icon(Icons.more_time_outlined),
+                      ),
+                      CommonTextField(
+                        // TODO(Kseniya): опечатка
+                        controller: _endDateCintroller,
+                        hintText: "Choose End Date",
+                        icon: const Icon(Icons.edit_calendar_outlined),
+                        onTap: _onTapEndDate,
+                      ),
+                      const SizedBox(height: 16),
+                      DayOfWeekSelector(
+                        selected: selectedDayList,
+                        onTapDay: onTapDay,
+                        onTapEveryDay: onTapEveryDay,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      );
 }

@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 
 class LogoutButton extends StatelessWidget {
@@ -10,20 +8,22 @@ class LogoutButton extends StatelessWidget {
   }) : super(key: key);
 
   final VoidCallback onPressed;
-  
+
   @override
   Widget build(BuildContext context) {
     String text = "LOGOUT";
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        primary: Colors.brown,
+        primary: Colors.brown, // TODO(Kseniya): deprecated
         backgroundColor: Colors.brown[900],
       ),
       child: Text(
         text,
-        // ignore: prefer_const_constructors
         style: TextStyle(
-            fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 20,
+        ),
       ),
       onPressed: onPressed,
     );

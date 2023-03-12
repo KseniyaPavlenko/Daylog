@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+// TODO(Kseniya): Почему виджеты в папке lib
 
 class ScrollWidget extends StatelessWidget {
   final List<String> items;
@@ -9,7 +9,6 @@ class ScrollWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const title = 'Long List';
-
     return MaterialApp(
       title: title,
       home: Scaffold(
