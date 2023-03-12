@@ -6,18 +6,20 @@ class EventListItem extends StatelessWidget {
     Key? key,
     required this.event,
     this.onTap,
+    required this.isDraft,
   }) : super(key: key);
   final Event event;
   final VoidCallback? onTap;
+  final bool isDraft;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: isDraft ? null : onTap,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: Colors.brown[900],
+          color: isDraft ? Colors.grey[800] : Colors.brown[900],
         ),
         child: ListTile(
           leading: const Icon(

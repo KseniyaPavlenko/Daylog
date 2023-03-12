@@ -1,3 +1,4 @@
+import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 
 class AboutPage extends StatefulWidget {
@@ -10,7 +11,7 @@ class AboutPage extends StatefulWidget {
 class _AboutPageState extends State<AboutPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         backgroundColor: const Color(0xFF3E2723),

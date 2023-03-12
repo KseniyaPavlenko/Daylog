@@ -3,6 +3,7 @@
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/pages/settings/widgets/logout_button.dart';
+import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -35,7 +36,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) => CommonScaffold(
         backgroundColor: Theme.of(context).primaryColor,
         appBar: AppBar(
           backgroundColor: const Color(0xFF3E2723),

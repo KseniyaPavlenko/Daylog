@@ -7,7 +7,7 @@ import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-//TODO: AppBar?????????
+
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
@@ -26,20 +26,11 @@ class _DashboardPageState extends State<DashboardPage> {
     eventListCubit.loadData();
   }
 
-  void setDate() => eventListCubit.updateDate(selectedDate);
-
-  void onLeftTap() {
+  void onDateUpdated(DateTime date) {
     setState(() {
-      selectedDate = selectedDate.subtract(const Duration(days: 1));
+      selectedDate = date;
     });
-    setDate();
-  }
-
-  void onRightTap() {
-    setState(() {
-      selectedDate = selectedDate.add(const Duration(days: 1));
-    });
-    setDate();
+    eventListCubit.updateDate(date);
   }
 
   void onTapEvent(Event event) => context.push('/daylog/${event.id}');
@@ -47,18 +38,20 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<EventListCubit, EventListState>(
-      
       builder: (context, state) {
-        
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
         return CommonScaffold(
-          
+          backgroundColor: Theme.of(context).primaryColor,
           isLoading: state.isLoading,
+          appBar: AppBar(
+            backgroundColor: const Color(0xFF3E2723),
+            title: const Text('Dashboard'),
+          ),
           // error: state.error?message,
           body:
-          
+
               // backgroundColor: Theme.of(context).primaryColor,
               // appBar: AppBar(
               //   backgroundColor: const Color(0xFF3E2723),
@@ -74,8 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               DateSelectorWidget(
                 date: selectedDate,
-                onLeftTap: onLeftTap,
-                onRightTap: onRightTap,
+                onChange: onDateUpdated,
               ),
               Expanded(
                 child: Container(
@@ -86,6 +78,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     itemBuilder: (_, index) {
                       final event = state.list[index];
                       return EventListItem(
+                        isDraft: event.id == Event.draftKey,
                         event: event,
                         onTap: () => onTapEvent(event),
                       );

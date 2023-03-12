@@ -21,8 +21,9 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final isAuthorized = await authService.isAuthorized();
       emit(state.copyWith(isAuthorized: isAuthorized));
-    } catch (e) {
+    } catch (eror) {
       // handle error
+      errorCubit.showError(ErrorState.deafult);
     } finally {
       emit(state.copyWith(isLoading: false));
     }
@@ -35,10 +36,10 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(isAuthorized: true));
     } catch (error) {
       if (error is AuthError) {
-        errorCubit.showError(ErrorState.auth);
+        errorCubit.showError(ErrorState.deafult);
       } else {
         _logger.e(error.toString());
-        errorCubit.showError(ErrorState.deafult);
+        errorCubit.showError(ErrorState.auth);
       }
     } finally {
       emit(state.copyWith(isLoading: false));
@@ -51,8 +52,15 @@ class AuthCubit extends Cubit<AuthState> {
       await authService.signup(login, password);
       await authService.login(login, password);
       emit(state.copyWith(isAuthorized: true));
-    } catch (e) {
+    } catch (error) {
       // handle error
+
+      if (error is AuthError) {
+        errorCubit.showError(ErrorState.auth);
+      } else {
+        _logger.e(error.toString());
+        errorCubit.showError(ErrorState.deafult);
+      }
     } finally {
       emit(state.copyWith(isLoading: false));
     }
@@ -63,8 +71,9 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       await authService.logout();
       emit(state.copyWith(isAuthorized: false));
-    } catch (e) {
+    } catch (error) {
       // handle error
+      errorCubit.showError(ErrorState.deafult);
     } finally {
       emit(state.copyWith(isLoading: false));
     }

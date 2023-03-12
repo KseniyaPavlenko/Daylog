@@ -1,3 +1,4 @@
+import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/me/me_cubit.dart';
 import 'package:daylog/cubits/me/me_state.dart';
 import 'package:daylog/models/user.dart';
@@ -9,7 +10,10 @@ void main() {
     late MeCubit meCubit;
 
     setUp((() {
-      meCubit = MeCubit(userService: UserServiceMock());
+      meCubit = MeCubit(
+        userService: UserServiceMock(),
+        errorCubit: ErrorCubit(),
+      );
     }));
 
     test('Get me', () async {

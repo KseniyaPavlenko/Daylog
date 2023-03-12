@@ -14,6 +14,8 @@ class Event with EquatableMixin {
   final String? title;
   final String? detail;
   final String? comment;
+  //
+  static const draftKey = 'draftKey';
 
   Event({
     this.id,

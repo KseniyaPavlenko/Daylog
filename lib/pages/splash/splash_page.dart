@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
+import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +56,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
       body: const Center(
         child: Text(
