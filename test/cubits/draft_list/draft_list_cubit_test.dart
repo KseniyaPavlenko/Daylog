@@ -1,5 +1,3 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:daylog/cubits/draft_list/draft_list_cubit.dart';
 import 'package:daylog/cubits/draft_list/draft_list_state.dart';
 import 'package:daylog/cubits/error_cubit/error_cubit.dart';
@@ -26,7 +24,6 @@ void main() {
         // Then
 
         final resultDraftList = DraftServiceMock.mockedDraftList();
-        const draftId = '5a1101fa-8361-40ed-9a6b-b9eda6b1595b';
 
         expect(draftListCubit.state, const DraftListState(isLoading: false));
         expectLater(

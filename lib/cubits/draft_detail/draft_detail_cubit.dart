@@ -1,21 +1,15 @@
-import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_state.dart';
 import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/error_cubit/error_state.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:daylog/services/draft/draft_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logging/logging.dart';
 
 class DraftDetailCubit extends Cubit<DraftDetailState> {
-  final Logger _logger;
   final ErrorCubit errorCubit;
   final DraftService draftService;
-  DraftDetailCubit({
-    required this.errorCubit, 
-    required this.draftService
-  }) :  _logger = createLog(name: 'DraftDetailCubit'),
-  super(DraftDetailState.init());
+  DraftDetailCubit({required this.errorCubit, required this.draftService})
+      : super(DraftDetailState.init());
 
   Future<void> loadData(String? draftId) async {
     if (draftId == null) {
@@ -28,7 +22,7 @@ class DraftDetailCubit extends Cubit<DraftDetailState> {
       emit(state.copyWith(selectedDraft: draft));
     } catch (error) {
       // handle error
-      errorCubit.showError(ErrorState.deafult);
+      errorCubit.showError(ErrorState.common);
     } finally {
       emit(state.copyWith(isLoading: false));
     }
@@ -46,7 +40,7 @@ class DraftDetailCubit extends Cubit<DraftDetailState> {
       }
     } catch (error) {
       // handle error
-      errorCubit.showError(ErrorState.deafult);
+      errorCubit.showError(ErrorState.common);
     } finally {
       emit(state.copyWith(isLoading: false));
     }

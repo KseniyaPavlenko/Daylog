@@ -15,13 +15,17 @@ class User with EquatableMixin {
       : id = json['id'],
         login = json['login'],
         password = json['password'];
+  // User.fromJson(Map<String, dynamic> json)
+  //     : id = json['id'],
+  //       login = json['login'],
+  //       password = json['password'];
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
         'login': login,
         'password': password,
       };
-  Map<String, dynamic> toJsonWithoutPassword() => {
+  Map<String, dynamic> toJsonWithoutPassword() => <String, dynamic>{
         'id': id,
         'login': login,
       };

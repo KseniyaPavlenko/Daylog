@@ -1,15 +1,12 @@
-// ignore_for_file: unnecessary_cast
-
 import 'package:daylog/pages/daylog/daylog_page.dart';
 import 'package:daylog/pages/home/home_page.dart';
 import 'package:daylog/pages/login/login_page.dart';
-import 'package:daylog/pages/scheduler/sheduler_page.dart';
+import 'package:daylog/pages/scheduler/scheduler_page.dart';
+import 'package:daylog/pages/scheduler_log/scheduler_log_page.dart';
 import 'package:daylog/pages/signup/signup_page.dart';
 import 'package:daylog/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import '../../pages/scheduler_log/sсheduler_log_page.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(routes: <GoRoute>[
@@ -39,8 +36,9 @@ class AppRouter {
     ),
     GoRoute(
       path: daylog,
+      name: daylogName,
       builder: (BuildContext context, GoRouterState state) {
-        return DaylogPage(id: state.params['id'] as String?);
+        return DaylogPage(id: state.params['id']);
       },
     ),
     GoRoute(
@@ -51,17 +49,20 @@ class AppRouter {
     ),
     GoRoute(
       path: schedulerLog,
+      name: schedulerLogName,
       builder: (BuildContext context, GoRouterState state) {
-        return SchedulerLogPage(id: state.extra as String?);
+        return SchedulerLogPage(id: state.params['id']);
       },
     ),
   ]);
 
   static const String splash = '/';
   static const String login = '/login';
-  static const String signUp = '/sugnUp';
+  static const String signUp = '/signUp';
   static const String home = '/home';
   static const String daylog = '/daylog/:id';
+  static const String daylogName = 'daylog';
   static const String scheduler = '/scheduler';
-  static const String schedulerLog = '/schedulerLog';
+  static const String schedulerLog = '/schedulerLog/:id';
+  static const String schedulerLogName = 'schedulerLog';
 }

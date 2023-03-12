@@ -11,22 +11,25 @@ class UserServiceImpl implements UserService {
     required this.dio,
   });
 
+    // Paths
+  static const _mePath = '/me';
+
   @override
   Future<User> me() async {
-    final response = await dio.get('/me');
+    final response = await dio.get(_mePath);
     final user = User.fromJson(jsonDecode(response.data));
     return user;
   }
 
   @override
   Future<User> update(User user) async {
-    final response = await dio.put('/me', data: jsonEncode(user.toJson()));
+    final response = await dio.put(_mePath, data: jsonEncode(user.toJson()));
     final updatedUser = User.fromJson(jsonDecode(response.data));
     return updatedUser;
   }
 
   @override
   Future<void> delete() async {
-    await dio.delete('/me');
+    await dio.delete(_mePath);
   }
 }

@@ -16,7 +16,7 @@ class AuthServiceMock implements AuthService {
   }
 
   @override
-  Future<User> signup(String login, String password) async {
+  Future<User> signUp(String login, String password) async {
     const rawJson = '''{
   "id": "e6bf616f-dd75-4214-89f6-97b3ad1f205c",
   "login": "ksenia3"

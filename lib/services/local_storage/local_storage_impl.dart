@@ -2,7 +2,7 @@ import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/services/local_storage/local_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LocalStorageImlp extends LocalStorage {
+class LocalStorageImpl extends LocalStorage {
   @override
   Future<String?> getToken() async {
     try {

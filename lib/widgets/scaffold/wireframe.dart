@@ -40,18 +40,6 @@ class Wireframe extends StatelessWidget {
                 title ?? '',
                 style: Theme.of(context).textTheme.titleLarge!.copyWith(),
               ),
-              // actions: actions ??
-              //     <Widget>[
-              //       Padding(
-              //         padding: const EdgeInsets.all(10.0),
-              //         child: SizedBox(
-              //           width: 20,
-              //           child: getIt<CurrentLocationContext>().hasPosition
-              //               ? Image.asset(ImageAssets.iconLogo)
-              //               : Image.asset(ImageAssets.iconLogoGrey),
-              //         ),
-              //       ),
-              //     ],
             ),
         drawer: drawer,
         backgroundColor: bgColor,

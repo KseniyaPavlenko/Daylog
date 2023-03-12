@@ -1,3 +1,4 @@
+import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/models/event.dart';
 import 'package:flutter/material.dart';
 
@@ -19,24 +20,17 @@ class EventListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: isDraft ? Colors.grey[800] : Colors.brown[900],
+          color: isDraft ? AppColors.grey : AppColors.brown,
         ),
         child: ListTile(
-          leading: const Icon(
-            Icons.add_alert,
-            size: 30,
-          ),
+          //key: const Key('eventItem'),
+          key: ValueKey(event.id),
+          leading: const Icon(Icons.add_alert, size: 30),
           title: Text(event.title ?? ''),
           subtitle: const Text('test subtitle'),
           trailing: onTap == null ? null : const Icon(Icons.arrow_forward_ios),
           contentPadding: const EdgeInsets.all(10),
           enabled: true,
-
-          // iconColor: Colors.white,
-          // textColor: Colors.white,
-          // tileColor: Colors.grey[600],
-          //// shape:
-          //    RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         ),
       ),
     );
