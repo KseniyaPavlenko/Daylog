@@ -26,20 +26,11 @@ class _DashboardPageState extends State<DashboardPage> {
     eventListCubit.loadData();
   }
 
-  void setDate() => eventListCubit.updateDate(selectedDate);
-
-  void onLeftTap() {
+  void onDateUpdated(DateTime date) {
     setState(() {
-      selectedDate = selectedDate.subtract(const Duration(days: 1));
+      selectedDate = date;
     });
-    setDate();
-  }
-
-  void onRightTap() {
-    setState(() {
-      selectedDate = selectedDate.add(const Duration(days: 1));
-    });
-    setDate();
+    eventListCubit.updateDate(date);
   }
 
   void onTapEvent(Event event) => context.push('/daylog/${event.id}');
@@ -76,8 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
             children: [
               DateSelectorWidget(
                 date: selectedDate,
-                onLeftTap: onLeftTap,
-                onRightTap: onRightTap,
+                onChange: onDateUpdated,
               ),
               Expanded(
                 child: Container(

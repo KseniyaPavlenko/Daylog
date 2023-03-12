@@ -1,17 +1,28 @@
 import 'package:daylog/common/utils/date_utils.dart';
 import 'package:flutter/material.dart';
 
-class DateSelectorWidget extends StatelessWidget {
+class DateSelectorWidget extends StatefulWidget {
   const DateSelectorWidget({
     Key? key,
     required this.date,
-    required this.onLeftTap,
-    required this.onRightTap,
+    required this.onChange,
   }) : super(key: key);
 
   final DateTime date;
-  final VoidCallback onLeftTap;
-  final VoidCallback onRightTap;
+  final ValueChanged<DateTime>? onChange;
+
+  @override
+  State<DateSelectorWidget> createState() => _DateSelectorWidgetState();
+}
+
+class _DateSelectorWidgetState extends State<DateSelectorWidget> {
+  late DateTime _selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDate = widget.date;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +36,12 @@ class DateSelectorWidget extends StatelessWidget {
         children: [
           InkWell(
             key: const Key('dateSelector_prev'),
-            onTap: onLeftTap,
+            onTap: () {
+              setState(() {
+                _selectedDate = _selectedDate.subtract(const Duration(days: 1));
+              });
+              widget.onChange?.call(_selectedDate);
+            },
             child: const Icon(
               Icons.arrow_left,
               size: 50,
@@ -39,7 +55,7 @@ class DateSelectorWidget extends StatelessWidget {
             children: [
               Text(
                 key: const Key('day'),
-                date.day.toString(),
+                _selectedDate.day.toString(),
                 style: const TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.w400,
@@ -47,7 +63,7 @@ class DateSelectorWidget extends StatelessWidget {
               ),
               Text(
                 key: const Key('month'),
-                date.toMonth(),
+                _selectedDate.toMonth(),
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
@@ -57,11 +73,16 @@ class DateSelectorWidget extends StatelessWidget {
           ),
           InkWell(
             key: const Key('dateSelector_next'),
-            onTap: onRightTap,
+            onTap: () {
+              setState(() {
+                _selectedDate = _selectedDate.add(const Duration(days: 1));
+              });
+              widget.onChange?.call(_selectedDate);
+              // widget.onRightTap;
+            },
             child: const Icon(
               Icons.arrow_right,
               size: 50,
-              //color: Colors.white,
             ),
           ),
         ],
