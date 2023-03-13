@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// TODO(Kseniya): Почему виджеты в папке lib
+
 
 class ScrollWidget extends StatelessWidget {
   final List<String> items;

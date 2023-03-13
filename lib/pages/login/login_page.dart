@@ -1,7 +1,9 @@
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
-import 'package:daylog/pages/login/widgets/bottom_wave.dart';
+import 'package:daylog/widgets/bottom_wave_clipper/bottom_wave_clipper.dart';
+import 'package:daylog/widgets/build_logo/build_logo.dart';
+import 'package:daylog/widgets/input_field/input_field.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,53 +58,9 @@ class _LoginPageState extends State<LoginPage> {
     GoRouter.of(context).go(AppRouter.signUp);
   }
 
-  Widget _buildLogo() {
-    // TODO(Kseniya): не строй виджеты в функции
-    // вынеси в отдельный файл в state less widget или напрямую в build
-    return Padding(
-      padding: EdgeInsets.only(top: 100),
-      child: Align(
-        child: Text(
-          'Daily Planner',
-          style: TextStyle(
-            fontSize: 45,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
+ 
 
-  // TODO(Kseniya): вынеси в отдельный файл в state less widget
-  Widget _input(
-      Icon icon, String hint, TextEditingController controller, bool obscure) {
-    return Container(
-      padding: EdgeInsets.only(left: 20, right: 20),
-      child: TextField(
-        controller: controller,
-        obscureText: obscure,
-        style: TextStyle(fontSize: 20, color: Colors.white),
-        decoration: InputDecoration(
-            hintStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
-                color: Colors.white30),
-            hintText: hint,
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white, width: 3)),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Colors.white54, width: 1)),
-            prefixIcon: Padding(
-              padding: EdgeInsets.only(left: 10, right: 10),
-              child: IconTheme(
-                data: IconThemeData(color: Colors.white),
-                child: icon,
-              ),
-            )),
-      ),
-    );
-  }
+  
 
   // TODO(Kseniya): вынеси в отдельный файл в state less widget
   Widget _buildButtonLogin(String text, void Function() func) {
@@ -143,31 +101,33 @@ class _LoginPageState extends State<LoginPage> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(bottom: 20, top: 10),
-          child: _input(
-            Icon(Icons.email),
-            "Username",
-            _usernameController,
-            false,
+          child: InputField(
+            icon: Icon(Icons.email),
+            hint: "Username",
+            controller: _usernameController,
+            obscure: false,
           ),
         ),
         Padding(
           padding: EdgeInsets.only(bottom: 5),
           // TODO(Kseniya): больше двух параметров передавай по имени {}
-          child: _input(
-            Icon(Icons.lock),
-            "Password",
-            _passwordController,
-            true,
+          child: InputField(
+           icon: Icon(Icons.lock),
+            hint:"Password",
+            controller: _passwordController,
+            obscure:true,
           ),
         ),
         Padding(
           padding: EdgeInsets.only(left: 260),
           child: SizedBox(
             height: 40,
-            
+          
             // TODO(Kseniya): context.width
             // + можно вынести в переменную выше так как использует больше раза
-            width: MediaQuery.of(context).size.width,
+           width: MediaQuery.of(context).size.width,
+           
+
             child: _createAccButton(label, func),
           ),
         ),
@@ -201,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
           body: Column(
             children: <Widget>[
               // TODO(Kseniya): переделай в state less widget в отдельном файле
-              _buildLogo(),
+              BuildLogo(),
               SizedBox(height: 100),
               // TODO(Kseniya): переделай в state less widget в отдельном файле
               _form('LOGIN', _loginUser),
@@ -213,22 +173,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+// TODO: п11
+//TODO: BottomWaveClipper
 
-class BottomWaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.moveTo(size.width, 0.0);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0.0, size.height);
-    path.lineTo(0.0, size.height + 5);
-    var secondControlPoint = Offset(size.width - (size.width / 6), size.height);
-    var secondEndPoint = Offset(size.width, 0.0);
-    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-        secondEndPoint.dx, secondEndPoint.dy);
-    return path;
-  }
 
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
+// BottomWaveClipper

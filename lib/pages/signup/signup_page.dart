@@ -1,7 +1,9 @@
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
-import 'package:daylog/pages/login/widgets/bottom_wave.dart';
+import 'package:daylog/widgets/bottom_wave_clipper/bottom_wave_clipper.dart';
+import 'package:daylog/widgets/build_logo/build_logo.dart';
+import 'package:daylog/widgets/input_field/input_field.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,6 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
 
   bool buttonIsEnabled = false;
 
@@ -63,7 +64,7 @@ class _SignUpPageState extends State<SignUpPage> {
           isLoading: state.isLoading,
           child: Column(
             children: <Widget>[
-              _logo(),
+              BuildLogo(),
               SizedBox(height: 100),
               _form('SIGN UP', _signUpUser),
               BottomWave(),
@@ -72,48 +73,6 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
       );
     });
-  }
-
-  Widget _logo() {
-    // TODO(Kseniya): вынести в отдельный state less widget
-    return Padding(
-        padding: EdgeInsets.only(top: 100),
-        child: Align(
-          child: Text(
-            'Daily Planner',
-            style: TextStyle(
-                fontSize: 45, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-        ));
-  }
-
-// TODO(Kseniya): вынести в отдельный state less widget  + именованные параметры
-  Widget _input(
-      Icon icon, String hint, TextEditingController controller, bool obscure) {
-    return Container(
-      padding: EdgeInsets.only(left: 20, right: 20),
-      child: TextField(
-        controller: controller,
-        obscureText: obscure,
-        style: TextStyle(fontSize: 20, color: Colors.white),
-        decoration: InputDecoration(
-          hintStyle: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white30),
-          hintText: hint,
-          focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white, width: 3)),
-          enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white54, width: 1)),
-          prefixIcon: Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
-            child: IconTheme(
-              data: IconThemeData(color: Colors.white),
-              child: icon,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 
 // TODO(Kseniya): вынести в отдельный state less widget + именованные параметры
@@ -158,13 +117,21 @@ class _SignUpPageState extends State<SignUpPage> {
       children: <Widget>[
         Padding(
           padding: EdgeInsets.only(bottom: 20, top: 10),
-          child:
-              _input(Icon(Icons.email), "Username", _usernameController, false),
+          child: InputField(
+            icon: Icon(Icons.email),
+            hint: "Username",
+            controller: _usernameController,
+            obscure: false,
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(bottom: 5),
-          child:
-              _input(Icon(Icons.lock), "Password", _passwordController, true),
+          child: InputField(
+            icon: Icon(Icons.lock),
+            hint: "Password",
+            controller: _passwordController,
+            obscure: true,
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(left: 150),
@@ -186,26 +153,10 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         )
       ],
+    //  BottomWaveClipper();
     );
   }
 }
 
-// TODO(Kseniya): где-то уже видел такой клипер можно вынести и использовать дважды тот же
-class BottomWaveClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.moveTo(size.width, 0.0);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0.0, size.height);
-    path.lineTo(0.0, size.height + 5);
-    var secondControlPoint = Offset(size.width - (size.width / 6), size.height);
-    var secondEndPoint = Offset(size.width, 0.0);
-    path.quadraticBezierTo(secondControlPoint.dx, secondControlPoint.dy,
-        secondEndPoint.dx, secondEndPoint.dy);
-    return path;
-  }
 
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
-}
+// BottomWaveClipper();

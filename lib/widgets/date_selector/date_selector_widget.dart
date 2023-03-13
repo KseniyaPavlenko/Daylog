@@ -24,6 +24,21 @@ class _DateSelectorWidgetState extends State<DateSelectorWidget> {
     _selectedDate = widget.date;
   }
 
+  void _onTapNext() async {
+    setState(() {
+      _selectedDate = _selectedDate.add(const Duration(days: 1));
+    });
+    widget.onChange?.call(_selectedDate);
+    // widget.onRightTap;
+  }
+
+  void _onTapPrevious() async {
+    setState(() {
+      _selectedDate = _selectedDate.subtract(const Duration(days: 1));
+    });
+    widget.onChange?.call(_selectedDate);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -36,12 +51,7 @@ class _DateSelectorWidgetState extends State<DateSelectorWidget> {
         children: [
           InkWell(
             key: const Key('dateSelector_prev'),
-            onTap: () { // TODO(Kseniya): вынеси в функцию onTap...
-              setState(() {
-                _selectedDate = _selectedDate.subtract(const Duration(days: 1));
-              });
-              widget.onChange?.call(_selectedDate);
-            },
+            onTap: _onTapPrevious,
             child: const Icon(
               Icons.arrow_left,
               size: 50,
@@ -73,14 +83,7 @@ class _DateSelectorWidgetState extends State<DateSelectorWidget> {
           ),
           InkWell(
             key: const Key('dateSelector_next'),
-            onTap: () {
-              // TODO(Kseniya): вынеси в функцию _onTap...
-              setState(() {
-                _selectedDate = _selectedDate.add(const Duration(days: 1));
-              });
-              widget.onChange?.call(_selectedDate);
-              // widget.onRightTap;
-            },
+            onTap: _onTapNext,
             child: const Icon(Icons.arrow_right, size: 50),
           ),
         ],

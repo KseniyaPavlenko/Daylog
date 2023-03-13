@@ -1,4 +1,4 @@
-import 'package:daylog/test_cookbook/simple_widget.dart';
+import 'package:daylog/widgets/test_cookbook/simple_widget.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
