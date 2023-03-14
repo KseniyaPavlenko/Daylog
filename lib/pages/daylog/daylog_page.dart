@@ -1,7 +1,5 @@
-import 'package:daylog/common/errors/request_error.dart';
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/utils/date_utils.dart';
-import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
@@ -28,7 +26,7 @@ class DaylogPage extends StatefulWidget {
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
   var _time = const TimeOfDay(hour: 00, minute: 00); 
-   EventStatus _dropdownValue = EventStatus.todo; // TODO(Kseniya): var + private
+ EventStatus _dropdownValue = EventStatus.todo; // TODO(Kseniya): var + private
 
 
   var _uuid = const Uuid();
@@ -42,7 +40,7 @@ class DaylogPage extends StatefulWidget {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_checkId()) {
       _eventDetailCubit.loadData(widget.id);
     }
@@ -89,11 +87,11 @@ class DaylogPage extends StatefulWidget {
 
   void _onTapTimeField() async {
     const initialTime = TimeOfDay(hour: 00, minute: 00);
-    final newTime = await showTimePicker(context: context, initialTime: time);
+    final newTime = await showTimePicker(context: context, initialTime: _time);
     if (newTime == null) return;
 
     setState(() {
-      time = newTime;
+      _time = newTime;
       _timeController.text = newTime.format(context);
     });
   }
@@ -137,8 +135,8 @@ class DaylogPage extends StatefulWidget {
             _titleController.text = event?.title ?? '';
             _detailsController.text = event?.detail ?? '';
             _commentController.text = event?.comment ?? '';
-            dropdownValue = event?.status ?? EventStatus.todo;
-            date = event?.startDate ?? DateTime.now();
+            _dropdownValue = event?.status ?? EventStatus.todo;
+      _date = event?.startDate ?? DateTime.now();
             _timeController.text = event?.startAt?.toFormatTime(context) ?? '';
           }
         },
@@ -149,7 +147,7 @@ class DaylogPage extends StatefulWidget {
               height: MediaQuery.of(context).size.height,
               child: RefreshIndicator(
                 edgeOffset: 20,
-                onRefresh: () => eventDetailCubit.loadData(widget.id),
+                onRefresh: () => _eventDetailCubit.loadData(widget.id),
                 child: ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   children: <Widget>[
@@ -161,13 +159,13 @@ class DaylogPage extends StatefulWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Date: ${date.year}.${date.month}.${date.day}',
+                            'Date: ${_date.year}.${_date.month}.${_date.day}',
                           
                           ),
                           StatusDropdownButton(
-                            dropdownValue: dropdownValue,
+                            dropdownValue: _dropdownValue,
                             onChanged: (newValue) {
-                              setState(() => dropdownValue = newValue!);
+                              setState(() => _dropdownValue = newValue!);
                             },
                           ),
                         ],

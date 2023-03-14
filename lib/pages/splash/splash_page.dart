@@ -16,7 +16,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  Timer? _timer; 
+  Timer? _timer;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void _checkAuth() async {
-    // context.go(AppRouter.home); // TODO(Kseniya): удалить
+    //context.go(AppRouter.home); // TODO(Kseniya): удалить
     final authCubit = context.read<AuthCubit>();
     await authCubit.loadData();
     if (authCubit.state.isAuthorized ?? false) {
