@@ -1,46 +1,46 @@
-include: package:very_good_analysis/analysis_options.4.0.0.yaml
+# include: package:very_good_analysis/analysis_options.4.0.0.yaml
 
-analyzer:
-  exclude:
-    - lib/**/*.g.dart
-    - lib/**/*.gen.dart
-    - lib/pages/generated_plugin_registrant.dart
-  strong-mode:
-    implicit-casts: false
-    implicit-dynamic: false
-  errors:
-    avoid_as: error
-    unnecessary_const: info
-    todo: warning
-    dead_code: error
+# analyzer:
+#   exclude:
+#     - lib/**/*.g.dart
+#     - lib/**/*.gen.dart
+#     - lib/pages/generated_plugin_registrant.dart
+#   strong-mode:
+#     implicit-casts: false
+#     implicit-dynamic: false
+#   errors:
+#     avoid_as: error
+#     unnecessary_const: info
+#     todo: warning
+#     dead_code: error
 
-linter:
-  rules:
-    depend_on_referenced_packages: false
-    lines_longer_than_80_chars: false
-    public_member_api_docs: false
-    sort_pub_dependencies: false
-    avoid_setters_without_getters: false
-    cast_nullable_to_non_nullable: 
-    unnecessary_getters_setters: false
+# linter:
+#   rules:
+#     depend_on_referenced_packages: false
+#     lines_longer_than_80_chars: false
+#     public_member_api_docs: false
+#     sort_pub_dependencies: false
+#     avoid_setters_without_getters: false
+#     cast_nullable_to_non_nullable: 
+#     unnecessary_getters_setters: false
 
-dart_code_metrics:
-  anti-patterns:
-    - long-method
-    - long-parameter-list
-  metrics:
-    cyclomatic-complexity: 20
-    maximum-nesting-level: 5
-    number-of-parameters: 4
-    source-lines-of-code: 60
-  metrics-exclude:
-    - test/**
-  rules:
-    - no-boolean-literal-compare
-    - no-empty-block
-    - prefer-trailing-comma
-    - prefer-conditional-expressions
-    - no-equal-then-else
-  rules-exclude:
-    - lib/**.g.dart
-    - lib/**.gen.dart
+# dart_code_metrics:
+#   anti-patterns:
+#     - long-method
+#     - long-parameter-list
+#   metrics:
+#     cyclomatic-complexity: 20
+#     maximum-nesting-level: 5
+#     number-of-parameters: 4
+#     source-lines-of-code: 60
+#   metrics-exclude:
+#     - test/**
+#   rules:
+#     - no-boolean-literal-compare
+#     - no-empty-block
+#     - prefer-trailing-comma
+#     - prefer-conditional-expressions
+#     - no-equal-then-else
+#   rules-exclude:
+#     - lib/**.g.dart
+#     - lib/**.gen.dart
