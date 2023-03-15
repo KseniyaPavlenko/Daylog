@@ -9,44 +9,43 @@ class DraftServiceImpl implements DraftService {
 
   DraftServiceImpl({required this.dio});
 
-  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
+  // Paths
+  static const _draftsPath = '/drafts';
+
+
   @override
   Future<List<Draft>> list() async {
-    final response = await dio.get('/drafts'); //
+    final response = await dio.get(_draftsPath); //
     final rawList = jsonDecode(response.data) as List<dynamic>;
     final list = rawList.map((e) => Draft.fromJson(e)).toList();
     return list;
   }
 
-  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<Draft> byId(String id) async {
-    final response = await dio.get('/drafts/$id');
+    final response = await dio.get('$_draftsPath/$id');
     final draft = Draft.fromJson(jsonDecode(response.data));
     return draft;
   }
 
-  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
   @override
   Future<Draft> create(Draft draft) async {
     final response =
-        await dio.post('/drafts', data: jsonEncode(draft.toJson()));
+        await dio.post(_draftsPath, data: jsonEncode(draft.toJson()));
     final newDraft = Draft.fromJson(jsonDecode(response.data));
     return newDraft;
   }
 
-  // TODO(Kseniya): отформатировать как AuthServiceImpl.logins
   @override
   Future<Draft> update(Draft draft) async {
     final response =
-        await dio.put('/drafts/${draft.id}', data: jsonEncode(draft.toJson()));
+        await dio.put('$_draftsPath/${draft.id}', data: jsonEncode(draft.toJson()));
     final updatedDraft = Draft.fromJson(jsonDecode(response.data));
     return updatedDraft;
   }
 
-  // TODO(Kseniya): отформатировать как AuthServiceImpl.logins
   @override
   Future<void> delete(String id) async {
-    await dio.delete('/drafts/$id');
+    await dio.delete('$_draftsPath/$id');
   }
 }

@@ -18,6 +18,7 @@ class AuthServiceImpl implements AuthService {
   // Paths
   static const _authPath = '/auth';
   static const _loginPath = '$_authPath/login';
+  static const _signUpPath = '$_authPath/signup';
 
   // Keys
   static const _loginKey = 'login';
@@ -34,14 +35,12 @@ class AuthServiceImpl implements AuthService {
     return token;
   }
 
-  // TODO(Kseniya): отформатировать как AuthServiceImpl.login
-
   @override
   Future<User> signUp(String login, String password) async {
-    final response = await dio.post('/auth/signup', data: {
-      'login': login,
-      'password': password,
-    });
+    final response = await dio.post(
+      _signUpPath,
+      data: {_loginKey: login, _passwordKey: password},
+    );
     return User.fromJson(jsonDecode(response.data));
   }
 
