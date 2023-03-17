@@ -77,15 +77,14 @@ class _SignUpPageState extends State<SignUpPage> {
 
 // TODO(Kseniya): вынести в отдельный state less widget + именованные параметры
   Widget _button(String text, void Function() func) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        primary: Theme.of(context).primaryColor,
-      ),
+    return FloatingActionButton(
+      backgroundColor: Theme.of(context).primaryColor,
       child: Text(
         text,
         style: TextStyle(
             fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
       ),
+      tooltip: 'SignUpButton',
       onPressed: () => _signUpUser(),
     );
   }
@@ -93,6 +92,7 @@ class _SignUpPageState extends State<SignUpPage> {
 // TODO(Kseniya): вынести в отдельный state less widget + именованные параметры
   Widget _backButton(String text, void Function() func) {
     return TextButton(
+      key: Key('backToLogin'),
       style: TextButton.styleFrom(
         foregroundColor: Theme.of(context).primaryColor,
       ),
@@ -122,6 +122,7 @@ class _SignUpPageState extends State<SignUpPage> {
             hint: "Username",
             controller: _usernameController,
             obscure: false,
+            key: Key('UsernameInputFieldSignUp'),
           ),
         ),
         Padding(
@@ -131,6 +132,7 @@ class _SignUpPageState extends State<SignUpPage> {
             hint: "Password",
             controller: _passwordController,
             obscure: true,
+             key: Key('PasswordInputFieldSignUp'),
           ),
         ),
         Padding(
@@ -153,7 +155,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         )
       ],
-    //  BottomWaveClipper();
+      //  BottomWaveClipper();
     );
   }
 }

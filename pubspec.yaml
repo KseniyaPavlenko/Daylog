@@ -34,6 +34,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   
   very_good_analysis: ^4.0.0
   flutter_lints: ^1.0.0

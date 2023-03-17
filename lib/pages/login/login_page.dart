@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
 
   // TODO(Kseniya): вынеси в отдельный файл в state less widget
   Widget _buildButtonLogin(String text, void Function() func) {
-    return ElevatedButton(
+    return FloatingActionButton(
       onPressed: _buttonIsEnabled ? _loginUser : null,
       child: Text(
         text,
@@ -74,12 +74,14 @@ class _LoginPageState extends State<LoginPage> {
           fontSize: 20,
         ),
       ),
+      tooltip: 'LoginButton',
     );
   }
 
   // TODO(Kseniya): вынеси в отдельный файл в state less widget
   Widget _createAccButton(String text, void Function() func) {
     return TextButton(
+      key: Key('CreateAccButton'),
       child: Text(
         "Create account",
         style: TextStyle(
@@ -102,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
         Padding(
           padding: EdgeInsets.only(bottom: 20, top: 10),
           child: InputField(
+            key: Key('UsernameInputFieldLogin'),
             icon: Icon(Icons.email),
             hint: "Username",
             controller: _usernameController,
@@ -112,6 +115,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.only(bottom: 5),
           // TODO(Kseniya): больше двух параметров передавай по имени {}
           child: InputField(
+            key: Key('PasswordInputFieldLogin'),
            icon: Icon(Icons.lock),
             hint:"Password",
             controller: _passwordController,
