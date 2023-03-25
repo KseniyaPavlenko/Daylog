@@ -99,9 +99,11 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       print(formattedDate);
 
-      setState(() {
-        _startDateController.text = formattedDate;
-      });
+      if (mounted) {
+        setState(() {
+          _startDateController.text = formattedDate;
+        });
+      }
     } else {
       print("Date is not selected");
     }
@@ -119,9 +121,11 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
       print(formattedDate);
 
-      setState(() {
-        _endDateController.text = formattedDate;
-      });
+      if (mounted) {
+        setState(() {
+          _endDateController.text = formattedDate;
+        });
+      }
     } else {
       print("Date is not selected");
     }
@@ -138,11 +142,12 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
     const initialTime = TimeOfDay(hour: 00, minute: 00);
     final newTime = await showTimePicker(context: context, initialTime: _time);
     if (newTime == null) return;
-
-    setState(() {
-      _time = newTime;
-      _timeController.text = newTime.format(context);
-    });
+    if (mounted) {
+      setState(() {
+        _time = newTime;
+        _timeController.text = newTime.format(context);
+      });
+    }
   }
 
   @override

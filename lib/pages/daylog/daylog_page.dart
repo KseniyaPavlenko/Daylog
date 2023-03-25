@@ -19,15 +19,13 @@ class DaylogPage extends StatefulWidget {
   State<DaylogPage> createState() => _DaylogPageState();
 }
 
-
- class _DaylogPageState extends State<DaylogPage> {
+class _DaylogPageState extends State<DaylogPage> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _detailsController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
-  var _time = const TimeOfDay(hour: 00, minute: 00); 
- EventStatus _dropdownValue = EventStatus.todo; // TODO(Kseniya): var + private
-
+  var _time = const TimeOfDay(hour: 00, minute: 00);
+  EventStatus _dropdownValue = EventStatus.todo; // TODO(Kseniya): var + private
 
   var _uuid = const Uuid();
   String? _userId;
@@ -42,17 +40,15 @@ class DaylogPage extends StatefulWidget {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (_checkId()) {
-      _eventDetailCubit.loadData(widget.id);
-    }
+        _eventDetailCubit.loadData(widget.id);
+      }
     });
-    
+
     /*
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       // executes after build
     })
     */
-
-   
   }
 
   bool _checkId() {
@@ -70,30 +66,30 @@ class DaylogPage extends StatefulWidget {
   // }
 
   void _onTapSave() async {
-      await _eventDetailCubit.updateEvent(
-        Event(
-          id: widget.id,
-          userId: _userId,
-          title: _titleController.text,
-          detail: _detailsController.text,
-          comment: _commentController.text,
-          startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
-          startDate: _date,
-          status: _dropdownValue,
-        ),
-      );
-    } 
-  
+    await _eventDetailCubit.updateEvent(
+      Event(
+        id: widget.id,
+        userId: _userId,
+        title: _titleController.text,
+        detail: _detailsController.text,
+        comment: _commentController.text,
+        startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
+        startDate: _date,
+        status: _dropdownValue,
+      ),
+    );
+  }
 
   void _onTapTimeField() async {
     const initialTime = TimeOfDay(hour: 00, minute: 00);
     final newTime = await showTimePicker(context: context, initialTime: _time);
     if (newTime == null) return;
-
-    setState(() {
-      _time = newTime;
-      _timeController.text = newTime.format(context);
-    });
+    if (mounted) {
+      setState(() {
+        _time = newTime;
+        _timeController.text = newTime.format(context);
+      });
+    }
   }
 
   @override
@@ -136,7 +132,7 @@ class DaylogPage extends StatefulWidget {
             _detailsController.text = event?.detail ?? '';
             _commentController.text = event?.comment ?? '';
             _dropdownValue = event?.status ?? EventStatus.todo;
-      _date = event?.startDate ?? DateTime.now();
+            _date = event?.startDate ?? DateTime.now();
             _timeController.text = event?.startAt?.toFormatTime(context) ?? '';
           }
         },
@@ -160,7 +156,6 @@ class DaylogPage extends StatefulWidget {
                         children: [
                           Text(
                             'Date: ${_date.year}.${_date.month}.${_date.day}',
-                          
                           ),
                           StatusDropdownButton(
                             dropdownValue: _dropdownValue,

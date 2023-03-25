@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:daylog/common/errors/auth_error.dart';
 import 'package:daylog/common/errors/request_error.dart';
 import 'package:daylog/common/utils/logger.dart';
@@ -17,7 +19,6 @@ class DioInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     _logger.info('REQUEST[${options.method}] => PATH: ${options.path}');
     if (isTokenRequired(options)) {
-     // Map<String, dynamic> headers = Map.from(options.headers);
       Map<String, dynamic> headers = Map<String, dynamic>.from(options.headers);
       final token = await localStorage.getToken();
       headers['Authorization'] = 'Bearer $token';
@@ -47,6 +48,11 @@ class DioInterceptor extends Interceptor {
     _logger.severe(
       'ERROR[${err.response?.statusCode}] => PATH: ${err.requestOptions.path}',
     );
+    final request = err.response?.requestOptions;
+
+    _logger.severe('''
+curl -d '${jsonEncode(request!.data)}' -H "Content-Type: application/json" -X POST "${request.baseUrl + request.path}"
+''');
 
     final code = err.response?.statusCode ?? 500;
     if (code == 400) {

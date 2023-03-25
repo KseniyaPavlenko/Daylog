@@ -2,7 +2,7 @@ import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/common/utils/context_utils.dart';
 import 'package:daylog/pages/about/about_page.dart';
 import 'package:daylog/pages/dashboard/dashboard_page.dart';
-import 'package:daylog/pages/scheduler/sheduler_page.dart';
+import 'package:daylog/pages/scheduler/scheduler_page.dart';
 import 'package:daylog/pages/settings/settings_page.dart';
 import 'package:flutter/material.dart';
 
@@ -41,12 +41,14 @@ class HomeBottomBar extends StatelessWidget {
           child: Row(
             children: [
               _IconButton(
+                key: Key('dashboard_page_key'),
                 icon: Icons.dashboard_outlined,
                 label: 'Dashboard',
                 isSelected: currentPage == 0,
                 onTap: () => onChangePage(0),
               ),
               _IconButton(
+                key: Key('scheduler_page_key'),
                 icon: Icons.date_range_outlined,
                 label: 'Scheduler',
                 isSelected: currentPage == 1,
@@ -54,12 +56,14 @@ class HomeBottomBar extends StatelessWidget {
               ),
               const Spacer(),
               _IconButton(
+                key: Key('about_page_key'),
                 icon: Icons.info_outline,
                 label: 'About',
                 isSelected: currentPage == 2,
                 onTap: () => onChangePage(2),
               ),
               _IconButton(
+                key: Key('settings_page_key'),
                 icon: Icons.settings_applications_outlined,
                 label: 'Settings',
                 isSelected: currentPage == 3,

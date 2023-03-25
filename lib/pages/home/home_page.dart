@@ -2,7 +2,7 @@ import 'package:daylog/common/route/router.dart';
 import 'package:daylog/pages/about/about_page.dart';
 import 'package:daylog/pages/dashboard/dashboard_page.dart';
 import 'package:daylog/pages/home/widgets/home_bottom_bar.dart';
-import 'package:daylog/pages/scheduler/sheduler_page.dart';
+import 'package:daylog/pages/scheduler/scheduler_page.dart';
 import 'package:daylog/pages/settings/settings_page.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';

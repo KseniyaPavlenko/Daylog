@@ -1,8 +1,8 @@
 import 'package:daylog/pages/daylog/daylog_page.dart';
 import 'package:daylog/pages/home/home_page.dart';
 import 'package:daylog/pages/login/login_page.dart';
-import 'package:daylog/pages/scheduler/sheduler_page.dart';
-import 'package:daylog/pages/scheduler_log/s%D1%81heduler_log_page.dart';
+import 'package:daylog/pages/scheduler/scheduler_page.dart';
+import 'package:daylog/pages/scheduler_log/scheduler_log_page.dart';
 import 'package:daylog/pages/signup/signup_page.dart';
 import 'package:daylog/pages/splash/splash_page.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class AppRouter {
     GoRoute(
       path: daylog,
       builder: (BuildContext context, GoRouterState state) {
-        return DaylogPage(id: state.params['id'] as String?);
+        return DaylogPage(id: state.params['id']);
       },
     ),
     GoRoute(

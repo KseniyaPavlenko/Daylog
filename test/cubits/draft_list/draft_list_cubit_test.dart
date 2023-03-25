@@ -24,7 +24,6 @@ void main() {
         // Then
 
         final resultDraftList = DraftServiceMock.mockedDraftList();
-        const draftId = '5a1101fa-8361-40ed-9a6b-b9eda6b1595b';
 
         expect(draftListCubit.state, const DraftListState(isLoading: false));
         expectLater(
@@ -51,7 +50,8 @@ void main() {
         // Then
         final resultDraftList = DraftServiceMock.mockedDraftList();
         const draftId = '5a1101fa-8361-40ed-9a6b-b9eda6b1595b';
-        final resultDraftListWithDeletedItem = resultDraftList.where((e) => e.id != draftId).toList();
+        final resultDraftListWithDeletedItem =
+            resultDraftList.where((e) => e.id != draftId).toList();
 
         expect(draftListCubit.state, const DraftListState(isLoading: false));
         expectLater(
@@ -61,8 +61,10 @@ void main() {
             DraftListState(isLoading: true, drafts: resultDraftList),
             DraftListState(isLoading: false, drafts: resultDraftList),
             DraftListState(isLoading: true, drafts: resultDraftList),
-            DraftListState(isLoading: true, drafts: resultDraftListWithDeletedItem),
-            DraftListState(isLoading: false, drafts: resultDraftListWithDeletedItem),
+            DraftListState(
+                isLoading: true, drafts: resultDraftListWithDeletedItem),
+            DraftListState(
+                isLoading: false, drafts: resultDraftListWithDeletedItem),
           ]),
         );
 
