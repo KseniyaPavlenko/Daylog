@@ -3,6 +3,7 @@ import 'package:daylog/common/utils/date_utils.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
+import 'package:daylog/pages/daylog/widgets/dropdown_padding.dart';
 import 'package:daylog/pages/daylog/widgets/status_dropdown_button.dart';
 import 'package:daylog/widgets/buttons/default_elevated_button_icon.dart';
 import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
@@ -12,7 +13,6 @@ import 'package:daylog/widgets/text_fields/common_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uuid/uuid.dart';
 
 class DaylogPage extends StatefulWidget {
   const DaylogPage({Key? key, required this.id}) : super(key: key);
@@ -29,10 +29,8 @@ class _DaylogPageState extends State<DaylogPage> {
   var _time = const TimeOfDay(hour: 00, minute: 00);
   var _dropdownValue = EventStatus.todo;
 
-  final _uuid = const Uuid();
   String? _userId;
   DateTime _date = DateTime.now();
-  final List _logItems = [];
 
   EventDetailCubit get _eventDetailCubit => context.read<EventDetailCubit>();
 
@@ -44,12 +42,6 @@ class _DaylogPageState extends State<DaylogPage> {
         _eventDetailCubit.loadData(widget.id);
       }
     });
-
-    /*
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      // executes after build
-    })
-    */
   }
 
   bool _checkId() {
@@ -59,12 +51,6 @@ class _DaylogPageState extends State<DaylogPage> {
     }
     return true;
   }
-
-  // createUuid() {
-  //   const uuid = Uuid();
-  //   //Create UUID version-4
-  //   return uuid.v4();
-  // }
 
   void _onTapSave() async {
     await _eventDetailCubit.updateEvent(
@@ -82,7 +68,6 @@ class _DaylogPageState extends State<DaylogPage> {
   }
 
   void _onTapTimeField() async {
-    const initialTime = TimeOfDay(hour: 00, minute: 00);
     final newTime = await showTimePicker(context: context, initialTime: _time);
     if (newTime == null) return;
     if (mounted) {
@@ -104,17 +89,13 @@ class _DaylogPageState extends State<DaylogPage> {
           icon: Icons.arrow_left_sharp,
           onTap: () => context.go(AppRouter.home),
         ),
-       //TODO: change all DefaultElevatedButtonIcon for all appBars
+        //TODO: change all DefaultElevatedButtonIcon for all appBars
         actions: <Widget>[
-          ElevatedButton.icon(
-            onPressed: _onTapSave,
-            icon: const Icon(Icons.save_outlined),
-            label: const Text('Save'),
-            style: ElevatedButton.styleFrom(
-              elevation: 3,
-              backgroundColor: Colors.brown[900],
-            ),
-          ),
+          DefaultElevatedButtonIcon(
+            label: 'Save',
+            icon: Icons.save_outlined,
+            onTap: _onTapSave,
+          )
         ],
       ),
       body: BlocConsumer<EventDetailCubit, EventDetailState>(
@@ -140,6 +121,12 @@ class _DaylogPageState extends State<DaylogPage> {
                 child: ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   children: <Widget>[
+                    // DropDownPadding(
+                    //   dropdownStatus: _dropdownValue,
+                    //   onChanged: () {
+                    //     setState(() => _dropdownValue = newValue!);
+                    //   },
+                    //  ),
                     Padding(
                       // TODO(Kseniya): вынеси в отдельный файл
                       padding: const EdgeInsets.symmetric(
