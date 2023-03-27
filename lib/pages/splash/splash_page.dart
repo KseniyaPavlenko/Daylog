@@ -38,11 +38,10 @@ class _SplashPageState extends State<SplashPage> {
     super.dispose();
   }
 
-  void _toHome() => context.go(AppRouter.home); //example 
+  void _toHome() => context.go(AppRouter.home); 
   void _toLogin() => context.go(AppRouter.login);
 
   void _checkAuth() async {
-    //context.go(AppRouter.home); // TODO(Kseniya): удалить
     final authCubit = context.read<AuthCubit>();
     await authCubit.loadData();
     if (authCubit.state.isAuthorized ?? false) {

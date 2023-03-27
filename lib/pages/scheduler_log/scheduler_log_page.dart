@@ -62,6 +62,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
     }
   }
 
+  void _pop() => context.pop();
   void _onTapSave() async {
     await _draftDetailCubit.updateDraft(
       Draft(
@@ -76,7 +77,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
         days: _days,
       ),
     );
-    context.pop();
+    _pop();
   }
 
   void _onTapDay(DayOfWeek day) {
@@ -104,8 +105,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
           _startDateController.text = formattedDate;
         });
       }
-    } else {
-    }
+    } else {}
   }
 
   void _onTapEndDate() async {
@@ -123,8 +123,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
           _endDateController.text = formattedDate;
         });
       }
-    } else {
-    }
+    } else {}
   }
 
   void onTapEveryDay() {
