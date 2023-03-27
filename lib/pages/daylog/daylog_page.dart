@@ -89,7 +89,6 @@ class _DaylogPageState extends State<DaylogPage> {
           icon: Icons.arrow_left_sharp,
           onTap: () => context.go(AppRouter.home),
         ),
-        //TODO: change all DefaultElevatedButtonIcon for all appBars
         actions: <Widget>[
           DefaultElevatedButtonIcon(
             label: 'Save',

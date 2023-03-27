@@ -5,6 +5,7 @@ import 'package:daylog/cubits/event_list/event_list_state.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/dashboard/widgets/event_list_item.dart';
 import 'package:daylog/widgets/date_selector/date_selector_widget.dart';
+import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,9 +53,9 @@ class _DashboardPageState extends State<DashboardPage> {
         return CommonScaffold(
           backgroundColor: Theme.of(context).primaryColor,
           isLoading: state.isLoading,
-          appBar: AppBar(
+          appBar: const DefaultAppBar(
+            title: 'Dashboard',
             backgroundColor: AppColors.darkRed2,
-            title: const Text('Dashboard'),
           ),
           body: Column(
             children: [

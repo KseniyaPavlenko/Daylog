@@ -1,4 +1,5 @@
 import 'package:daylog/common/style/app_colors.dart';
+import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,9 @@ class _AboutPageState extends State<AboutPage> {
   Widget build(BuildContext context) {
     return CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
+      appBar: const DefaultAppBar(
         backgroundColor: AppColors.darkRed2,
-        title: const Text('About the App'),
+        title: 'About the App',
       ),
       body: const Padding(
         padding: EdgeInsets.only(left: 30, right: 30, bottom: 20, top: 250),
