@@ -18,7 +18,6 @@ class SchedulerPage extends StatefulWidget {
 
 class _SchedulerPageState extends State<SchedulerPage> {
   DraftListCubit get _draftListCubit => context.read<DraftListCubit>();
-  List<Draft>? get _currentDraftList => _draftListCubit.state.drafts;
 
   @override
   void initState() {
