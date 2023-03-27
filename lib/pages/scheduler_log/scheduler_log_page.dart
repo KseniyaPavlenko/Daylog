@@ -42,8 +42,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   DateTime _date = DateTime.now();
   DateTime? _endDate;
 
-  String getText() {
-    // TODO(Kseniya): переделай в getter
+  String get text {
     if (_time == null) {
       return 'Select Time';
     } else {
@@ -98,9 +97,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
         lastDate: DateTime(2101));
 
     if (pickedDate != null) {
-      print(pickedDate);
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-      print(formattedDate);
 
       if (mounted) {
         setState(() {
@@ -108,7 +105,6 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
         });
       }
     } else {
-      print("Date is not selected");
     }
   }
 
@@ -120,9 +116,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
         lastDate: DateTime(2101));
 
     if (pickedDate != null) {
-      print(pickedDate);
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
-      print(formattedDate);
 
       if (mounted) {
         setState(() {
@@ -130,7 +124,6 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
         });
       }
     } else {
-      print("Date is not selected");
     }
   }
 
@@ -192,7 +185,6 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
                   child: ListView(
                     physics: const AlwaysScrollableScrollPhysics(),
                     children: <Widget>[
-                      // TODO(Kseniya): Нужен ли этот пустой виджет ?ы
                       Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 16,
