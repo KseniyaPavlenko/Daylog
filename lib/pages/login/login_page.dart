@@ -2,11 +2,9 @@ import 'package:daylog/common/route/router.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
 import 'package:daylog/pages/login/widgets/create_acc_button.dart';
-import 'package:daylog/pages/login/widgets/login_button.dart';
 import 'package:daylog/pages/login/widgets/login_form.dart';
 import 'package:daylog/widgets/bottom_wave_clipper/bottom_wave_clipper.dart';
 import 'package:daylog/widgets/build_logo/build_logo.dart';
-import 'package:daylog/widgets/input_field/input_field.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,10 +89,8 @@ class _LoginPageState extends State<LoginPage> {
           isLoading: state.isLoading,
           body: Column(
             children: <Widget>[
-              // TODO(Kseniya): переделай в state less widget в отдельном файле
               const BuildLogo(),
               const SizedBox(height: 100),
-              // TODO(Kseniya): переделай в state less widget в отдельном файле
               _form(_loginUser),
               const BottomWave(),
             ],
@@ -104,8 +100,3 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
-// TODO: п11
-//TODO: BottomWaveClipper
-
-
-// BottomWaveClipper
