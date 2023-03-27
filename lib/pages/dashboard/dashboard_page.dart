@@ -36,8 +36,8 @@ class _DashboardPageState extends State<DashboardPage> {
     _eventListCubit.updateDate(date);
   }
 
-  /* TODO(Kseniya): Используей GoRouter 
-  + путь используй из константы, возможно нужно передачу id переделать под extra как в SchedulerLogPage */
+
+//TODO: pushNamed 
   void onTapEvent(Event event) => context.push('/daylog/${event.id}');
 
   @override
@@ -67,7 +67,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   itemBuilder: (_, index) {
                     final event = state.list[index];
                     return EventListItem(
-                      key: Key('eventItem'),
+                      key: const Key('eventItem'),
                       isDraft: event.id == Event.draftKey,
                       event: event,
                       onTap: () => onTapEvent(event),

@@ -8,7 +8,7 @@
 //   String previousDay =
 //       selectedDate.subtract(const Duration(days: 1)).toString();
 //   String nextDay = selectedDate.add(const Duration(days: 1)).toString();
-//   const keyPreviosDay = Key('dateSelector_prev');
+//   const keyPreviousDay = Key('dateSelector_prev');
 //   const keyNextDay = Key('dateSelector_next');
 //   const dayText = Key('day');
 

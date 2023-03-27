@@ -17,15 +17,15 @@ class LogoutButton extends StatelessWidget {
         backgroundColor: Colors.brown, 
         //backgroundColor: Colors.brown[900],
       ),
+      onPressed: onPressed,
       child: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.white,
           fontSize: 20,
         ),
       ),
-      onPressed: onPressed,
     );
   }
 }

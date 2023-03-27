@@ -1,26 +1,22 @@
-import 'package:daylog/common/route/router.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
+//TODO: text,action общий виджет textButton (title, onTap)
 class BackButton extends StatelessWidget {
-   BackButton({
+  const BackButton({
     Key? key,
-     this.text,
-     this.func,
+    required this.onTap,
   }) : super(key: key);
-   String? text;
-   void Function()? func;
 
+  final VoidCallback onTap;
 
-  
   @override
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
         foregroundColor: Theme.of(context).primaryColor,
       ),
-      child: Text(
-        text = "Already have an account? Login",
+      onPressed: onTap,
+      child: const Text(
+        "Already have an account? Login",
         style: TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.white,
@@ -28,9 +24,8 @@ class BackButton extends StatelessWidget {
           decoration: TextDecoration.underline,
         ),
       ),
-      onPressed:()=> GoRouter.of(context).go(AppRouter.login),
-      
-      //GoRouter.of(context).go(AppRouter.login),
     );
   }
 }
+
+//onPressed: () => GoRouter.of(context).go(AppRouter.login),

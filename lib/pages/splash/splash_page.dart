@@ -12,7 +12,7 @@ class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
-  _SplashPageState createState() => _SplashPageState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
@@ -38,14 +38,17 @@ class _SplashPageState extends State<SplashPage> {
     super.dispose();
   }
 
+  void _toHome() => context.go(AppRouter.home); //example 
+  void _toLogin() => context.go(AppRouter.login);
+
   void _checkAuth() async {
     //context.go(AppRouter.home); // TODO(Kseniya): удалить
     final authCubit = context.read<AuthCubit>();
     await authCubit.loadData();
     if (authCubit.state.isAuthorized ?? false) {
-      context.go(AppRouter.home);
+      _toHome();
     } else {
-      context.go(AppRouter.login);
+      _toLogin();
     }
   }
 

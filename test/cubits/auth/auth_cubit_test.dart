@@ -2,7 +2,7 @@ import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
 import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/services/auth/auth_service_mock.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Auth Cubit', () {

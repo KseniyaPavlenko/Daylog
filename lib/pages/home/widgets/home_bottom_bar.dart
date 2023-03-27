@@ -41,14 +41,14 @@ class HomeBottomBar extends StatelessWidget {
           child: Row(
             children: [
               _IconButton(
-                key: Key('dashboard_page_key'),
+                key: const Key('dashboard_page_key'),
                 icon: Icons.dashboard_outlined,
                 label: 'Dashboard',
                 isSelected: currentPage == 0,
                 onTap: () => onChangePage(0),
               ),
               _IconButton(
-                key: Key('scheduler_page_key'),
+                key: const Key('scheduler_page_key'),
                 icon: Icons.date_range_outlined,
                 label: 'Scheduler',
                 isSelected: currentPage == 1,
@@ -56,14 +56,14 @@ class HomeBottomBar extends StatelessWidget {
               ),
               const Spacer(),
               _IconButton(
-                key: Key('about_page_key'),
+                key: const Key('about_page_key'),
                 icon: Icons.info_outline,
                 label: 'About',
                 isSelected: currentPage == 2,
                 onTap: () => onChangePage(2),
               ),
               _IconButton(
-                key: Key('settings_page_key'),
+                key: const Key('settings_page_key'),
                 icon: Icons.settings_applications_outlined,
                 label: 'Settings',
                 isSelected: currentPage == 3,

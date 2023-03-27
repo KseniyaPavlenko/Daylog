@@ -21,7 +21,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       final isAuthorized = await authService.isAuthorized();
       emit(state.copyWith(isAuthorized: isAuthorized));
-    } catch (eror) {
+    } catch (error) {
       // handle error
       errorCubit.showError(ErrorState.common);
     } finally {

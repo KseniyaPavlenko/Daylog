@@ -1,6 +1,7 @@
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
+import 'package:daylog/pages/login/widgets/login_button.dart';
 import 'package:daylog/widgets/bottom_wave_clipper/bottom_wave_clipper.dart';
 import 'package:daylog/widgets/build_logo/build_logo.dart';
 import 'package:daylog/widgets/input_field/input_field.dart';
@@ -59,30 +60,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
  
-
-  
-
   // TODO(Kseniya): вынеси в отдельный файл в state less widget
-  Widget _buildButtonLogin(String text, void Function() func) {
-    return FloatingActionButton(
-      onPressed: _buttonIsEnabled ? _loginUser : null,
-      child: Text(
-        text,
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.white,
-          fontSize: 20,
-        ),
-      ),
-      tooltip: 'LoginButton',
-    );
-  }
-
-  // TODO(Kseniya): вынеси в отдельный файл в state less widget
-  Widget _createAccButton(String text, void Function() func) {
+  Widget _createAccButton() {
     return TextButton(
-      key: Key('CreateAccButton'),
-      child: Text(
+      key: const Key('CreateAccButton'),
+      onPressed: _onCreateAcc,
+      child: const Text(
         "Create account",
         style: TextStyle(
           fontWeight: FontWeight.bold,
@@ -91,39 +74,38 @@ class _LoginPageState extends State<LoginPage> {
           decoration: TextDecoration.underline,
         ),
       ),
-      onPressed: _onCreateAcc,
     );
   }
 
   // TODO(Kseniya): вынеси в отдельный файл в state less widget
-  Widget _form(String label, void Function() func) {
+  Widget _form(void Function() func) {
     // Сюда :)
     // final screenWidth = context.width;
     return Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(bottom: 20, top: 10),
+          padding: const EdgeInsets.only(bottom: 20, top: 10),
           child: InputField(
-            key: Key('UsernameInputFieldLogin'),
-            icon: Icon(Icons.email),
+            key: const Key('UsernameInputFieldLogin'),
+            icon: const Icon(Icons.email),
             hint: "Username",
             controller: _usernameController,
             obscure: false,
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: 5),
+          padding: const EdgeInsets.only(bottom: 5),
           // TODO(Kseniya): больше двух параметров передавай по имени {}
           child: InputField(
-            key: Key('PasswordInputFieldLogin'),
-           icon: Icon(Icons.lock),
+            key: const Key('PasswordInputFieldLogin'),
+           icon: const Icon(Icons.lock),
             hint:"Password",
             controller: _passwordController,
             obscure:true,
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 260),
+          padding: const EdgeInsets.only(left: 260),
           child: SizedBox(
             height: 40,
           
@@ -132,18 +114,21 @@ class _LoginPageState extends State<LoginPage> {
            width: MediaQuery.of(context).size.width,
            
 
-            child: _createAccButton(label, func),
+            child: _createAccButton(),
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: SizedBox(
             height: 50,
             // TODO(Kseniya): context.width
             // + можно вынести в переменную выше так как использует больше раза
             width: MediaQuery.of(context).size.width,
-            child: _buildButtonLogin(label, func),
+            child: LoginButton(
+              onTap: _loginUser,
+              isEnabled: _buttonIsEnabled,
+            ),
           ),
         )
       ],
@@ -165,11 +150,11 @@ class _LoginPageState extends State<LoginPage> {
           body: Column(
             children: <Widget>[
               // TODO(Kseniya): переделай в state less widget в отдельном файле
-              BuildLogo(),
-              SizedBox(height: 100),
+              const BuildLogo(),
+              const SizedBox(height: 100),
               // TODO(Kseniya): переделай в state less widget в отдельном файле
-              _form('LOGIN', _loginUser),
-              BottomWave(),
+              _form( _loginUser),
+             const BottomWave(),
             ],
           ),
         );

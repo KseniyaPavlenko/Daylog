@@ -5,7 +5,7 @@ class BuildLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.only(top: 100),
       child: Align(
         child: Text(

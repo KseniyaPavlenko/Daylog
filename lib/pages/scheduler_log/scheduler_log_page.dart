@@ -32,7 +32,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
 
   TimeOfDay _time = const TimeOfDay(hour: 00, minute: 00);
 
-  List<DayOfWeek> _selectedDayList = [];
+  final List<DayOfWeek> _selectedDayList = [];
 
   String? _userId;
   int? _duration;
@@ -54,10 +54,11 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   @override
   void initState() {
     super.initState();
-
-    SchedulerBinding.instance.addPostFrameCallback((_) {
-      if (widget.id?.isNotEmpty ?? false) _draftDetailCubit.loadData(widget.id);
-    });
+    if ((widget.id ?? '-1') != '-1') {
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _draftDetailCubit.loadData(widget.id);
+      });
+    }
   }
 
   void _onTapSave() async {

@@ -10,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+//TODO: create text buttons (login and signup)
+//TODO: create floatingactionbyttons (login and signup)
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
 
@@ -64,10 +66,10 @@ class _SignUpPageState extends State<SignUpPage> {
           isLoading: state.isLoading,
           child: Column(
             children: <Widget>[
-              BuildLogo(),
-              SizedBox(height: 100),
+              const BuildLogo(),
+              const SizedBox(height: 100),
               _form('SIGN UP', _signUpUser),
-              BottomWave(),
+              const BottomWave(),
             ],
           ),
         ),
@@ -79,33 +81,36 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _button(String text, void Function() func) {
     return FloatingActionButton(
       backgroundColor: Theme.of(context).primaryColor,
-      child: Text(
-        text,
-        style: TextStyle(
-            fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20),
-      ),
       tooltip: 'SignUpButton',
       onPressed: () => _signUpUser(),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.white,
+          fontSize: 20,
+        ),
+      ),
     );
   }
 
 // TODO(Kseniya): вынести в отдельный state less widget + именованные параметры
   Widget _backButton(String text, void Function() func) {
     return TextButton(
-      key: Key('backToLogin'),
+      key: const Key('backToLogin'),
       style: TextButton.styleFrom(
         foregroundColor: Theme.of(context).primaryColor,
       ),
+      onPressed: _onBack,
       child: Text(
         text = "Already have an account? Login",
-        style: TextStyle(
+        style: const TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.white,
           fontSize: 15,
           decoration: TextDecoration.underline,
         ),
       ),
-      onPressed: _onBack,
     );
   }
 
@@ -116,38 +121,38 @@ class _SignUpPageState extends State<SignUpPage> {
     return Column(
       children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(bottom: 20, top: 10),
+          padding: const EdgeInsets.only(bottom: 20, top: 10),
           child: InputField(
-            icon: Icon(Icons.email),
+            icon: const Icon(Icons.email),
             hint: "Username",
             controller: _usernameController,
             obscure: false,
-            key: Key('UsernameInputFieldSignUp'),
+            key: const Key('UsernameInputFieldSignUp'),
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(bottom: 5),
+          padding: const EdgeInsets.only(bottom: 5),
           child: InputField(
-            icon: Icon(Icons.lock),
+            icon: const Icon(Icons.lock),
             hint: "Password",
             controller: _passwordController,
             obscure: true,
-             key: Key('PasswordInputFieldSignUp'),
+            key: const Key('PasswordInputFieldSignUp'),
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(left: 150),
+          padding: const EdgeInsets.only(left: 150),
           child: SizedBox(
             height: 40,
             width: MediaQuery.of(context).size.width,
             child: _backButton(label, func),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: SizedBox(
             height: 50,
             width: MediaQuery.of(context).size.width,
@@ -155,10 +160,6 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         )
       ],
-      //  BottomWaveClipper();
     );
   }
 }
-
-
-// BottomWaveClipper();

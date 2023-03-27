@@ -49,9 +49,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _onPageChanged(int index) =>
-    setState(() => _currentPage = index);
-  
+  void _onPageChanged(int index) => setState(() => _currentPage = index);
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +62,15 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomBar: HomeBottomBar(
         currentPage: _currentPage,
-        onChangePage: _onTap, 
+        onChangePage: _onTap,
       ),
       floatButton: FloatingActionButton(
+        onPressed: () => context.pushNamed(
+          AppRouter.schedulerLogName,
+          params: <String, String>{'id': "-1"},
+        ),
+        tooltip: 'SchedulerLogButton',
         child: const Icon(Icons.add),
-        onPressed: () => context.push(AppRouter.schedulerLog),
       ),
     );
   }

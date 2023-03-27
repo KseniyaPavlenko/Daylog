@@ -29,11 +29,11 @@ class DayOfWeekSelector extends StatelessWidget {
             isSelected: isSelectedEveryDay,
           ),
           ...List.generate(DayOfWeek.values.length, (index) {
-            final _item = DayOfWeek.values[index];
+            final item = DayOfWeek.values[index];
             return _DayOfWeekItem(
-              onTap: () => onTapDay(_item),
-              title: _item.name,
-              isSelected: selected.contains(_item) || isSelectedEveryDay,
+              onTap: () => onTapDay(item),
+              title: item.name,
+              isSelected: selected.contains(item) || isSelectedEveryDay,
             );
           })
         ],

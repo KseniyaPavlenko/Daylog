@@ -4,7 +4,7 @@ import 'package:daylog/services/draft/draft_service.dart';
 import 'package:daylog/services/draft/draft_service_impl.dart';
 import 'package:daylog/services/local_storage/local_storage_mock.dart';
 import 'package:dio/dio.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Draft Service', () {

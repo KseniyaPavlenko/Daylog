@@ -23,7 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
   dynamic get _buildNumber => null; 
   // get _buildNumber => null; 
 
-  String _text = "LOGOUT"; 
+  final String _text = "LOGOUT"; 
 
   void _getPackage() async {
     _packageInfo = await PackageInfo.fromPlatform();

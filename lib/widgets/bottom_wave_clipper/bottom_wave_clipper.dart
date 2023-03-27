@@ -7,14 +7,14 @@ class BottomWave extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Align(
+      alignment: Alignment.bottomCenter,
       child: ClipPath(
+        clipper: BottomWaveClipper(),
         child: Container(
           color: Colors.white,
           height: 300,
         ),
-        clipper: BottomWaveClipper(),
       ),
-      alignment: Alignment.bottomCenter,
     ));
   }
 }

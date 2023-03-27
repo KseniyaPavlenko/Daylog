@@ -15,7 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 void main() {
   setupDi();
   setupLog();
-  runApp(App());
+  runApp(const App());
   //testWidget();
 }
 

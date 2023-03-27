@@ -48,14 +48,9 @@ class AppRouter {
     ),
     GoRoute(
       path: schedulerLog,
+      name: schedulerLogName,
       builder: (BuildContext context, GoRouterState state) {
-        return SchedulerLogPage(id: state.extra as String?);
-      },
-    ),
-    GoRoute(
-      path: daylog2,
-      builder: (BuildContext context, GoRouterState state) {
-        return DaylogPage(id: state.extra as String?);
+        return SchedulerLogPage(id: state.params['id']);
       },
     ),
   ]);
@@ -66,6 +61,6 @@ class AppRouter {
   static const String home = '/home';
   static const String daylog = '/daylog/:id';
   static const String scheduler = '/scheduler';
-  static const String schedulerLog = '/schedulerLog';
-  static const String daylog2 = '/daylog2';
+  static const String schedulerLog = '/schedulerLog/:id';
+  static const String schedulerLogName = 'schedulerLog';
 }

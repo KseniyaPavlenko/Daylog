@@ -17,25 +17,25 @@ class InputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 20, right: 20),
+      padding: const EdgeInsets.only(left: 20, right: 20),
       child: TextField(
         controller: controller,
         obscureText: obscure,
-        style: TextStyle(fontSize: 20, color: Colors.white),
+        style: const TextStyle(fontSize: 20, color: Colors.white),
         decoration: InputDecoration(
-            hintStyle: TextStyle(
+            hintStyle: const TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
                 color: Colors.white30),
             hintText: hint,
-            focusedBorder: OutlineInputBorder(
+            focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white, width: 3)),
-            enabledBorder: OutlineInputBorder(
+            enabledBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.white54, width: 1)),
             prefixIcon: Padding(
-              padding: EdgeInsets.only(left: 10, right: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10),
               child: IconTheme(
-                data: IconThemeData(color: Colors.white),
+                data: const IconThemeData(color: Colors.white),
                 child: icon,
               ),
             )),

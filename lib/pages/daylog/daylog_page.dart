@@ -4,6 +4,8 @@ import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/daylog/widgets/status_dropdown_button.dart';
+import 'package:daylog/widgets/buttons/default_elevated_button_icon.dart';
+import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:daylog/widgets/text_fields/common_text_field.dart';
@@ -25,13 +27,12 @@ class _DaylogPageState extends State<DaylogPage> {
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
   var _time = const TimeOfDay(hour: 00, minute: 00);
-  EventStatus _dropdownValue = EventStatus.todo; // TODO(Kseniya): var + private
+  var _dropdownValue = EventStatus.todo;
 
-  var _uuid = const Uuid();
+  final _uuid = const Uuid();
   String? _userId;
   DateTime _date = DateTime.now();
-  List _logItems = <dynamic>[];
-  //List _logItems = [];
+  final List _logItems = [];
 
   EventDetailCubit get _eventDetailCubit => context.read<EventDetailCubit>();
 
@@ -96,22 +97,14 @@ class _DaylogPageState extends State<DaylogPage> {
   Widget build(BuildContext context) {
     return CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
-        // TODO(Kseniya): вынеси в отдельный файл
-        automaticallyImplyLeading: false,
-        leadingWidth: 100,
-        leading: ElevatedButton.icon(
-          onPressed: () => context.go(AppRouter.home),
-          icon: const Icon(Icons.arrow_left_sharp),
-          label: const Text('Back'),
-          style: ElevatedButton.styleFrom(
-              elevation: 3,
-              primary: Colors.brown[900],
-              minimumSize: const Size(1000, 1000)),
+      appBar: DefaultAppBar(
+        title: 'Day Log',
+        leading: DefaultElevatedButtonIcon(
+          label: 'Back',
+          icon: Icons.arrow_left_sharp,
+          onTap: () => context.go(AppRouter.home),
         ),
-        title: const Text('Day Log'),
-        backgroundColor: Theme.of(context).primaryColor,
-        centerTitle: true,
+       //TODO: change all DefaultElevatedButtonIcon for all appBars
         actions: <Widget>[
           ElevatedButton.icon(
             onPressed: _onTapSave,
@@ -119,7 +112,7 @@ class _DaylogPageState extends State<DaylogPage> {
             label: const Text('Save'),
             style: ElevatedButton.styleFrom(
               elevation: 3,
-              primary: Colors.brown[900],
+              backgroundColor: Colors.brown[900],
             ),
           ),
         ],
@@ -166,6 +159,7 @@ class _DaylogPageState extends State<DaylogPage> {
                         ],
                       ),
                     ),
+                    //
                     CommonTextField(
                       controller: _titleController,
                       hintText: 'Enter Title',
