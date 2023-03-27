@@ -36,6 +36,7 @@ class AppRouter {
     ),
     GoRoute(
       path: daylog,
+      name: daylogName,
       builder: (BuildContext context, GoRouterState state) {
         return DaylogPage(id: state.params['id']);
       },
@@ -60,6 +61,7 @@ class AppRouter {
   static const String signUp = '/signUp';
   static const String home = '/home';
   static const String daylog = '/daylog/:id';
+  static const String daylogName = 'daylog';
   static const String scheduler = '/scheduler';
   static const String schedulerLog = '/schedulerLog/:id';
   static const String schedulerLogName = 'schedulerLog';

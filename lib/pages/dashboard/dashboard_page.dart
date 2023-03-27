@@ -1,3 +1,4 @@
+import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/cubits/event_list/event_list_state.dart';
@@ -36,9 +37,10 @@ class _DashboardPageState extends State<DashboardPage> {
     _eventListCubit.updateDate(date);
   }
 
-
-//TODO: pushNamed 
-  void onTapEvent(Event event) => context.push('/daylog/${event.id}');
+  void onTapEvent(Event event) => context.pushNamed(
+        AppRouter.daylogName,
+        params: <String, String>{'id': event.id ?? '-1'},
+      );
 
   @override
   Widget build(BuildContext context) {
