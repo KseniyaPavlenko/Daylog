@@ -4,6 +4,8 @@ import 'package:daylog/cubits/draft_detail/draft_detail_state.dart';
 import 'package:daylog/models/day_of_week.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:daylog/pages/scheduler_log/widgets/day_of_week_selector.dart';
+import 'package:daylog/widgets/buttons/default_elevated_button_icon.dart';
+import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:daylog/widgets/text_fields/common_text_field.dart';
@@ -140,7 +142,6 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   }
 
   void _onTapTimeField() async {
-    const initialTime = TimeOfDay(hour: 00, minute: 00);
     final newTime = await showTimePicker(context: context, initialTime: _time);
     if (newTime == null) return;
     if (mounted) {
@@ -154,31 +155,19 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   @override
   Widget build(BuildContext context) => CommonScaffold(
         backgroundColor: Theme.of(context).primaryColor,
-        appBar: AppBar(
-          // TODO(Kseniya): вынеси в отдельный файл
-          automaticallyImplyLeading: false,
-          leadingWidth: 100,
-          leading: ElevatedButton.icon(
-            onPressed: () => context.go(AppRouter.home),
-            icon: const Icon(Icons.arrow_left_sharp),
-            label: const Text('Back'),
-            style: ElevatedButton.styleFrom(
-              elevation: 3,
-            ),
+        appBar: DefaultAppBar(
+          title: "Scheduler Log",
+          leading: DefaultElevatedButtonIcon(
+            icon: Icons.arrow_left_sharp,
+            label: 'Back',
+            onTap: () => context.go(AppRouter.home),
           ),
-          title: const Text("Scheduler Log"),
-          backgroundColor: Theme.of(context).primaryColor,
-          centerTitle: true,
           actions: <Widget>[
-            ElevatedButton.icon(
-              onPressed: _onTapSave,
-              icon: const Icon(Icons.save_outlined),
-              label: const Text('Save'),
-              style: ElevatedButton.styleFrom(
-                elevation: 3,
-                backgroundColor: Colors.brown[900],
-              ),
-            ),
+            DefaultElevatedButtonIcon(
+              icon: Icons.save_outlined,
+              label: 'Save',
+              onTap: _onTapSave,
+            )
           ],
         ),
         body: BlocConsumer<DraftDetailCubit, DraftDetailState>(
