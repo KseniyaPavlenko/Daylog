@@ -1,10 +1,10 @@
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
-import 'package:daylog/pages/login/widgets/create_acc_button.dart';
 import 'package:daylog/pages/login/widgets/login_form.dart';
 import 'package:daylog/widgets/bottom_wave_clipper/bottom_wave_clipper.dart';
 import 'package:daylog/widgets/build_logo/build_logo.dart';
+import 'package:daylog/widgets/buttons/default_text_button.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,8 +60,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _createAccButton() {
-    return CreateAccountButton(
+    return DefaultTextButton(
       onPressed: _onCreateAcc,
+      text: 'Create account',
+      key: const Key('CreateAccButton'),
     );
   }
 
