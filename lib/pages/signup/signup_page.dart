@@ -4,7 +4,6 @@ import 'package:daylog/cubits/auth/auth_state.dart';
 import 'package:daylog/pages/signup/widgets/sign_up_form.dart';
 import 'package:daylog/widgets/bottom_wave_clipper/bottom_wave_clipper.dart';
 import 'package:daylog/widgets/build_logo/build_logo.dart';
-import 'package:daylog/widgets/buttons/default_floating_action_button.dart';
 import 'package:daylog/widgets/buttons/default_text_button.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
