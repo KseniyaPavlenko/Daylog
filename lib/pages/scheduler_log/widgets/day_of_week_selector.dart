@@ -24,6 +24,7 @@ class DayOfWeekSelector extends StatelessWidget {
         spacing: 8,
         children: [
           _DayOfWeekItem(
+            key: const Key('EveryDaySchedulerLog'),
             onTap: onTapEveryDay,
             title: 'Every day',
             isSelected: isSelectedEveryDay,

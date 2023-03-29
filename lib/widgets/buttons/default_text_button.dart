@@ -12,7 +12,6 @@ class DefaultTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      key: key,
       onPressed: onPressed,
       child: Text(
         text,

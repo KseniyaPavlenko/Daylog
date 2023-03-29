@@ -61,6 +61,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
             LogoutButton(
+              key: const Key('LogoutButton'),
               _text,
               onPressed: _onLogout,
             )

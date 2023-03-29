@@ -156,6 +156,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
           ),
           actions: <Widget>[
             DefaultElevatedButtonIcon(
+              key: const Key('SchedulerLogSaveButton'),
               icon: Icons.save_outlined,
               label: 'Save',
               onTap: _onTapSave,
@@ -194,26 +195,31 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
                         ),
                       ),
                       CommonTextField(
+                        key: const Key('EnterTitleFieldSchedulerLog'),
                         controller: _titleController,
                         hintText: 'Enter Title',
                       ),
                       CommonTextField(
+                        key: const Key('EnterDetailsFieldSchedulerLog'),
                         controller: _detailsController,
                         hintText: 'Enter Details',
                       ),
                       CommonTextField(
+                        key: const Key('ChooseStartDateFieldSchedulerLog'),
                         controller: _startDateController,
                         hintText: "Choose Start Date",
                         icon: const Icon(Icons.calendar_today_outlined),
                         onTap: _onTapStartDate,
                       ),
                       CommonTextField(
+                        key: const Key('ChooseStartTimeFieldSchedulerLog'),
                         controller: _timeController,
                         hintText: 'Choose Start Time',
                         onTap: () async => _onTapTimeField(),
                         icon: const Icon(Icons.more_time_outlined),
                       ),
                       CommonTextField(
+                        key: const Key('ChooseEndDateFieldSchedulerLog'),
                         controller: _endDateController,
                         hintText: "Choose End Date",
                         icon: const Icon(Icons.edit_calendar_outlined),
