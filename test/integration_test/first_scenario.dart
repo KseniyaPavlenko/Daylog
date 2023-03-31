@@ -123,6 +123,15 @@ void main() {
 
       await tester.pumpAndSettle();
 
+      // // Finds the create start time field to tap on.
+      // final Finder startTime = find.byKey(chooseStartTimeFieldSchedLod);
+      // // Emulate a tap on the Dashboard Page button.
+      // await tester.tap(startTime);
+      
+      // await tester.enterText(startTime)
+
+      // await tester.pumpAndSettle();
+
       // Enter title
       await tester.enterText(
           find.byKey(enterDetailsFieldSchedLod), 'Integration Test Details');
