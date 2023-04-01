@@ -6,6 +6,7 @@ import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:go_router/go_router.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -16,19 +17,35 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  dynamic get _version => null;
-  // get _version => null;
-
-  dynamic get _buildNumber => null;
-  // get _buildNumber => null;
-
   final String _text = "LOGOUT";
+  String? _appName;
+  String? _packageName;
+  String? _version;
+  String? _buildNumber;
 
   void _toLogin() => context.go(AppRouter.login);
 
   void _onLogout() async {
     await context.read<AuthCubit>().logout();
     _toLogin();
+  }
+
+  Future<void> _getInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    if (mounted) {
+      setState(() {
+        _appName = packageInfo.appName;
+        _packageName = packageInfo.packageName;
+        _version = packageInfo.version;
+        _buildNumber = packageInfo.buildNumber;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getInfo();
   }
 
   @override
@@ -49,7 +66,6 @@ class _SettingsPageState extends State<SettingsPage> {
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
-                //color: Colors.white
               ),
             ),
             Text(

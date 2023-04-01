@@ -10,13 +10,13 @@ import 'package:daylog/env_config.dart';
 import 'package:daylog/services/auth/auth_service.dart';
 import 'package:daylog/services/auth/auth_service_impl.dart';
 import 'package:daylog/services/draft/draft_service.dart';
-import 'package:daylog/services/draft/draft_service_mock.dart';
+import 'package:daylog/services/draft/draft_service_impl.dart';
 import 'package:daylog/services/event/event_service.dart';
-import 'package:daylog/services/event/event_service_mock.dart';
+import 'package:daylog/services/event/event_service_impl.dart';
 import 'package:daylog/services/local_storage/local_storage.dart';
 import 'package:daylog/services/local_storage/local_storage_impl.dart';
 import 'package:daylog/services/user/user_service.dart';
-import 'package:daylog/services/user/user_service_mock.dart';
+import 'package:daylog/services/user/user_service_impl.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -24,9 +24,11 @@ final getIt = GetIt.instance;
 
 void setupDi() {
   // Event
-  getIt.registerLazySingleton<EventService>(() => EventServiceMock());
+  getIt.registerLazySingleton<EventService>(
+      () => EventServiceImpl(dio: getIt()));
   getIt.registerFactory<EventListCubit>(
-    () => EventListCubit(eventService: getIt(), draftService: getIt(), errorCubit: getIt()),
+    () => EventListCubit(
+        eventService: getIt(), draftService: getIt(), errorCubit: getIt()),
   );
 
   getIt.registerFactory<EventDetailCubit>(
@@ -34,7 +36,8 @@ void setupDi() {
   );
 
   // Draft
-  getIt.registerLazySingleton<DraftService>(() => DraftServiceMock());
+  getIt.registerLazySingleton<DraftService>(
+      () => DraftServiceImpl(dio: getIt()));
   getIt.registerFactory<DraftListCubit>(
     () => DraftListCubit(draftService: getIt(), errorCubit: getIt()),
   );
@@ -42,8 +45,7 @@ void setupDi() {
     () => DraftDetailCubit(draftService: getIt(), errorCubit: getIt()),
   );
 
-  // Auth
-  // getIt.registerLazySingleton<AuthService>(() => AuthServiceMock());
+  //Auth
   getIt.registerLazySingleton<AuthService>(() => AuthServiceImpl(
         dio: getIt(),
         localStorage: getIt(),
@@ -54,8 +56,9 @@ void setupDi() {
       ));
 
   // User
-  getIt.registerLazySingleton<UserService>(() => UserServiceMock());
-  getIt.registerFactory<MeCubit>(() => MeCubit(userService: getIt(), errorCubit: getIt()));
+  getIt.registerLazySingleton<UserService>(() => UserServiceImpl(dio: getIt()));
+  getIt.registerFactory<MeCubit>(
+      () => MeCubit(userService: getIt(), errorCubit: getIt()));
 
   //Error
   getIt.registerLazySingleton<ErrorCubit>(() => ErrorCubit());
