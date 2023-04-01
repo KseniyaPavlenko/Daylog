@@ -1,3 +1,4 @@
+import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/daylog/widgets/status_dropdown_button.dart';
 import 'package:flutter/material.dart';
 
@@ -6,11 +7,11 @@ class DropDownPadding extends StatelessWidget {
       {Key? key, required this.onChanged, required this.dropdownStatus})
       : super(key: key);
 
-  var dropdownStatus;
-  final VoidCallback onChanged;
+  final EventStatus dropdownStatus;
+  final void Function(EventStatus?) onChanged;
 
   final DateTime _date = DateTime.now();
-  
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,9 +24,7 @@ class DropDownPadding extends StatelessWidget {
           ),
           StatusDropdownButton(
             dropdownValue: dropdownStatus,
-            onChanged: (newValue) {
-              onChanged;
-            },
+            onChanged: onChanged,
           ),
         ],
       ),

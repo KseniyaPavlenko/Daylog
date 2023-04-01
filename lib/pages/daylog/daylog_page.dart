@@ -3,7 +3,7 @@ import 'package:daylog/common/utils/date_utils.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
-import 'package:daylog/pages/daylog/widgets/status_dropdown_button.dart';
+import 'package:daylog/pages/daylog/widgets/dropdown_padding.dart';
 import 'package:daylog/widgets/buttons/default_elevated_button_icon.dart';
 import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
@@ -119,32 +119,12 @@ class _DaylogPageState extends State<DaylogPage> {
                 child: ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   children: <Widget>[
-                    // DropDownPadding(
-                    //   dropdownStatus: _dropdownValue,
-                    //   onChanged: () {
-                    //     setState(() => _dropdownValue = newValue!);
-                    //   },
-                    //  ),
-                    Padding(
-                      // TODO(Kseniya): вынеси в отдельный файл
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Date: ${_date.year}.${_date.month}.${_date.day}',
-                          ),
-                          StatusDropdownButton(
-                            dropdownValue: _dropdownValue,
-                            onChanged: (newValue) {
-                              setState(() => _dropdownValue = newValue!);
-                            },
-                          ),
-                        ],
-                      ),
+                    DropDownPadding(
+                      dropdownStatus: _dropdownValue,
+                      onChanged: (newValue) {
+                        setState(() => _dropdownValue = newValue!);
+                      },
                     ),
-                    //
                     CommonTextField(
                       controller: _titleController,
                       hintText: 'Enter Title',

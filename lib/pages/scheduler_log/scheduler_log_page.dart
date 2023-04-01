@@ -42,14 +42,6 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   DateTime _date = DateTime.now();
   DateTime? _endDate;
 
-  String get text {
-    if (_time == null) {
-      return 'Select Time';
-    } else {
-      return '${_time.hour}:${_time.minute}';
-    }
-  }
-
   DraftDetailCubit get _draftDetailCubit => context.read<DraftDetailCubit>();
 
   @override
@@ -126,7 +118,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
     } else {}
   }
 
-  void onTapEveryDay() {
+  void _onTapEveryDay() {
     setState(() {
       _selectedDayList.clear();
       _selectedDayList.addAll(DayOfWeek.values);
@@ -229,7 +221,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
                       DayOfWeekSelector(
                         selected: _selectedDayList,
                         onTapDay: _onTapDay,
-                        onTapEveryDay: onTapEveryDay,
+                        onTapEveryDay: _onTapEveryDay,
                       ),
                     ],
                   ),

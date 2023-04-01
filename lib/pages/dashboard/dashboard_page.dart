@@ -70,7 +70,8 @@ class _DashboardPageState extends State<DashboardPage> {
                   itemBuilder: (_, index) {
                     final event = state.list[index];
                     return EventListItem(
-                      key: const Key('eventItem'),
+                     // key: const Key('DashboardListKey'),
+                      // key: ValueKey(event.id),
                       isDraft: event.id == Event.draftKey,
                       event: event,
                       onTap: () => onTapEvent(event),

@@ -23,6 +23,8 @@ class EventListItem extends StatelessWidget {
           color: isDraft ? AppColors.grey : AppColors.brown,
         ),
         child: ListTile(
+          //key: const Key('eventItem'),
+          key: ValueKey(event.id),
           leading: const Icon(Icons.add_alert, size: 30),
           title: Text(event.title ?? ''),
           subtitle: const Text('test subtitle'),

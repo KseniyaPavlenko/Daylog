@@ -6,6 +6,7 @@ class Event with EquatableMixin {
   final String? id;
   final String? userId;
   final String? draftId;
+  // final DateTime? updateAt;
   final DateTime? startAt;
   final DateTime? startDate;
   final int? duration;
