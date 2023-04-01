@@ -1,5 +1,4 @@
 import 'package:daylog/common/utils/date_utils.dart';
-import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/error_cubit/error_state.dart';
 import 'package:daylog/cubits/event_list/event_list_state.dart';
@@ -8,21 +7,18 @@ import 'package:daylog/models/event.dart';
 import 'package:daylog/services/draft/draft_service.dart';
 import 'package:daylog/services/event/event_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:logging/logging.dart';
 
 class EventListCubit extends Cubit<EventListState> {
   final EventService eventService;
   final DraftService draftService;
-  final Logger _logger;
   final ErrorCubit errorCubit;
 
-  EventListCubit({required this.errorCubit, 
+  EventListCubit({
+    required this.errorCubit,
     required this.draftService,
     required this.eventService,
-  }) : _logger = createLog(name: 'EventListCubit'),
-   super(
-          EventListState.init(),
-        );
+  })  : 
+        super(EventListState.init());
 
   Future<void> loadData([bool withDraft = false]) async {
     emit(state.copyWith(isLoading: true));
@@ -35,14 +31,13 @@ class EventListCubit extends Cubit<EventListState> {
       ]);
 
       drafts
-        ..where((draft) =>
-            state.selectedDate.isBetween(draft.startAt, draft.endDate))
+        ..where((draft) => state.selectedDate.isBetween(draft.startAt, draft.endDate))
         ..forEach((draft) => events.add(draft.toEvent));
 
       emit(state.copyWith(events: events));
     } catch (error) {
       // handle error
-      errorCubit.showError(ErrorState.deafult);
+      errorCubit.showError(ErrorState.common);
     } finally {
       emit(state.copyWith(isLoading: false));
     }
@@ -55,7 +50,7 @@ class EventListCubit extends Cubit<EventListState> {
       emit(state.copyWith(events: events, selectedDate: date));
     } catch (error) {
       // handle error
-      errorCubit.showError(ErrorState.deafult);
+      errorCubit.showError(ErrorState.common);
     } finally {
       emit(state.copyWith(isLoading: false));
     }
@@ -70,7 +65,7 @@ class EventListCubit extends Cubit<EventListState> {
       emit(state.copyWith(events: events));
     } catch (error) {
       // handle error
-      errorCubit.showError(ErrorState.deafult);
+      errorCubit.showError(ErrorState.common);
     } finally {
       emit(state.copyWith(isLoading: false));
     }

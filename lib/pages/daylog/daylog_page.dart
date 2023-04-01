@@ -1,20 +1,17 @@
-// ignore_for_file: deprecated_member_use, unused_local_variable
-
-import 'package:daylog/common/errors/request_error.dart';
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/utils/date_utils.dart';
-import 'package:daylog/common/utils/logger.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
-import 'package:daylog/pages/daylog/widgets/status_dropdown_button.dart';
+import 'package:daylog/pages/daylog/widgets/dropdown_padding.dart';
+import 'package:daylog/widgets/buttons/default_elevated_button_icon.dart';
+import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:daylog/widgets/text_fields/common_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:uuid/uuid.dart';
 
 class DaylogPage extends StatefulWidget {
   const DaylogPage({Key? key, required this.id}) : super(key: key);
@@ -28,22 +25,22 @@ class _DaylogPageState extends State<DaylogPage> {
   final TextEditingController _detailsController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
-  TimeOfDay time = const TimeOfDay(hour: 00, minute: 00);
-  EventStatus dropdownValue = EventStatus.todo;
+  var _time = const TimeOfDay(hour: 00, minute: 00);
+  var _dropdownValue = EventStatus.todo;
 
-  var uuid = const Uuid();
-  String? userId;
-  DateTime date = DateTime.now();
-  List logItems = [];
+  String? _userId;
+  DateTime _date = DateTime.now();
 
-  EventDetailCubit get eventDetailCubit => context.read<EventDetailCubit>();
+  EventDetailCubit get _eventDetailCubit => context.read<EventDetailCubit>();
 
   @override
   void initState() {
     super.initState();
-    if (_checkId()) {
-      eventDetailCubit.loadData(widget.id);
-    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_checkId()) {
+        _eventDetailCubit.loadData(widget.id);
+      }
+    });
   }
 
   bool _checkId() {
@@ -54,100 +51,49 @@ class _DaylogPageState extends State<DaylogPage> {
     return true;
   }
 
-  createUuid() {
-    const uuid = Uuid();
-    //Create UUID version-4
-    return uuid.v4();
-  }
-
   void _onTapSave() async {
-    try {
-      await eventDetailCubit.updateEvent(
-        Event(
-          id: widget.id,
-          userId: userId,
-          title: _titleController.text,
-          detail: _detailsController.text,
-          comment: _commentController.text,
-          startAt: date.copyWith(minute: time.minute, hour: time.hour),
-          startDate: date,
-          status: dropdownValue,
-        ),
-      );
-      context.pop();
-    } on RequestError catch (e) {
-      final message = e.toString();
-      // Show toast
-      log.e(e);
-    } catch (e) {
-      log.e(e);
-    }
+    await _eventDetailCubit.updateEvent(
+      Event(
+        id: widget.id,
+        userId: _userId,
+        title: _titleController.text,
+        detail: _detailsController.text,
+        comment: _commentController.text,
+        startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
+        startDate: _date,
+        status: _dropdownValue,
+      ),
+    );
   }
 
   void _onTapTimeField() async {
-    const initialTime = TimeOfDay(hour: 00, minute: 00);
-    final newTime = await showTimePicker(context: context, initialTime: time);
+    final newTime = await showTimePicker(context: context, initialTime: _time);
     if (newTime == null) return;
-
-    setState(() {
-      time = newTime;
-      _timeController.text = newTime.format(context);
-    });
+    if (mounted) {
+      setState(() {
+        _time = newTime;
+        _timeController.text = newTime.format(context);
+      });
+    }
   }
-
-  // _backButton() {
-  //   ElevatedButton.icon(
-  //     onPressed: () => context.go(AppRouter.home),
-  //     icon: const Icon(Icons.arrow_left_sharp),
-  //     label: const Text('Back'),
-  //     style: ElevatedButton.styleFrom(
-  //       elevation: 3,
-  //       primary: Colors.brown[900],
-  //     ),
-  //   );
-  // }
-
-  // _saveButton() {
-  //   ElevatedButton.icon(
-  //       onPressed:_onTapSave,
-  //       icon: const Icon(Icons.save_outlined),
-  //       label: const Text('Save'),
-  //       style: ElevatedButton.styleFrom(
-  //       elevation: 3,
-  //       primary: Colors.brown[900],
-  //     ),
-  //   ),
-  // }
 
   @override
   Widget build(BuildContext context) {
     return CommonScaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leadingWidth: 100,
-        leading: ElevatedButton.icon(
-          onPressed: () => context.go(AppRouter.home),
-          icon: const Icon(Icons.arrow_left_sharp),
-          label: const Text('Back'),
-          style: ElevatedButton.styleFrom(
-              elevation: 3,
-              primary: Colors.brown[900],
-              minimumSize: const Size(1000, 1000)),
+      appBar: DefaultAppBar(
+        title: 'Day Log',
+        leading: DefaultElevatedButtonIcon(
+          label: 'Back',
+          icon: Icons.arrow_left_sharp,
+          onTap: () => context.go(AppRouter.home),
         ),
-        title: const Text('Day Log'),
-        backgroundColor: Theme.of(context).primaryColor,
-        centerTitle: true,
         actions: <Widget>[
-          ElevatedButton.icon(
-            onPressed: _onTapSave,
-            icon: const Icon(Icons.save_outlined),
-            label: const Text('Save'),
-            style: ElevatedButton.styleFrom(
-              elevation: 3,
-              primary: Colors.brown[900],
-            ),
-          ),
+          DefaultElevatedButtonIcon(
+            label: 'Save',
+            icon: Icons.save_outlined,
+            onTap: _onTapSave,
+          )
         ],
       ),
       body: BlocConsumer<EventDetailCubit, EventDetailState>(
@@ -157,8 +103,8 @@ class _DaylogPageState extends State<DaylogPage> {
             _titleController.text = event?.title ?? '';
             _detailsController.text = event?.detail ?? '';
             _commentController.text = event?.comment ?? '';
-            dropdownValue = event?.status ?? EventStatus.todo;
-            date = event?.startDate ?? DateTime.now();
+            _dropdownValue = event?.status ?? EventStatus.todo;
+            _date = event?.startDate ?? DateTime.now();
             _timeController.text = event?.startAt?.toFormatTime(context) ?? '';
           }
         },
@@ -169,32 +115,15 @@ class _DaylogPageState extends State<DaylogPage> {
               height: MediaQuery.of(context).size.height,
               child: RefreshIndicator(
                 edgeOffset: 20,
-                onRefresh: () => eventDetailCubit.loadData(widget.id),
+                onRefresh: () => _eventDetailCubit.loadData(widget.id),
                 child: ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 8),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Date: ${date.year}.${date.month}.${date.day}',
-                            // style: const TextStyle(
-                            //   fontSize: 18,
-                            //   fontWeight: FontWeight.bold,
-                            //   color: Colors.white,
-                            // ),
-                          ),
-                          StatusDropdownButton(
-                            dropdownValue: dropdownValue,
-                            onChanged: (newValue) {
-                              setState(() => dropdownValue = newValue!);
-                            },
-                          ),
-                        ],
-                      ),
+                    DropDownPadding(
+                      dropdownStatus: _dropdownValue,
+                      onChanged: (newValue) {
+                        setState(() => _dropdownValue = newValue!);
+                      },
                     ),
                     CommonTextField(
                       controller: _titleController,

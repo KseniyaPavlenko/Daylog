@@ -1,3 +1,4 @@
+import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,10 @@ class DraftListItem extends StatelessWidget {
   final Draft draft;
   final VoidCallback? onTap;
 
+  Icon? get trailingWidget {
+    return onTap == null ? null : const Icon(Icons.arrow_forward_ios);
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -18,26 +23,15 @@ class DraftListItem extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          
-          color: Colors.brown[900],
-          //color: Colors.grey[800],
+          color: AppColors.darkRed2,
         ),
         child: ListTile(
-          leading: const Icon(
-            Icons.add_alert,
-            size: 30,
-          ),
+          leading: const Icon(Icons.add_alert, size: 30),
           title: Text(draft.title ?? ''),
           subtitle: const Text('test subtitle'),
-          trailing: onTap == null ? null : const Icon(Icons.arrow_forward_ios),
+          trailing: trailingWidget,
           contentPadding: const EdgeInsets.all(10),
-          
           enabled: true,
-          // iconColor: Colors.white,
-          //textColor: Colors.white,
-          //tileColor: Colors.grey[600],
-          //// shape:
-          //    RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
         ),
       ),
     );

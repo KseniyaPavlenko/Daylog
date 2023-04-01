@@ -1,11 +1,10 @@
 const _authErrorMessage = 'Authorization error, try again.';
-const _defaultErrorMessage =
-    'Something went wrong we are already working on it.';
+const _defaultErrorMessage = 'Something went wrong we are already working on it.';
 
 enum ErrorState {
   empty(''),
   auth(_authErrorMessage),
-  deafult(_defaultErrorMessage);
+  common(_defaultErrorMessage); 
 
   const ErrorState(this.message);
 

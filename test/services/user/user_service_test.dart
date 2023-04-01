@@ -6,7 +6,7 @@ import 'package:daylog/services/local_storage/local_storage_mock.dart';
 import 'package:daylog/services/user/user_service.dart';
 import 'package:daylog/services/user/user_service_impl.dart';
 import 'package:dio/dio.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('User Service', () {
@@ -51,7 +51,7 @@ void main() {
     test('Create user', () async {
       const login = 'ksenia_test_user_002';
       const password = '1234';
-      await authService.signup(login, password);
+      await authService.signUp(login, password);
       localStorage.setToken('login=$login');
       await userService.delete();
     });

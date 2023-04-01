@@ -11,7 +11,8 @@ class RequestError extends DioError {
   RequestError({required super.requestOptions}) {
     // parse
     try {
-      final raw = jsonDecode(requestOptions.data);
+      //final raw = jsonDecode(requestOptions.data);
+      final dynamic raw = jsonDecode(requestOptions.data);
       final errors = raw['errors'] as Map<String, String>;
       _message = errors[errors.keys.first] ?? 'Request error';
     } catch (e) {

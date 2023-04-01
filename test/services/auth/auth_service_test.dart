@@ -8,7 +8,7 @@ import 'package:daylog/services/local_storage/local_storage_mock.dart';
 import 'package:daylog/services/user/user_service.dart';
 import 'package:daylog/services/user/user_service_impl.dart';
 import 'package:dio/dio.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('Auth Service', () {
@@ -45,7 +45,7 @@ void main() {
     test('SignUp check', () async {
       const login = 'ksenia_test_user_01';
       const password = '1234';
-      final token = await authService.signup(login, password);
+      final token = await authService.signUp(login, password);
       expect(token.login, isNotNull);
       expect(token.password, isNull);
       expect(token.id, isNotNull);

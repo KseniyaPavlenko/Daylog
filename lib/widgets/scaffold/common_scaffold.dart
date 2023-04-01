@@ -34,7 +34,6 @@ class CommonScaffold extends StatelessWidget {
       child: Scaffold(
         appBar: appBar,
         backgroundColor: backgroundColor,
-        // backgroundColor: Theme.of(context).colorScheme.background,
         floatingActionButton: floatButton,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         body: Stack(

@@ -21,6 +21,7 @@ class CommonTextField extends StatelessWidget {
     return Padding(
       padding: padding,
       child: TextFormField(
+        
         controller: controller,
         onTap: onTap,
         decoration: InputDecoration(

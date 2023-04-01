@@ -3,14 +3,14 @@ import 'package:daylog/widgets/widget_test/widget_test.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+const keyPreviousDay = Key('dateSelector_prev');
+const keyNextDay = Key('dateSelector_next');
+const dayText = Key('day');
 void main() {
   DateTime selectedDate = DateTime.now();
   String previousDay =
       selectedDate.subtract(const Duration(days: 1)).day.toString();
-  String nextDay = selectedDate.add(const Duration(days: 1)).day.toString();
-  const keyPreviosDay = Key('dateSelector_prev');
-  const keyNextDay = Key('dateSelector_next');
-  const dayText = Key('day');
+  selectedDate.add(const Duration(days: 1)).day.toString();
 
   testWidgets('Go to previous day', (tester) async {
     await tester.pumpWidget(WidgetTest(
@@ -20,7 +20,7 @@ void main() {
       ),
     ));
 
-    await tester.tap(find.byKey(keyPreviosDay));
+    await tester.tap(find.byKey(keyPreviousDay));
 
     await tester.pump();
 
@@ -36,7 +36,6 @@ void main() {
     ));
 
     final dayFinder = find.byKey(dayText);
-
 
     //final monthFinder = find.text('MAR');
 

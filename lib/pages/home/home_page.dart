@@ -2,7 +2,7 @@ import 'package:daylog/common/route/router.dart';
 import 'package:daylog/pages/about/about_page.dart';
 import 'package:daylog/pages/dashboard/dashboard_page.dart';
 import 'package:daylog/pages/home/widgets/home_bottom_bar.dart';
-import 'package:daylog/pages/scheduler/sheduler_page.dart';
+import 'package:daylog/pages/scheduler/scheduler_page.dart';
 import 'package:daylog/pages/settings/settings_page.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -49,9 +49,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _onPageChanged(int index) {
-    setState(() => _currentPage = index);
-  }
+  void _onPageChanged(int index) => setState(() => _currentPage = index);
 
   @override
   Widget build(BuildContext context) {
@@ -64,12 +62,15 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomBar: HomeBottomBar(
         currentPage: _currentPage,
-        onCahngePage: _onTap,
+        onChangePage: _onTap,
       ),
       floatButton: FloatingActionButton(
-        // backgroundColor: Colors.brown[600],
+        onPressed: () => context.pushNamed(
+          AppRouter.schedulerLogName,
+          params: <String, String>{'id': "-1"},
+        ),
+        tooltip: 'SchedulerLogButton',
         child: const Icon(Icons.add),
-        onPressed: () => context.push(AppRouter.schedulerLog),
       ),
     );
   }

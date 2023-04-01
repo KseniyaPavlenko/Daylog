@@ -12,45 +12,42 @@ class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
 
   @override
-  _SplashPageState createState() => _SplashPageState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
 class _SplashPageState extends State<SplashPage> {
-  Timer? timer;
+  Timer? _timer;
 
   @override
   void initState() {
     super.initState();
 
-    SchedulerBinding.instance.addPostFrameCallback(
-      (_) => _checkAuth(),
-    );
+    SchedulerBinding.instance.addPostFrameCallback((_) => _checkAuth());
   }
 
   void initStateX() {
-    super.initState();
-    timer = Timer(
+    _timer = Timer(
       const Duration(seconds: 3),
-      () {
-        context.go(AppRouter.login);
-      },
+      () => context.go(AppRouter.login),
     );
   }
 
   @override
   void dispose() {
-    timer?.cancel();
+    _timer?.cancel();
     super.dispose();
   }
 
+  void _toHome() => context.go(AppRouter.home); 
+  void _toLogin() => context.go(AppRouter.login);
+
   void _checkAuth() async {
-    // context.go(AppRouter.home);
     final authCubit = context.read<AuthCubit>();
     await authCubit.loadData();
     if (authCubit.state.isAuthorized ?? false) {
-      context.go(AppRouter.home);
+      _toHome();
     } else {
-      context.go(AppRouter.login);
+      _toLogin();
     }
   }
 

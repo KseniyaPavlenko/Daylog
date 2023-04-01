@@ -24,16 +24,17 @@ class DayOfWeekSelector extends StatelessWidget {
         spacing: 8,
         children: [
           _DayOfWeekItem(
+            key: const Key('EveryDaySchedulerLog'),
             onTap: onTapEveryDay,
             title: 'Every day',
             isSelected: isSelectedEveryDay,
           ),
           ...List.generate(DayOfWeek.values.length, (index) {
-            final _item = DayOfWeek.values[index];
+            final item = DayOfWeek.values[index];
             return _DayOfWeekItem(
-              onTap: () => onTapDay(_item),
-              title: _item.name,
-              isSelected: selected.contains(_item) || isSelectedEveryDay,
+              onTap: () => onTapDay(item),
+              title: item.name,
+              isSelected: selected.contains(item) || isSelectedEveryDay,
             );
           })
         ],
@@ -56,7 +57,7 @@ class _DayOfWeekItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       margin: const EdgeInsets.only(bottom: 6),
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -64,8 +65,8 @@ class _DayOfWeekItem extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: isSelected
-            ? theme.colorScheme.primaryContainer
-            : theme.colorScheme.secondaryContainer,
+            ? colorScheme.primaryContainer
+            : colorScheme.secondaryContainer,
       ),
       child: InkWell(
         onTap: onTap,
@@ -78,27 +79,11 @@ class _DayOfWeekItem extends StatelessWidget {
             ],
             Text(
               title.capitalize,
-              style: const TextStyle(
-                fontSize: 16,
-              ),
+              style: const TextStyle(fontSize: 16),
             ),
           ],
         ),
       ),
     );
-    // return InkWell(
-    //   onTap: onTap,
-    //   borderRadius: BorderRadius.circular(30),
-    //   child: Chip(
-    //     padding: EdgeInsets.zero,
-    //     label: Text(title),
-    //     avatar: isSelected
-    //         ? const Icon(
-    //             Icons.check,
-    //             size: 15,
-    //           )
-    //         : null,
-    //   ),
-    // );
   }
 }
