@@ -1,9 +1,11 @@
 import 'package:daylog/common/route/router.dart';
+import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_cubit.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_state.dart';
 import 'package:daylog/models/day_of_week.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:daylog/pages/scheduler_log/widgets/day_of_week_selector.dart';
+import 'package:daylog/widgets/buttons/default_app_bar_icon_button.dart';
 import 'package:daylog/widgets/buttons/default_elevated_button_icon.dart';
 import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
@@ -141,17 +143,27 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
         backgroundColor: Theme.of(context).primaryColor,
         appBar: DefaultAppBar(
           title: "Scheduler Log",
-          leading: DefaultElevatedButtonIcon(
+          leading: DefaultAppBarIconButton(
             icon: Icons.arrow_left_sharp,
             label: 'Back',
             onTap: () => context.go(AppRouter.home),
+            style: ButtonStyle(
+              fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(AppColors.darkRed2),
+            ),
           ),
           actions: <Widget>[
-            DefaultElevatedButtonIcon(
+            DefaultAppBarIconButton(
               key: const Key('SchedulerLogSaveButton'),
               icon: Icons.save_outlined,
               label: 'Save',
               onTap: _onTapSave,
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all<Size>(const Size(105, 55)),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(AppColors.darkRed2),
+              ),
             )
           ],
         ),

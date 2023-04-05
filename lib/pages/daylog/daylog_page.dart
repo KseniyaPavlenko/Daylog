@@ -1,9 +1,11 @@
 import 'package:daylog/common/route/router.dart';
+import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/common/utils/date_utils.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/daylog/widgets/dropdown_padding.dart';
+import 'package:daylog/widgets/buttons/default_app_bar_icon_button.dart';
 import 'package:daylog/widgets/buttons/default_elevated_button_icon.dart';
 import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
@@ -83,16 +85,26 @@ class _DaylogPageState extends State<DaylogPage> {
       backgroundColor: Theme.of(context).primaryColor,
       appBar: DefaultAppBar(
         title: 'Day Log',
-        leading: DefaultElevatedButtonIcon(
+        leading: DefaultAppBarIconButton(
           label: 'Back',
           icon: Icons.arrow_left_sharp,
           onTap: () => context.go(AppRouter.home),
+          style: ButtonStyle(
+            fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(AppColors.darkRed2),
+          ),
         ),
         actions: <Widget>[
-          DefaultElevatedButtonIcon(
+          DefaultAppBarIconButton(
             label: 'Save',
             icon: Icons.save_outlined,
             onTap: _onTapSave,
+            style: ButtonStyle(
+              fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(AppColors.darkRed2),
+            ),
           )
         ],
       ),

@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-class DefaultElevatedButtonIcon extends StatelessWidget {
-  const DefaultElevatedButtonIcon({
+class DefaultAppBarIconButton extends StatelessWidget {
+  const DefaultAppBarIconButton({
     Key? key,
     required this.label,
     required this.icon,
     required this.onTap,
+    this.style,
   }) : super(key: key);
 
   final String label;
   final IconData icon;
   final VoidCallback onTap;
-  
+  final ButtonStyle? style;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +20,7 @@ class DefaultElevatedButtonIcon extends StatelessWidget {
       onPressed: onTap,
       icon: Icon(icon),
       label: Text(label),
-      style: ElevatedButton.styleFrom(
-        elevation: 3,
-        backgroundColor: Colors.brown[900],
-      ),
+      style: style,
     );
   }
 }
