@@ -15,10 +15,10 @@ class WelcomePage extends StatefulWidget {
 class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CommonScaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: const Text('DayLog App'),
+      appBar: const DefaultAppBar(
+        title: 'DayLog App',
         backgroundColor: AppColors.darkRed2,
         centerTitle: true,
       ),
