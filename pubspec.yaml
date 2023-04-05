@@ -11,8 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-    assets:
-    - assets/images/
   uuid: 3.0.6
   # flutter_cupertino_date_picker: ^1.0.26+2
   # flutter_cupertino_datetime_picker: ^3.0.0
@@ -32,6 +30,7 @@ dependencies:
   another_flushbar: ^1.12.29
   provider: ^6.0.5
   url_strategy: ^0.2.0
+  
 
 
 dev_dependencies:
