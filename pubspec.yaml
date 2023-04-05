@@ -11,6 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+    assets:
+    - assets/images/
   uuid: 3.0.6
   # flutter_cupertino_date_picker: ^1.0.26+2
   # flutter_cupertino_datetime_picker: ^3.0.0
