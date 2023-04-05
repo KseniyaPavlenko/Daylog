@@ -18,7 +18,6 @@ void main() {
   setupDi();
   setupLog();
   runApp(const App());
-  //testWidget();
 }
 
 class App extends StatefulWidget {
