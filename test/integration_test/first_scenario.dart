@@ -3,6 +3,12 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:daylog/main.dart' as app;
+//Login
+const schedulerLogKey = Key('SchedulerLogButton');
+const loginButtonKey = Key('LoginButton');
+const signUpButtonKey = Key('SignUpButton');
+
+
 
 const createAccBtnKey = Key('CreateAccButton');
 const backToLoginButtonKey = Key('backToLogin');
@@ -34,10 +40,6 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      //tooltip: 'SignUpButton',
-      //tooltip: 'LoginButton',
-      // tooltip: 'SchedulerLogButton',  +
-
       // verify create account button
       expect(find.byKey(createAccBtnKey), findsOneWidget);
 
@@ -64,7 +66,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Finds the create signUp button to tap on.
-      final Finder signUpBtn = find.byTooltip('SignUpButton');
+      final Finder signUpBtn = find.byKey(signUpButtonKey);
 
       // // Emulate a tap on the create account button.
       await tester.tap(signUpBtn);
@@ -111,7 +113,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Finds the create SchedulerLog button (+) to tap on.
-      final Finder addButton = find.byTooltip('SchedulerLogButton');
+      final Finder addButton = find.byKey(schedulerLogKey);
       // Emulate a tap on the Dashboard Page button.
       await tester.tap(addButton);
 

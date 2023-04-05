@@ -62,6 +62,13 @@ class _SettingsPageState extends State<SettingsPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
+              'App : $_appName',
+              style: const TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
               'Version: $_version',
               style: const TextStyle(
                 fontSize: 25,
@@ -73,9 +80,13 @@ class _SettingsPageState extends State<SettingsPage> {
               style: const TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.bold,
-                // color: Colors.white
               ),
             ),
+
+            //TODO: delete ElevatedButton
+            ElevatedButton(
+                onPressed: () => context.go(AppRouter.welcome),
+                child: const Text('Welcome')),
             LogoutButton(
               key: const Key('LogoutButton'),
               _text,

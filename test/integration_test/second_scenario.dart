@@ -4,6 +4,12 @@ import 'package:integration_test/integration_test.dart';
 
 import 'package:daylog/main.dart' as app;
 
+
+//Login
+const schedulerLogKey = Key('SchedulerLogButton');
+const loginButtonKey = Key('LoginButton');
+const signUpButtonKey = Key('SignUpButton');
+
 const createAccBtnKey = Key('CreateAccButton');
 const backToLoginButtonKey = Key('backToLogin');
 const usernameInputFieldKey = Key('UsernameInputFieldSignUp');
@@ -44,9 +50,8 @@ void main() {
           selectedDate.subtract(const Duration(days: 1)).day.toString();
       selectedDate.add(const Duration(days: 1)).day.toString();
 
-      //tooltip: 'SignUpButton',
-      //tooltip: 'LoginButton',
-      // tooltip: 'SchedulerLogButton',  +
+
+    
 
       // verify username field button
       expect(find.byKey(usernameInputFieldLoginKey), findsOneWidget);
@@ -67,7 +72,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Finds the create Login button to tap on.
-      final Finder loginBtn = find.byTooltip('LoginButton');
+      final Finder loginBtn = find.byKey(loginButtonKey);
 
       // // Emulate a tap on the create account button.
       await tester.tap(loginBtn);

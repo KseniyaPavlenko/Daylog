@@ -69,7 +69,8 @@ class _HomePageState extends State<HomePage> {
           AppRouter.schedulerLogName,
           params: <String, String>{'id': "-1"},
         ),
-        tooltip: 'SchedulerLogButton',
+        key: const Key('SchedulerLogButton'),
+        tooltip: 'Create task',
         child: const Icon(Icons.add),
       ),
     );

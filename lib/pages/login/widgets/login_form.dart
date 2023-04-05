@@ -60,7 +60,7 @@ class LoginForm extends StatelessWidget {
               onTap: loginUser,
               isEnabled: isEnabled,
               text: 'LOGIN',
-              tooltip: 'LoginButton',
+              key: const Key('LoginButton'),
             ),
           ),
         )

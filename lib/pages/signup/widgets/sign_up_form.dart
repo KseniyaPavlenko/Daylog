@@ -62,7 +62,7 @@ class SignUpForm extends StatelessWidget {
               isEnabled: isEnabled,
               onTap: onSignUpTap,
               text: 'SIGN UP',
-              tooltip: 'SignUpButton',
+              key: const Key('SignUpButton'),
             ),
           ),
         )
