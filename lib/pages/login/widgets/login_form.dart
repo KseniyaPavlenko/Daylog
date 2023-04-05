@@ -26,7 +26,7 @@ class LoginForm extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: 20, top: 10),
           child: InputField(
             key: const Key('UsernameInputFieldLogin'),
-            icon: const Icon(Icons.email),
+            icon: const Icon(Icons.person_outline_sharp),
             hint: "Username",
             controller: usernameController,
             obscure: false,
