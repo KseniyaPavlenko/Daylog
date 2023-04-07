@@ -5,9 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "daylog",
+            "name": "Chrome",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "deviceId": "chrome",
+            "args": ["--web-port", "8686"],
         },
         {
             "name": "daylog (profile mode)",
