@@ -1,5 +1,6 @@
 class EnvConfig {
   static const localBaseUrl = 'http://localost:80/api/v1';
+  static const debugBaseUrl = 'http://localost:8081/api/v1';
   static const prodBaseUrl = 'https://app.onedaylog.org/api/v1';
   static const herokuBaseUrl = 'https://daylog-dev.abexam.org/api/v1';
   static const testCloud = 'https://daylog-dev.abexam.org/api/v1';
@@ -10,6 +11,10 @@ class EnvConfig {
 
   factory EnvConfig.local() {
     return EnvConfig(baseUrl: localBaseUrl);
+  }
+
+  factory EnvConfig.debug() {
+    return EnvConfig(baseUrl: debugBaseUrl);
   }
 
   factory EnvConfig.prod() {

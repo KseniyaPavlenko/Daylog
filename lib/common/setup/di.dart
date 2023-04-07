@@ -67,7 +67,7 @@ void setupDi() {
 }
 
 void _setupDio() {
-  final envConfig = EnvConfig.prod();
+  final envConfig = EnvConfig.debug();
   final dio = Dio();
   dio.options.baseUrl = envConfig.baseUrl;
   getIt.registerLazySingleton<LocalStorage>(() => LocalStorageImpl());
