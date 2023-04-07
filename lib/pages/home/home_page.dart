@@ -28,6 +28,8 @@ class _HomePageState extends State<HomePage> {
     const SettingsPage(),
   ];
 
+ 
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +52,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onPageChanged(int index) => setState(() => _currentPage = index);
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,3 +79,4 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
