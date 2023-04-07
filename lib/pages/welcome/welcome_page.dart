@@ -1,5 +1,6 @@
 import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/style/app_colors.dart';
+import 'package:daylog/common/utils/app_images.dart';
 import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _WelcomePageState extends State<WelcomePage> {
           const Padding(
             padding: EdgeInsets.only(left: 30, right: 30, bottom: 20, top: 200),
             child: Text(
-              '       Welcome to "Daily Planner"! This app is designed to make your life easier. You can no longer fill your head with your affairs. You just need to open the application and perform a couple of actions. Now all your affairs will be stored in this application.            ',
+              '\tWelcome to "Daily Planner"! This app is designed to make your life easier. You can no longer fill your head with your affairs. You just need to open the application and perform a couple of actions. Now all your affairs will be stored in this application.            ',
               style: TextStyle(
                 fontSize: 24.0,
                 color: Colors.white,
@@ -42,7 +43,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   iconSize: 10,
                   onPressed: () {},
                   icon: Image.asset(
-                    '/Users/kseniapavlenko/src/edu/demoApp/daylog/assets/wireframes/AppStore.png',
+                    AppImages.iosApp,
                     width: 200,
                     height: 200,
                   ),
@@ -50,9 +51,9 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
                 IconButton(
                   iconSize: 10,
-                  onPressed: () => context.go(AppRouter.splash),
+                  onPressed: _toLogin,
                   icon: Image.asset(
-                    '/Users/kseniapavlenko/src/edu/demoApp/daylog/assets/wireframes/web2.png',
+                    AppImages.webApp,
                     width: 200,
                     height: 200,
                   ),
@@ -60,7 +61,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 IconButton(
                   onPressed: () {},
                   icon: Image.asset(
-                    '/Users/kseniapavlenko/src/edu/demoApp/daylog/assets/wireframes/PlayMarket.png',
+                    AppImages.androidApp,
                     width: 200,
                     height: 200,
                   ),
@@ -73,4 +74,6 @@ class _WelcomePageState extends State<WelcomePage> {
       ),
     );
   }
+
+  void _toLogin() => context.go(AppRouter.login);
 }

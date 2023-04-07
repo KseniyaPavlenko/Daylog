@@ -11,7 +11,6 @@ import 'package:daylog/pages/welcome/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -71,18 +70,15 @@ class AppRouter {
           return const NotFoundPage();
         },
       ),
-        GoRoute(
+      GoRoute(
         path: welcome,
         name: welcomeName,
         builder: (BuildContext context, GoRouterState state) {
           return const WelcomePage();
         },
       ),
-
     ],
-
     errorBuilder: (context, state) => const NotFoundPage(),
-  
     redirect: (context, state) {
       final isAuthorized =
           context.read<AuthCubit>().state.isAuthorized ?? false;
@@ -92,6 +88,7 @@ class AppRouter {
         login,
         signUp,
         notFound,
+        welcome,
       ];
       final isLocWithAuth = !locationsWithoutAuth.contains(state.subloc);
       if (!isAuthorized && isLocWithAuth) {
@@ -99,8 +96,6 @@ class AppRouter {
       }
       return null;
     },
-  
-  
   );
 
   //paths
