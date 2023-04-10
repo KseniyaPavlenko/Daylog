@@ -57,7 +57,8 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _backToLoginButton() {
     return DefaultTextButton(
       onPressed: _onLoginPage,
-      text: 'Already have an account? Login',
+      text: 'Login',
+     // text: 'Already have an account? Login',
       key: const Key('backToLogin'),
     );
   }
