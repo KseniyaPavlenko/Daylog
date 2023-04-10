@@ -22,47 +22,59 @@ class SignUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(bottom: 20, top: 10),
-          child: InputField(
-            icon: const Icon(Icons.email),
-            hint: "Username",
-            controller: usernameController,
-            obscure: false,
-            key: const Key('UsernameInputFieldSignUp'),
+        SizedBox(
+          width: 400,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 20, top: 10),
+            child: InputField(
+              icon: const Icon(Icons.email),
+              hint: "Username",
+              controller: usernameController,
+              obscure: false,
+              key: const Key('UsernameInputFieldSignUp'),
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 5),
-          child: InputField(
-            icon: const Icon(Icons.lock),
-            hint: "Password",
-            controller: passwordController,
-            obscure: true,
-            key: const Key('PasswordInputFieldSignUp'),
+        SizedBox(
+          width: 400,
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 5),
+            child: InputField(
+              icon: const Icon(Icons.lock),
+              hint: "Password",
+              controller: passwordController,
+              obscure: true,
+              key: const Key('PasswordInputFieldSignUp'),
+            ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 150),
-          child: SizedBox(
-            height: 40,
-            width: MediaQuery.of(context).size.width,
-            child: backToLoginButton,
+        SizedBox(
+          width: 400,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 260),
+            child: SizedBox(
+              height: 40,
+              width: MediaQuery.of(context).size.width,
+              child: backToLoginButton,
+            ),
           ),
         ),
         const SizedBox(
           height: 20,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
-          child: SizedBox(
-            height: 50,
-            width: MediaQuery.of(context).size.width,
-            child: DefaultFloatingActionButton(
-              isEnabled: isEnabled,
-              onTap: onSignUpTap,
-              text: 'SIGN UP',
-              key: const Key('SignUpButton'),
+        SizedBox(
+          width: 400,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: SizedBox(
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+              child: DefaultFloatingActionButton(
+                isEnabled: isEnabled,
+                onTap: onSignUpTap,
+                text: 'SIGN UP',
+                key: const Key('SignUpButton'),
+              ),
             ),
           ),
         )
