@@ -82,11 +82,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
-            //TODO: delete ElevatedButton
-            ElevatedButton(
-                onPressed: () => context.go(AppRouter.welcome),
-                child: const Text('Welcome')),
             LogoutButton(
               key: const Key('LogoutButton'),
               _text,

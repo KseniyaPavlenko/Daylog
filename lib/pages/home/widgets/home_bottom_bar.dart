@@ -12,12 +12,7 @@ List<dynamic> screens = <dynamic>[
   const AboutPage(),
   const SettingsPage(),
 ];
-// List<dynamic> screens = <dynamic>[
-//   const DashboardPage(),
-//   const SchedulerPage(),
-//   const AboutPage(),
-//   const SettingsPage(),
-// ];
+
 
 class HomeBottomBar extends StatelessWidget {
   const HomeBottomBar({
@@ -28,6 +23,7 @@ class HomeBottomBar extends StatelessWidget {
 
   final int currentPage;
   final void Function(int) onChangePage;
+  
   
 
  

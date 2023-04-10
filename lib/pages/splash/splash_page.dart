@@ -31,7 +31,7 @@ class _SplashPageState extends State<SplashPage> {
     super.dispose();
   }
 
-  // void _toHome() => context.go(AppRouter.home);
+  //void _toHome() => context.go(AppRouter.home);
   // void _toLogin() => context.go(AppRouter.login);
   void _toWelcome() => context.go(AppRouter.welcome);
 
