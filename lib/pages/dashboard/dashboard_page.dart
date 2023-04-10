@@ -4,6 +4,7 @@ import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/cubits/event_list/event_list_state.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/dashboard/widgets/event_list_item.dart';
+import 'package:daylog/widgets/buttons/default_app_bar_icon_button.dart';
 import 'package:daylog/widgets/date_selector/date_selector_widget.dart';
 import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
@@ -53,9 +54,19 @@ class _DashboardPageState extends State<DashboardPage> {
         return CommonScaffold(
           backgroundColor: Theme.of(context).primaryColor,
           isLoading: state.isLoading,
-          appBar: const DefaultAppBar(
+          appBar: DefaultAppBar(
             title: 'Dashboard',
             backgroundColor: AppColors.darkRed2,
+            leading: DefaultAppBarIconButton(
+              label: 'Create task',
+              icon: Icons.task_alt,
+              onTap: () => context.go(AppRouter.daylog),
+              style: ButtonStyle(
+                fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
+                backgroundColor:
+                    MaterialStateProperty.all<Color>(AppColors.darkRed2),
+              ),
+            ),
           ),
           body: Column(
             children: [
@@ -70,7 +81,7 @@ class _DashboardPageState extends State<DashboardPage> {
                   itemBuilder: (_, index) {
                     final event = state.list[index];
                     return EventListItem(
-                     // key: const Key('DashboardListKey'),
+                      // key: const Key('DashboardListKey'),
                       // key: ValueKey(event.id),
                       isDraft: event.id == Event.draftKey,
                       event: event,
