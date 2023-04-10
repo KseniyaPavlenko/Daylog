@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
         currentPage: _currentPage,
         onChangePage: _onTap,
       ),
-      floatButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () => context.pushNamed(
           AppRouter.schedulerLogName,
           params: <String, String>{'id': "-1"},
