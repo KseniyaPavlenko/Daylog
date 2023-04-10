@@ -10,15 +10,17 @@ class CommonScaffold extends StatelessWidget {
     required this.body,
     this.isLoading = false,
     this.bottomBar,
-    this.floatButton,
+    this.floatingActionButton,
     this.appBar,
     this.backgroundColor,
+    this.floatingActionButtonLocation,
   }) : super(key: key);
 
   final Widget body;
   final bool isLoading;
   final Widget? bottomBar;
-  final Widget? floatButton;
+  final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
   final PreferredSizeWidget? appBar;
   final Color? backgroundColor;
 
@@ -34,8 +36,8 @@ class CommonScaffold extends StatelessWidget {
       child: Scaffold(
         appBar: appBar,
         backgroundColor: backgroundColor,
-        floatingActionButton: floatButton,
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        floatingActionButton: floatingActionButton,
+        floatingActionButtonLocation: floatingActionButtonLocation,
         body: Stack(
           children: [
             body,
