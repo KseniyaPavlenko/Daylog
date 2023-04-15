@@ -4,13 +4,13 @@ class DefaultAppBarIconButton extends StatelessWidget {
   const DefaultAppBarIconButton({
     Key? key,
     required this.label,
-    required this.icon,
+    this.icon,
     required this.onTap,
     this.style,
   }) : super(key: key);
 
   final String label;
-  final IconData icon;
+  final IconData? icon;
   final VoidCallback onTap;
   final ButtonStyle? style;
 
