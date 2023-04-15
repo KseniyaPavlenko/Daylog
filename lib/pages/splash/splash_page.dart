@@ -34,11 +34,15 @@ class _SplashPageState extends State<SplashPage> {
   //void _toHome() => context.go(AppRouter.home);
   // void _toLogin() => context.go(AppRouter.login);
   void _toWelcome() => context.go(AppRouter.welcome);
+  void _toPinCode() => context.go(AppRouter.pinCode);
 
   void _checkAuth() async {
     final authCubit = context.read<AuthCubit>();
     await authCubit.loadData();
-    _toWelcome();
+    _toPinCode();
+    //
+    //_toWelcome();
+    //
     // if (authCubit.state.isAuthorized ?? false) {
     //   _toHome();
     // } else {
