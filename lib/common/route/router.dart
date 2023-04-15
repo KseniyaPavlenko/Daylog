@@ -1,4 +1,5 @@
 import 'package:daylog/cubits/auth/auth_cubit.dart';
+import 'package:daylog/pages/create_passcode/create_passcode_page.dart';
 import 'package:daylog/pages/daylog/daylog_page.dart';
 import 'package:daylog/pages/home/home_page.dart';
 import 'package:daylog/pages/login/login_page.dart';
@@ -77,6 +78,13 @@ class AppRouter {
           return const WelcomePage();
         },
       ),
+      GoRoute(
+        path: pinCode,
+        name: pinCodeName,
+        builder: (BuildContext context, GoRouterState state) {
+          return const PinCodePage();
+        },
+      ),
     ],
     errorBuilder: (context, state) => const NotFoundPage(),
     redirect: (context, state) {
@@ -108,6 +116,7 @@ class AppRouter {
   static const String schedulerLog = '/schedulerLog/:id';
   static const String notFound = '/*';
   static const String welcome = '/welcome';
+  static const String pinCode = '/pinCode';
 
   //names
   static const String splashName = 'splash';
@@ -118,4 +127,5 @@ class AppRouter {
   static const String schedulerName = 'scheduler';
   static const String schedulerLogName = 'schedulerLog';
   static const String welcomeName = 'welcome';
+  static const String pinCodeName = 'pinCode';
 }
