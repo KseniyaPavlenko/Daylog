@@ -9,6 +9,7 @@ import 'package:daylog/cubits/error_cubit/error_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/cubits/me/me_cubit.dart';
+import 'package:daylog/widgets/app_lifecycle_listener.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_strategy/url_strategy.dart';
@@ -61,6 +62,9 @@ class _AppState extends State<App> {
         theme: AppTheme.theme,
         darkTheme: AppTheme.darkTheme,
         themeMode: ThemeMode.dark,
+        builder: (context, child) {
+          return AppLifecycleListener(child: child ?? const SizedBox());
+        },
       ),
     );
   }

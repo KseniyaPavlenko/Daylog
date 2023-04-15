@@ -18,6 +18,11 @@
             "flutterMode": "profile"
         },
         {
+            "name": "daylog (deubug mode)",
+            "request": "launch",
+            "type": "dart",
+        },
+        {
             "name": "daylog (release mode)",
             "request": "launch",
             "type": "dart",
