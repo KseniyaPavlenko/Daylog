@@ -13,14 +13,12 @@ class CommonScaffold extends StatelessWidget {
     this.floatingActionButton,
     this.appBar,
     this.backgroundColor,
-    this.floatingActionButtonLocation,
   }) : super(key: key);
 
   final Widget body;
   final bool isLoading;
   final Widget? bottomBar;
   final Widget? floatingActionButton;
-  final FloatingActionButtonLocation? floatingActionButtonLocation;
   final PreferredSizeWidget? appBar;
   final Color? backgroundColor;
 
@@ -37,7 +35,6 @@ class CommonScaffold extends StatelessWidget {
         appBar: appBar,
         backgroundColor: backgroundColor,
         floatingActionButton: floatingActionButton,
-        floatingActionButtonLocation: floatingActionButtonLocation,
         body: Stack(
           children: [
             body,
