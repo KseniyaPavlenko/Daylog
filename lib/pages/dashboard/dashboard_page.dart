@@ -57,16 +57,30 @@ class _DashboardPageState extends State<DashboardPage> {
           appBar: DefaultAppBar(
             title: 'Dashboard',
             backgroundColor: AppColors.darkRed2,
-            leading: DefaultAppBarIconButton(
-              label: 'Create task',
-              icon: Icons.task_alt,
-              onTap: () => context.go(AppRouter.daylog),
-              style: ButtonStyle(
-                fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(AppColors.darkRed2),
-              ),
-            ),
+            // leading: DefaultAppBarIconButton(
+            //   label: 'Create task',
+            //  icon: Icons.task_alt,
+            //   onTap: () => context.go(AppRouter.daylog),
+            //   style: ButtonStyle(
+            //     fixedSize: MaterialStateProperty.all<Size>(const Size(10, 60)),
+            //     backgroundColor:
+            //         MaterialStateProperty.all<Color>(AppColors.darkRed2),
+            //   ),
+            // ),
+            actions: <Widget>[
+              DefaultAppBarIconButton(
+                key: const Key('SchedulerLogSaveButton'),
+                icon: Icons.task_alt,
+                label: 'Create task',
+                onTap: () => context.go(AppRouter.daylog),
+                style: ButtonStyle(
+                  fixedSize:
+                      MaterialStateProperty.all<Size>(const Size(105, 55)),
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(AppColors.darkRed2),
+                ),
+              )
+            ],
           ),
           body: Column(
             children: [
