@@ -6,7 +6,6 @@ import 'package:daylog/cubits/event_detail/event_detail_state.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/daylog/widgets/dropdown_padding.dart';
 import 'package:daylog/widgets/buttons/default_app_bar_icon_button.dart';
-import 'package:daylog/widgets/buttons/default_elevated_button_icon.dart';
 import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';

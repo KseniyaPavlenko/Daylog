@@ -6,7 +6,6 @@ import 'package:daylog/models/day_of_week.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:daylog/pages/scheduler_log/widgets/day_of_week_selector.dart';
 import 'package:daylog/widgets/buttons/default_app_bar_icon_button.dart';
-import 'package:daylog/widgets/buttons/default_elevated_button_icon.dart';
 import 'package:daylog/widgets/default_app_bar/default_app_bar.dart';
 import 'package:daylog/widgets/loading_indicator/common_loading_indicator.dart';
 import 'package:daylog/widgets/scaffold/common_scaffold.dart';
