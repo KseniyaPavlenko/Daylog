@@ -76,4 +76,5 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   void _toLogin() => context.go(AppRouter.login);
+  void _toPinCode() => context.go(AppRouter.pinCode);
 }

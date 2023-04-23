@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -41,7 +40,7 @@ class DaylogSecureStorage {
   }
 
   static String _hashPassword(String password, String salt) {
-    final codec = Utf8Codec();
+    const codec =  Utf8Codec();
     final key = codec.encode(password);
     final saltBytes = codec.encode(salt);
     final hmac = Hmac(sha256, key);

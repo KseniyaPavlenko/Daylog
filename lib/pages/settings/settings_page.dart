@@ -19,7 +19,7 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   final String _text = "LOGOUT";
   String? _appName;
-  String? _packageName;
+  // String? _packageName;
   String? _version;
   String? _buildNumber;
 
@@ -35,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
     if (mounted) {
       setState(() {
         _appName = packageInfo.appName;
-        _packageName = packageInfo.packageName;
+        // _packageName = packageInfo.packageName;
         _version = packageInfo.version;
         _buildNumber = packageInfo.buildNumber;
       });

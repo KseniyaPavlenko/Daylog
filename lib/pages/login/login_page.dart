@@ -55,6 +55,10 @@ class _LoginPageState extends State<LoginPage> {
     GoRouter.of(context).go(AppRouter.home);
   }
 
+  void _toPinCode() {
+    GoRouter.of(context).go(AppRouter.pinCode);
+  }
+
   void _onCreateAcc() {
     GoRouter.of(context).go(AppRouter.signUp);
   }
@@ -82,7 +86,8 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (_, state) {
         if (state.isAuthorized ?? false) {
-          _onLogin();
+          // _onLogin();
+          _toPinCode();
         }
       },
       builder: (_, state) {
