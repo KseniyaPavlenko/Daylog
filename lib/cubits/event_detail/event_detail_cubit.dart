@@ -8,9 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class EventDetailCubit extends Cubit<EventDetailState> {
   final EventService eventService;
   final ErrorCubit errorCubit;
-  EventDetailCubit({required this.errorCubit, required this.eventService})
-      : 
-        super(EventDetailState.init());
+  EventDetailCubit({required this.errorCubit, required this.eventService}) : super(EventDetailState.init());
 
   Future<void> loadData(String? eventId) async {
     if (eventId == null) {

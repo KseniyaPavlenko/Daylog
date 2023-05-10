@@ -8,8 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class DraftDetailCubit extends Cubit<DraftDetailState> {
   final ErrorCubit errorCubit;
   final DraftService draftService;
-  DraftDetailCubit({required this.errorCubit, required this.draftService})
-      : super(DraftDetailState.init());
+  DraftDetailCubit({required this.errorCubit, required this.draftService}) : super(DraftDetailState.init());
 
   Future<void> loadData(String? draftId) async {
     if (draftId == null) {
@@ -28,8 +27,8 @@ class DraftDetailCubit extends Cubit<DraftDetailState> {
     }
   }
 
-  Future<void> updateDraft(Draft draft) async {
-    emit(state.copyWith(isLoading: true));
+  Future<void> updateDraft(Draft draft, [bool isNew = false]) async {
+    emit(state.copyWith(isLoading: true, isNew: isNew));
     try {
       if (state.isNew) {
         final updatedDraft = await draftService.create(draft);

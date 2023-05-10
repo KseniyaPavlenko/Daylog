@@ -18,9 +18,9 @@ import 'package:intl/intl.dart';
 import 'package:daylog/common/utils/date_utils.dart';
 
 class SchedulerLogPage extends StatefulWidget {
-  const SchedulerLogPage({Key? key, this.id}) : super(key: key);
+  const SchedulerLogPage({required this.id, super.key});
 
-  final String? id;
+  final String id;
 
   @override
   State<SchedulerLogPage> createState() => _SchedulerLogPageState();
@@ -44,22 +44,8 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   DateTime? _endDate;
 
   DraftDetailCubit get _draftDetailCubit => context.read<DraftDetailCubit>();
-
-  @override
-  void initState() {
-    super.initState();
-    if ((widget.id ?? '-1') != '-1') {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        _draftDetailCubit.loadData(widget.id);
-      });
-    }
-  }
-
-  void _pop() => context.pop();
-  void _onTapSave() async {
-    await _draftDetailCubit.updateDraft(
-      Draft(
-        id: widget.id,
+  bool get _isNew => widget.id == '-1';
+  Draft get _draft => Draft(
         userId: _userId,
         title: _titleController.text,
         detail: _detailsController.text,
@@ -68,9 +54,22 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
         endDate: _endDate,
         duration: _duration,
         days: _days,
-      ),
-    );
-    _pop();
+      );
+
+  @override
+  void initState() {
+    super.initState();
+    if (_isNew) return;
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _draftDetailCubit.loadData(widget.id);
+    });
+  }
+
+  void _goBack() => context.pop();
+
+  void _onTapSave() async {
+    await _draftDetailCubit.updateDraft(_draft, _isNew);
+    _goBack();
   }
 
   void _onTapDay(DayOfWeek day) {
@@ -85,10 +84,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
 
   void _onTapStartDate() async {
     DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2101));
+        context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2101));
 
     if (pickedDate != null) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -103,10 +99,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
 
   void _onTapEndDate() async {
     DateTime? pickedDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2101));
+        context: context, initialDate: DateTime.now(), firstDate: DateTime(2000), lastDate: DateTime(2101));
 
     if (pickedDate != null) {
       String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
@@ -148,8 +141,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
             onTap: () => context.go(AppRouter.home),
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(AppColors.darkRed2),
+              backgroundColor: MaterialStateProperty.all<Color>(AppColors.darkRed2),
             ),
           ),
           actions: <Widget>[
@@ -160,8 +152,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
               onTap: _onTapSave,
               style: ButtonStyle(
                 fixedSize: MaterialStateProperty.all<Size>(const Size(105, 55)),
-                backgroundColor:
-                    MaterialStateProperty.all<Color>(AppColors.darkRed2),
+                backgroundColor: MaterialStateProperty.all<Color>(AppColors.darkRed2),
               ),
             )
           ],
@@ -173,8 +164,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
               _titleController.text = draft?.title ?? '';
               _detailsController.text = draft?.detail ?? '';
               _date = draft?.startDate ?? DateTime.now();
-              _timeController.text =
-                  draft?.startAt?.toFormatTime(context) ?? '';
+              _timeController.text = draft?.startAt?.toFormatTime(context) ?? '';
             }
           },
           builder: (context, state) {

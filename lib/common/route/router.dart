@@ -48,7 +48,7 @@ class AppRouter {
         path: daylog,
         name: daylogName,
         builder: (BuildContext context, GoRouterState state) {
-          return DaylogPage(id: state.params['id']);
+          return DaylogPage(id: state.params['id']!);
         },
       ),
       GoRoute(
@@ -62,7 +62,7 @@ class AppRouter {
         path: schedulerLog,
         name: schedulerLogName,
         builder: (BuildContext context, GoRouterState state) {
-          return SchedulerLogPage(id: state.params['id']);
+          return SchedulerLogPage(id: state.params['id']!);
         },
       ),
       GoRoute(
@@ -88,8 +88,7 @@ class AppRouter {
     ],
     errorBuilder: (context, state) => const NotFoundPage(),
     redirect: (context, state) {
-      final isAuthorized =
-          context.read<AuthCubit>().state.isAuthorized ?? false;
+      final isAuthorized = context.read<AuthCubit>().state.isAuthorized ?? false;
 
       final locationsWithoutAuth = [
         splash,

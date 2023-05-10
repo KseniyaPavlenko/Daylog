@@ -39,9 +39,9 @@ class _DashboardPageState extends State<DashboardPage> {
     _eventListCubit.updateDate(date);
   }
 
-  void onTapEvent(Event event) => context.pushNamed(
+  void _onTapEvent([Event? event]) => context.pushNamed(
         AppRouter.daylogName,
-        params: <String, String>{'id': event.id ?? '-1'},
+        params: <String, String>{'id': event?.id ?? '-1'},
       );
 
   @override
@@ -72,12 +72,10 @@ class _DashboardPageState extends State<DashboardPage> {
                 key: const Key('SchedulerLogSaveButton'),
                 icon: Icons.task_alt,
                 label: 'Create task',
-                onTap: () => context.go(AppRouter.daylog),
+                onTap: _onTapEvent,
                 style: ButtonStyle(
-                  fixedSize:
-                      MaterialStateProperty.all<Size>(const Size(105, 55)),
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(AppColors.darkRed2),
+                  fixedSize: MaterialStateProperty.all<Size>(const Size(105, 55)),
+                  backgroundColor: MaterialStateProperty.all<Color>(AppColors.darkRed2),
                 ),
               )
             ],
@@ -99,11 +97,10 @@ class _DashboardPageState extends State<DashboardPage> {
                       // key: ValueKey(event.id),
                       isDraft: event.id == Event.draftKey,
                       event: event,
-                      onTap: () => onTapEvent(event),
+                      onTap: () => _onTapEvent(event),
                     );
                   },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
+                  separatorBuilder: (context, index) => const SizedBox(height: 10),
                 ),
               ),
             ],

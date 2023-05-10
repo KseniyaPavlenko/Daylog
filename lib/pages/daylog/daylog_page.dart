@@ -15,8 +15,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class DaylogPage extends StatefulWidget {
-  const DaylogPage({Key? key, required this.id}) : super(key: key);
-  final String? id;
+  const DaylogPage({
+    required this.id,
+    super.key,
+  });
+
+  final String id;
   @override
   State<DaylogPage> createState() => _DaylogPageState();
 }
@@ -33,29 +37,7 @@ class _DaylogPageState extends State<DaylogPage> {
   DateTime _date = DateTime.now();
 
   EventDetailCubit get _eventDetailCubit => context.read<EventDetailCubit>();
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_checkId()) {
-        _eventDetailCubit.loadData(widget.id);
-      }
-    });
-  }
-
-  bool _checkId() {
-    if (widget.id?.isEmpty ?? true) {
-      context.pop();
-      return false;
-    }
-    return true;
-  }
-
-  void _onTapSave() async {
-    await _eventDetailCubit.updateEvent(
-      Event(
-        id: widget.id,
+  Event get _changedEvent => Event(
         userId: _userId,
         title: _titleController.text,
         detail: _detailsController.text,
@@ -63,9 +45,17 @@ class _DaylogPageState extends State<DaylogPage> {
         startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
         startDate: _date,
         status: _dropdownValue,
-      ),
-    );
+      );
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _eventDetailCubit.loadData(widget.id);
+    });
   }
+
+  void _onTapSave() => _eventDetailCubit.updateEvent(_changedEvent);
 
   void _onTapTimeField() async {
     final newTime = await showTimePicker(context: context, initialTime: _time);
@@ -90,8 +80,7 @@ class _DaylogPageState extends State<DaylogPage> {
           onTap: () => context.go(AppRouter.home),
           style: ButtonStyle(
             fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
-            backgroundColor:
-                MaterialStateProperty.all<Color>(AppColors.darkRed2),
+            backgroundColor: MaterialStateProperty.all<Color>(AppColors.darkRed2),
           ),
         ),
         actions: <Widget>[
@@ -101,8 +90,7 @@ class _DaylogPageState extends State<DaylogPage> {
             onTap: _onTapSave,
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
-              backgroundColor:
-                  MaterialStateProperty.all<Color>(AppColors.darkRed2),
+              backgroundColor: MaterialStateProperty.all<Color>(AppColors.darkRed2),
             ),
           )
         ],
