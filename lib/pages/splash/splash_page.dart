@@ -42,12 +42,12 @@ class _SplashPageState extends State<SplashPage> {
     _toPinCode();
 //_toWelcome();
 
-    //  if (kIsWeb) {
-    //     _toWelcome();
-    //   } else {
-    //     _toLogin();
-    //   }
-    //
+     if (kIsWeb) {
+        _toWelcome();
+      } else {
+        _toLogin();
+      }
+    
     
     //
     // if (authCubit.state.isAuthorized ?? false) {
