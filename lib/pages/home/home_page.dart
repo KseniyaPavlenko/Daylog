@@ -28,8 +28,6 @@ class _HomePageState extends State<HomePage> {
     const SettingsPage(),
   ];
 
- 
-
   @override
   void initState() {
     super.initState();
@@ -53,8 +51,7 @@ class _HomePageState extends State<HomePage> {
 
   void _onPageChanged(int index) => setState(() => _currentPage = index);
 
-
- @override
+  @override
   Widget build(BuildContext context) {
     return CommonScaffold(
       body: PageView.builder(
@@ -68,9 +65,10 @@ class _HomePageState extends State<HomePage> {
         onChangePage: _onTap,
       ),
       floatButton: FloatingActionButton(
-        onPressed: () => context.pushNamed(
-          AppRouter.schedulerLogName,
-          params: <String, String>{'id': "-1"},
+        onPressed: () => context.push(
+          '${AppRouter.schedulerLog}/-1',
+          // AppRouter.schedulerLogName,
+          // params: <String, String>{'id': "-1"},
         ),
         tooltip: 'SchedulerLogButton',
         child: const Icon(Icons.add),
@@ -78,4 +76,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

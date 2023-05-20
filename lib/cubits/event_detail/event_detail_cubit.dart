@@ -46,4 +46,17 @@ class EventDetailCubit extends Cubit<EventDetailState> {
       emit(state.copyWith(isLoading: false));
     }
   }
+
+  Future<void> deleteEvent(String eventId) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      await eventService.delete(eventId);
+     
+    } catch (error) {
+      // handle error
+      errorCubit.showError(ErrorState.common);
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
+  }
 }

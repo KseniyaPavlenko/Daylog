@@ -1,4 +1,6 @@
+import 'package:daylog/common/route/router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class AppLifecycleListener extends StatefulWidget {
   const AppLifecycleListener({
@@ -24,11 +26,18 @@ class _AppLifecycleListenerState extends State<AppLifecycleListener>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
-    
+
     setState(() {
       _lastAppLifecycleState = state;
     });
 
+
+    //TODO: ???? 
+    if (_lastAppLifecycleState != AppLifecycleState.resumed) {
+      context.go(AppRouter.pinCode);
+    }
+
+    
     // if (state == AppLifecycleState.resumed &&
     //     _lastAppLifecycleState == AppLifecycleState.paused) {
     //   widget.onReturnToApp?.call();

@@ -39,9 +39,10 @@ class _DashboardPageState extends State<DashboardPage> {
     _eventListCubit.updateDate(date);
   }
 
-  void onTapEvent(Event event) => context.pushNamed(
-        AppRouter.daylogName,
-        params: <String, String>{'id': event.id ?? '-1'},
+  void onTapEvent(Event event) => context.push(
+        '${AppRouter.daylog}/${event.id}',
+        // AppRouter.daylogName,
+        // params: <String, String>{'id': event.id ?? '-1'},
       );
 
   @override
@@ -72,7 +73,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 key: const Key('SchedulerLogSaveButton'),
                 icon: Icons.task_alt,
                 label: 'Create task',
-                onTap: () => context.go(AppRouter.daylog),
+                onTap: () => context.push('${AppRouter.daylog}/-1'),
                 style: ButtonStyle(
                   fixedSize:
                       MaterialStateProperty.all<Size>(const Size(105, 55)),

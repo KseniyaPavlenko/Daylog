@@ -3,6 +3,7 @@ import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/common/utils/date_utils.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
 import 'package:daylog/cubits/event_detail/event_detail_state.dart';
+import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/daylog/widgets/dropdown_padding.dart';
 import 'package:daylog/widgets/buttons/default_app_bar_icon_button.dart';
@@ -15,8 +16,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class DaylogPage extends StatefulWidget {
-  const DaylogPage({Key? key, required this.id}) : super(key: key);
+  const DaylogPage({Key? key, required this.id, this.isUpdating})
+      : super(key: key);
   final String? id;
+  final bool? isUpdating;
   @override
   State<DaylogPage> createState() => _DaylogPageState();
 }
@@ -33,24 +36,54 @@ class _DaylogPageState extends State<DaylogPage> {
   DateTime _date = DateTime.now();
 
   EventDetailCubit get _eventDetailCubit => context.read<EventDetailCubit>();
+  EventListCubit get _eventListCubit => context.read<EventListCubit>();
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (_checkId()) {
-        _eventDetailCubit.loadData(widget.id);
-      }
+      // if (_checkId()) {
+      _eventDetailCubit.loadData(widget.id);
+      //   }
     });
   }
 
-  bool _checkId() {
-    if (widget.id?.isEmpty ?? true) {
-      context.pop();
-      return false;
-    }
-    return true;
-  }
+  // bool _checkId() {
+  //   if (widget.id?.isEmpty ?? true) {
+  //     context.pop();
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  // void _onTapSave() async {
+  //   if (widget.isUpdating) {
+  //     await _eventDetailCubit.updateEvent(
+  //       Event(
+  //         id: widget.id!,
+  //         userId: _userId,
+  //         title: _titleController.text,
+  //         detail: _detailsController.text,
+  //         comment: _commentController.text,
+  //         startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
+  //         startDate: _date,
+  //         status: _dropdownValue,
+  //       ),
+  //     );
+  //   } else {
+  //     await _eventDetailCubit.createEvent(
+  //       Event(
+  //         userId: _userId,
+  //         title: _titleController.text,
+  //         detail: _detailsController.text,
+  //         comment: _commentController.text,
+  //         startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
+  //         startDate: _date,
+  //         status: _dropdownValue,
+  //       ),
+  //     );
+  //   }
+  // }
 
   void _onTapSave() async {
     await _eventDetailCubit.updateEvent(
@@ -87,7 +120,7 @@ class _DaylogPageState extends State<DaylogPage> {
         leading: DefaultAppBarIconButton(
           label: 'Back',
           icon: Icons.arrow_left_sharp,
-          onTap: () => context.go(AppRouter.home),
+          onTap: () => context.pop(),
           style: ButtonStyle(
             fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
             backgroundColor:
@@ -144,16 +177,23 @@ class _DaylogPageState extends State<DaylogPage> {
                       controller: _detailsController,
                       hintText: 'Enter Details',
                     ),
-                    CommonTextField(
-                      controller: _commentController,
-                      hintText: 'Enter Comment',
-                    ),
+                    // CommonTextField(
+                    //   controller: _commentController,
+                    //   hintText: 'Enter Comment',
+                    // ),
                     CommonTextField(
                       controller: _timeController,
                       hintText: 'Choose Start Time',
                       onTap: () async => _onTapTimeField(),
                       icon: const Icon(Icons.more_time_outlined),
                     ),
+                    if (widget.id != null)
+                      ElevatedButton(
+                          onPressed: _onDelete,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.red,
+                          ),
+                          child: const Text('Delete')),
                   ],
                 ),
               ),
@@ -162,5 +202,10 @@ class _DaylogPageState extends State<DaylogPage> {
         },
       ),
     );
+  }
+
+  void _onDelete() {
+    _eventListCubit.deleteEvent(widget.id!);
+    context.pop();
   }
 }

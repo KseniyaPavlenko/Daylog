@@ -28,9 +28,10 @@ class _SchedulerPageState extends State<SchedulerPage> {
     });
   }
 
-  void onTapDraft(Draft draft) => context.pushNamed(
-        AppRouter.schedulerLogName,
-        params: <String, String>{'id': draft.id ?? "-1"},
+  void onTapDraft(Draft draft) => context.push(
+        '${AppRouter.schedulerLog}${draft.id == '-1' ? "" : "/${draft.id}"}',
+        // AppRouter.schedulerLogName,
+        // params: <String, String>{'id': draft.id ?? "-1"},
       );
 
   @override

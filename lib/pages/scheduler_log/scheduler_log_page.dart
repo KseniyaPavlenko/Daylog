@@ -48,11 +48,11 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   @override
   void initState() {
     super.initState();
-    if ((widget.id ?? '-1') != '-1') {
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        _draftDetailCubit.loadData(widget.id);
-      });
-    }
+    // if ((widget.id) ) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      _draftDetailCubit.loadData(widget.id);
+    });
+    //}
   }
 
   void _pop() => context.pop();
@@ -71,6 +71,10 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
       ),
     );
     _pop();
+  }
+//TODO: days, 
+  void days() {
+    int days = 12;
   }
 
   void _onTapDay(DayOfWeek day) {
@@ -145,7 +149,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
           leading: DefaultAppBarIconButton(
             icon: Icons.arrow_left_sharp,
             label: 'Back',
-            onTap: () => context.go(AppRouter.home),
+            onTap: () => context.pop(),
             style: ButtonStyle(
               fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
               backgroundColor:
