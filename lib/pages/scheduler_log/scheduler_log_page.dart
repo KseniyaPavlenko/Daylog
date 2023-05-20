@@ -1,7 +1,7 @@
-import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_cubit.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_state.dart';
+import 'package:daylog/cubits/draft_list/draft_list_cubit.dart';
 import 'package:daylog/models/day_of_week.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:daylog/pages/scheduler_log/widgets/day_of_week_selector.dart';
@@ -41,9 +41,10 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
   int? _duration;
   int? _days;
   DateTime _date = DateTime.now();
-  DateTime? _endDate;
+  DateTime _endDate = DateTime.now();
 
   DraftDetailCubit get _draftDetailCubit => context.read<DraftDetailCubit>();
+  DraftListCubit get _draftListCubit => context.read<DraftListCubit>();
 
   @override
   void initState() {
@@ -72,7 +73,8 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
     );
     _pop();
   }
-//TODO: days, 
+
+//TODO: days,
   void days() {
     int days = 12;
   }
@@ -238,6 +240,26 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
                         onTapDay: _onTapDay,
                         onTapEveryDay: _onTapEveryDay,
                       ),
+                      const SizedBox(height: 40),
+                      if (widget.id != null)
+                        SizedBox(
+                          width: 60,
+                          height: 40,
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: ElevatedButton(
+                              onPressed: _onDelete,
+                              style: ElevatedButton.styleFrom(
+                                textStyle: const TextStyle(fontSize: 20),
+                                backgroundColor: Colors.red[300],
+                                foregroundColor: Colors.white,
+                                elevation: 10,
+                                shadowColor: Colors.red[400],
+                              ),
+                              child: const Text('Delete'),
+                            ),
+                          ),
+                        ),
                     ],
                   ),
                 ),
@@ -246,4 +268,8 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
           },
         ),
       );
+  void _onDelete() {
+    _draftListCubit.deleteDraft(widget.id!);
+    context.pop();
+  }
 }

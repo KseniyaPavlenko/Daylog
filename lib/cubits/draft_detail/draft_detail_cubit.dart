@@ -46,6 +46,19 @@ class DraftDetailCubit extends Cubit<DraftDetailState> {
     }
   }
 
+  Future<void> deleteDraft(String draftId) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      await draftService.delete(draftId);
+     
+    } catch (error) {
+      // handle error
+      errorCubit.showError(ErrorState.common);
+    } finally {
+      emit(state.copyWith(isLoading: false));
+    }
+  }
+
   void init() {
     emit(DraftDetailState.init());
   }

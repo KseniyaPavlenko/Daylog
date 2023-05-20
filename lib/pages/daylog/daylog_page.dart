@@ -1,4 +1,3 @@
-import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/common/utils/date_utils.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
@@ -56,35 +55,7 @@ class _DaylogPageState extends State<DaylogPage> {
   //   return true;
   // }
 
-  // void _onTapSave() async {
-  //   if (widget.isUpdating) {
-  //     await _eventDetailCubit.updateEvent(
-  //       Event(
-  //         id: widget.id!,
-  //         userId: _userId,
-  //         title: _titleController.text,
-  //         detail: _detailsController.text,
-  //         comment: _commentController.text,
-  //         startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
-  //         startDate: _date,
-  //         status: _dropdownValue,
-  //       ),
-  //     );
-  //   } else {
-  //     await _eventDetailCubit.createEvent(
-  //       Event(
-  //         userId: _userId,
-  //         title: _titleController.text,
-  //         detail: _detailsController.text,
-  //         comment: _commentController.text,
-  //         startAt: _date.copyWith(minute: _time.minute, hour: _time.hour),
-  //         startDate: _date,
-  //         status: _dropdownValue,
-  //       ),
-  //     );
-  //   }
-  // }
-
+  void _pop() => context.pop();
   void _onTapSave() async {
     await _eventDetailCubit.updateEvent(
       Event(
@@ -98,6 +69,7 @@ class _DaylogPageState extends State<DaylogPage> {
         status: _dropdownValue,
       ),
     );
+    _pop();
   }
 
   void _onTapTimeField() async {
@@ -187,13 +159,26 @@ class _DaylogPageState extends State<DaylogPage> {
                       onTap: () async => _onTapTimeField(),
                       icon: const Icon(Icons.more_time_outlined),
                     ),
+                    const SizedBox(height: 40),
                     if (widget.id != null)
-                      ElevatedButton(
-                          onPressed: _onDelete,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.red,
+                      SizedBox(
+                        width: 60,
+                        height: 40,
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: ElevatedButton(
+                            onPressed: _onDelete,
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 20),
+                              backgroundColor: Colors.red[300],
+                              foregroundColor: Colors.white,
+                              elevation: 10,
+                              shadowColor: Colors.red[400],
+                            ),
+                            child: const Text('Delete'),
                           ),
-                          child: const Text('Delete')),
+                        ),
+                      ),
                   ],
                 ),
               ),
