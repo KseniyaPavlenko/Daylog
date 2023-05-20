@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:daylog/common/route/router.dart';
-import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/common/utils/secure_storage.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
@@ -71,7 +70,7 @@ class _PinCodePageState extends State<PinCodePage> {
                   semanticsLabel: 'Delete',
                 ),
                 shouldTriggerVerification: _verificationNotifier.stream,
-                backgroundColor: AppColors.lightRed,
+                backgroundColor: Theme.of(context).primaryColor,
                 isValidCallback: _onPasscodeCancelled,
                 digits: const [
                   '一',
