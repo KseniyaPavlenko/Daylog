@@ -28,7 +28,7 @@ class DraftListItem extends StatelessWidget {
         child: ListTile(
           leading: const Icon(Icons.add_alert, size: 30),
           title: Text(draft.title ?? ''),
-          subtitle: const Text('test subtitle'),
+          subtitle: Text(draft.detail ?? ''),
           trailing: trailingWidget,
           contentPadding: const EdgeInsets.all(10),
           enabled: true,
