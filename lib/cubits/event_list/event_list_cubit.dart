@@ -17,8 +17,7 @@ class EventListCubit extends Cubit<EventListState> {
     required this.errorCubit,
     required this.draftService,
     required this.eventService,
-  })  : 
-        super(EventListState.init());
+  }) : super(EventListState.init());
 
   Future<void> loadData([bool withDraft = false]) async {
     emit(state.copyWith(isLoading: true));
@@ -29,10 +28,13 @@ class EventListCubit extends Cubit<EventListState> {
         eventService.list(state.selectedDate).then((result) => events = result),
         draftService.list().then((result) => drafts = result),
       ]);
-
+      final draftIdList =
+          events.map((e) => e.draftId).where((e) => e != null).toList();
       drafts
-        ..where((draft) => state.selectedDate.isBetween(draft.startAt, draft.endDate))
-        ..forEach((draft) => events.add(draft.toEvent));
+        .where((draft) =>
+            state.selectedDate.isBetween(draft.startAt, draft.endDate) &&
+            !draftIdList.contains(draft.id))
+        .forEach((draft) => events.add(draft.toEvent));
 
       emit(state.copyWith(events: events));
     } catch (error) {

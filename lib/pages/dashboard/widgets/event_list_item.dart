@@ -16,7 +16,7 @@ class EventListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: isDraft ? null : onTap,
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
@@ -27,7 +27,7 @@ class EventListItem extends StatelessWidget {
           key: ValueKey(event.id),
           leading: const Icon(Icons.add_alert, size: 30),
           title: Text(event.title ?? ''),
-          subtitle:  Text(event.detail ?? ''),
+          subtitle: Text(event.detail ?? ''),
           trailing: onTap == null ? null : const Icon(Icons.arrow_forward_ios),
           contentPadding: const EdgeInsets.all(10),
           enabled: true,
