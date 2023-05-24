@@ -15,9 +15,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class DaylogPage extends StatefulWidget {
-  const DaylogPage({Key? key, required this.id, this.isUpdating})
+  const DaylogPage({Key? key, required this.id, this.isUpdating, this.draftId})
       : super(key: key);
   final String? id;
+  final String? draftId;
+
   final bool? isUpdating;
   @override
   State<DaylogPage> createState() => _DaylogPageState();
@@ -40,9 +42,16 @@ class _DaylogPageState extends State<DaylogPage> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // if (_checkId()) {
-      _eventDetailCubit.loadData(widget.id);
+      Event? draftEvent;
+      if (widget.draftId != null) {
+        final eventDraftId = '${Event.draftPrefix}${widget.draftId}';
+        draftEvent = _eventListCubit.state.events
+            ?.firstWhere((e) => e.id == eventDraftId);
+      }
+      _eventDetailCubit.loadData(widget.id, draftEvent: draftEvent);
       //   }
     });
   }
@@ -61,6 +70,7 @@ class _DaylogPageState extends State<DaylogPage> {
       Event(
         id: widget.id,
         userId: _userId,
+        draftId: widget.draftId,
         title: _titleController.text,
         detail: _detailsController.text,
         comment: _commentController.text,
@@ -69,6 +79,7 @@ class _DaylogPageState extends State<DaylogPage> {
         status: _dropdownValue,
       ),
     );
+    // await _eventListCubit.loadData();
     _pop();
   }
 
@@ -160,7 +171,7 @@ class _DaylogPageState extends State<DaylogPage> {
                       icon: const Icon(Icons.more_time_outlined),
                     ),
                     const SizedBox(height: 40),
-                    if (widget.id != null)
+                    if (widget.id != null && widget.draftId == null)
                       SizedBox(
                         width: 60,
                         height: 40,

@@ -98,7 +98,7 @@ class _DashboardPageState extends State<DashboardPage> {
                     return EventListItem(
                       // key: const Key('DashboardListKey'),
                       // key: ValueKey(event.id),
-                      isDraft: event.id == Event.draftKey,
+                      isDraft: event.id?.startsWith(Event.draftPrefix) ?? false,
                       event: event,
                       onTap: () => onTapEvent(event),
                     );

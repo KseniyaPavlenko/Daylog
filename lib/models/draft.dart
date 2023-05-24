@@ -13,7 +13,6 @@ class Draft with EquatableMixin {
   final String? title;
   final String? detail;
 
-
   Draft({
     this.id,
     this.userId,
@@ -36,7 +35,7 @@ class Draft with EquatableMixin {
         days = json['days'],
         title = json['title'],
         detail = json['detail'];
-      
+
   Map<String, dynamic> toJson() => <String, dynamic>{
         'id': id,
         'userId': userId,
@@ -51,7 +50,7 @@ class Draft with EquatableMixin {
 
   Event get toEvent {
     return Event(
-      id: Event.draftKey,
+      id: '${Event.draftPrefix}$id',
       userId: userId,
       startAt: startAt,
       startDate: startDate,

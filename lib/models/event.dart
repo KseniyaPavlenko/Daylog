@@ -15,7 +15,7 @@ class Event with EquatableMixin {
   final String? detail;
   final String? comment;
   //
-  static const draftKey = 'draftKey';
+  static const draftPrefix = 'draftId::';
 
   Event({
     this.id,
@@ -30,16 +30,16 @@ class Event with EquatableMixin {
     this.comment,
   });
 
-  Event.fromJson(Map<String, dynamic> json) 
+  Event.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        userId = json['userId'] ,
-        draftId = json['draftId'] ,
-        startAt = DateTime.parse(json['startAt']) ,
-        startDate = DateTime.parse(json['startDate']) ,
+        userId = json['userId'],
+        draftId = json['draftId'],
+        startAt = DateTime.parse(json['startAt']),
+        startDate = DateTime.parse(json['startDate']),
         duration = json['duration'],
-        status = EventStatus.parse(json['status']) ,
-        title = json['title'] ,
-        detail = json['detail'] ,
+        status = EventStatus.parse(json['status']),
+        title = json['title'],
+        detail = json['detail'],
         comment = json['comment'];
 
   Map<String, dynamic> toJson() => <String, dynamic>{

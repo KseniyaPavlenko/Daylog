@@ -1,3 +1,4 @@
+import 'package:daylog/common/utils/days.dart';
 import 'package:daylog/models/day_of_week.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
@@ -5,16 +6,14 @@ import 'package:flutter/material.dart';
 class DayOfWeekSelector extends StatelessWidget {
   const DayOfWeekSelector({
     Key? key,
-    required this.selected,
+    required this.days,
     required this.onTapDay,
     required this.onTapEveryDay,
   }) : super(key: key);
 
-  final List<DayOfWeek> selected;
-  final void Function(DayOfWeek) onTapDay;
+  final int days;
+  final ValueChanged<int> onTapDay;
   final VoidCallback onTapEveryDay;
-
-  bool get isSelectedEveryDay => selected.length == DayOfWeek.values.length;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +26,14 @@ class DayOfWeekSelector extends StatelessWidget {
             key: const Key('EveryDaySchedulerLog'),
             onTap: onTapEveryDay,
             title: 'Every day',
-            isSelected: isSelectedEveryDay,
+            isSelected: Days.isSelectedEveryDay(days),
           ),
-          ...List.generate(DayOfWeek.values.length, (index) {
-            final item = DayOfWeek.values[index];
+          ...List.generate(Days.daysOfTheWeek.length, (index) {
+            final day = Days.daysOfTheWeek[index];
             return _DayOfWeekItem(
-              onTap: () => onTapDay(item),
-              title: item.name,
-              isSelected: selected.contains(item) || isSelectedEveryDay,
+              onTap: () => onTapDay(day),
+              title: Days.weekDayNames[day] ?? '',
+              isSelected: Days.isSelected(days, day),
             );
           })
         ],

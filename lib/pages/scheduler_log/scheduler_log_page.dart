@@ -1,7 +1,9 @@
 import 'package:daylog/common/style/app_colors.dart';
+import 'package:daylog/common/utils/days.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_cubit.dart';
 import 'package:daylog/cubits/draft_detail/draft_detail_state.dart';
 import 'package:daylog/cubits/draft_list/draft_list_cubit.dart';
+import 'package:daylog/cubits/event_list/event_list_cubit.dart';
 import 'package:daylog/models/day_of_week.dart';
 import 'package:daylog/models/draft.dart';
 import 'package:daylog/pages/scheduler_log/widgets/day_of_week_selector.dart';
@@ -35,23 +37,23 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
 
   TimeOfDay _time = const TimeOfDay(hour: 00, minute: 00);
 
-  final List<DayOfWeek> _selectedDayList = [];
-
   String? _userId;
   int? _duration;
-  int? _days;
+  int _days = 0;
   DateTime _date = DateTime.now();
   DateTime _endDate = DateTime.now();
 
   DraftDetailCubit get _draftDetailCubit => context.read<DraftDetailCubit>();
   DraftListCubit get _draftListCubit => context.read<DraftListCubit>();
+  EventListCubit get _eventListCubit => context.read<EventListCubit>();
 
   @override
   void initState() {
     super.initState();
     // if ((widget.id) ) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      _draftDetailCubit.loadData(widget.id);
+      _draftDetailCubit.loadData(widget.id).then(
+          (value) => _days = _draftDetailCubit.state.selectedDraft?.days ?? 0);
     });
     //}
   }
@@ -71,22 +73,9 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
         days: _days,
       ),
     );
+    await _eventListCubit.loadData();
+    // await _draftListCubit.loadData();
     _pop();
-  }
-
-//TODO: days,
-  void days() {
-    int days = 12;
-  }
-
-  void _onTapDay(DayOfWeek day) {
-    setState(() {
-      if (_selectedDayList.contains(day)) {
-        _selectedDayList.removeWhere((e) => e == day);
-      } else {
-        _selectedDayList.add(day);
-      }
-    });
   }
 
   void _onTapStartDate() async {
@@ -120,6 +109,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
       if (mounted) {
         setState(() {
           _endDateController.text = formattedDate;
+          _endDate = pickedDate;
         });
       }
     } else {}
@@ -127,8 +117,13 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
 
   void _onTapEveryDay() {
     setState(() {
-      _selectedDayList.clear();
-      _selectedDayList.addAll(DayOfWeek.values);
+      _days = _days == Days.allDays ? 0 : Days.allDays;
+    });
+  }
+
+  void _onTapDay(int day) {
+    setState(() {
+      _days = Days.toggle(_days, day);
     });
   }
 
@@ -236,7 +231,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
                       ),
                       const SizedBox(height: 16),
                       DayOfWeekSelector(
-                        selected: _selectedDayList,
+                        days: _days,
                         onTapDay: _onTapDay,
                         onTapEveryDay: _onTapEveryDay,
                       ),
