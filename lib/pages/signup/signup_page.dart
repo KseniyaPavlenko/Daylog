@@ -1,4 +1,5 @@
 import 'package:daylog/common/route/router.dart';
+import 'package:daylog/common/utils/secure_storage.dart';
 import 'package:daylog/cubits/auth/auth_cubit.dart';
 import 'package:daylog/cubits/auth/auth_state.dart';
 import 'package:daylog/pages/signup/widgets/sign_up_form.dart';
@@ -58,7 +59,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return DefaultTextButton(
       onPressed: _onLoginPage,
       text: 'Login',
-     // text: 'Already have an account? Login',
+      // text: 'Already have an account? Login',
       key: const Key('backToLogin'),
     );
   }
@@ -77,7 +78,8 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return BlocConsumer<AuthCubit, AuthState>(listener: (context, state) {
       if (state.isAuthorized ?? false) {
-        context.go(AppRouter.home);
+        DaylogSecureStorage.deleteStorage();
+        context.go(AppRouter.pinCode);
       }
     }, builder: (context_, state) {
       return CommonScaffold(

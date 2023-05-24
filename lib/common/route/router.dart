@@ -1,4 +1,5 @@
 import 'package:daylog/cubits/auth/auth_cubit.dart';
+import 'package:daylog/models/event.dart';
 import 'package:daylog/pages/create_passcode/create_passcode_page.dart';
 import 'package:daylog/pages/daylog/daylog_page.dart';
 import 'package:daylog/pages/home/home_page.dart';
@@ -49,10 +50,15 @@ class AppRouter {
         name: _daylogName,
         builder: (BuildContext context, GoRouterState state) {
           var id = state.params['id'];
+          String? draftId;
           if (id == '-1') {
             id = null;
           }
-          return DaylogPage(id: id);
+          if (id?.startsWith(Event.draftPrefix) ?? false) {
+            draftId = id?.replaceFirst(Event.draftPrefix, '');
+            id = null;
+          }
+          return DaylogPage(id: id, draftId: draftId,);
         },
       ),
       GoRoute(
