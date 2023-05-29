@@ -86,7 +86,6 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthCubit, AuthState>(
       listener: (_, state) {
         if (state.isAuthorized ?? false) {
-          // _onLogin();
           _toPinCode();
         }
       },
@@ -94,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
         return CommonScaffold(
           backgroundColor: Theme.of(context).primaryColor,
           isLoading: state.isLoading,
-          body: Column(
+          body: ListView(
             children: <Widget>[
               const BuildLogo(),
               const SizedBox(height: 100),

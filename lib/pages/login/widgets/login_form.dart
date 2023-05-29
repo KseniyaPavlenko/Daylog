@@ -51,7 +51,7 @@ class LoginForm extends StatelessWidget {
         SizedBox(
           width: 400,
           child: Padding(
-            padding: const EdgeInsets.only(left: 260),
+            padding: const EdgeInsets.only(left: 200),
             child: SizedBox(
               height: 40,
               width: MediaQuery.of(context).size.width,
