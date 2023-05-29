@@ -13,20 +13,16 @@ List<dynamic> screens = <dynamic>[
   const SettingsPage(),
 ];
 
-
 class HomeBottomBar extends StatelessWidget {
   const HomeBottomBar({
     super.key,
     required this.currentPage,
-    required this.onChangePage, 
+    required this.onChangePage,
   });
 
   final int currentPage;
   final void Function(int) onChangePage;
-  
-  
 
- 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
@@ -71,7 +67,6 @@ class HomeBottomBar extends StatelessWidget {
         ),
       ),
     );
-
   }
 }
 
@@ -101,12 +96,15 @@ class _IconButton extends StatelessWidget {
               icon,
               color: isSelected ? AppColors.lightBrown : AppColors.middleBrown,
             ),
-            Text(label),
+            DefaultTextStyle(
+              style: const TextStyle(
+                  fontSize: 13), 
+              child: Text(label),
+            ),
+            // Text(label),
           ],
         ),
       ),
     );
   }
 }
-
-
