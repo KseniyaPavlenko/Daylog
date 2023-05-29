@@ -49,25 +49,56 @@ class _SchedulerPageState extends State<SchedulerPage> {
             return Column(
               children: [
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.all(10),
-                    child: ListView.separated(
-                      itemCount: state.list.length,
-                      itemBuilder: (_, index) {
-                        final draft = state.list[index];
-                        return DraftListItem(
-                          draft: draft,
-                          onTap: () => onTapDraft(draft),
-                        );
-                      },
-                      separatorBuilder: (context, index) => const SizedBox(
-                        height: 10,
-                      ),
-                    ),
-                  ),
+                  child: state.list.isNotEmpty
+                      ? Container(
+                          padding: const EdgeInsets.all(10),
+                          child: ListView.separated(
+                            itemCount: state.list.length,
+                            itemBuilder: (_, index) {
+                              final draft = state.list[index];
+                              return DraftListItem(
+                                draft: draft,
+                                onTap: () => onTapDraft(draft),
+                              );
+                            },
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(height: 10),
+                          ),
+                        )
+                      : const Center(
+                          child: Text(
+                            'No tasks',
+                            style: TextStyle(
+                              color: AppColors.brown,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ),
                 ),
               ],
             );
+            // return Column(
+            //   children: [
+            //     Expanded(
+            //       child: Container(
+            //         padding: const EdgeInsets.all(10),
+            //         child: ListView.separated(
+            //           itemCount: state.list.length,
+            //           itemBuilder: (_, index) {
+            //             final draft = state.list[index];
+            //             return DraftListItem(
+            //               draft: draft,
+            //               onTap: () => onTapDraft(draft),
+            //             );
+            //           },
+            //           separatorBuilder: (context, index) => const SizedBox(
+            //             height: 10,
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // );
           },
         ),
       );

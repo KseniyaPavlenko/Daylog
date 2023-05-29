@@ -74,7 +74,7 @@ class _SchedulerLogPageState extends State<SchedulerLogPage> {
       ),
     );
     await _eventListCubit.loadData();
-    // await _draftListCubit.loadData();
+     await _draftListCubit.loadData();
     _pop();
   }
 
