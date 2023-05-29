@@ -1,3 +1,4 @@
+import 'package:daylog/common/route/router.dart';
 import 'package:daylog/common/style/app_colors.dart';
 import 'package:daylog/common/utils/date_utils.dart';
 import 'package:daylog/cubits/event_detail/event_detail_cubit.dart';
@@ -79,7 +80,7 @@ class _DaylogPageState extends State<DaylogPage> {
         status: _dropdownValue,
       ),
     );
-    // await _eventListCubit.loadData();
+    await _eventListCubit.loadData();
     _pop();
   }
 
@@ -103,7 +104,8 @@ class _DaylogPageState extends State<DaylogPage> {
         leading: DefaultAppBarIconButton(
           label: 'Back',
           icon: Icons.arrow_left_sharp,
-          onTap: () => context.pop(),
+          onTap: () => context.go(AppRouter.home),
+          // onTap: () => context.pop(),
           style: ButtonStyle(
             fixedSize: MaterialStateProperty.all<Size>(const Size(100, 50)),
             backgroundColor:
