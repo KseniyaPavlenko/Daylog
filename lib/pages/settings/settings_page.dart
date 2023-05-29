@@ -82,6 +82,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(
+              height: 60,
+            ),
             LogoutButton(
               key: const Key('LogoutButton'),
               _text,
